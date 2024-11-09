@@ -75,7 +75,7 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
             state = State.INACTIVE;
             return;
         }
-        Direction dir = Direction.getDirectionFromSide(getMovedData()).getOpposite();
+        Direction dir = Direction.getDirectionFromSide(getMovedData());
         ArrayList<BlockInstance> tileEntities = multiblock.data.getTileEntities(worldObj,new Vec3i(x,y,z),dir);
         for (BlockInstance tileEntity : tileEntities) {
             if(tileEntity.tile instanceof IMultiblockPart){
