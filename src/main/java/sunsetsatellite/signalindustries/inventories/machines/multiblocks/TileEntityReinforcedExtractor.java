@@ -1,16 +1,18 @@
-package sunsetsatellite.signalindustries.inventories.machines;
+package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
 
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
+import sunsetsatellite.catalyst.multiblocks.MultiblockInstance;
 import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
@@ -18,25 +20,22 @@ import sunsetsatellite.signalindustries.inventories.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemBus;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
-import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
-import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase implements IMultiblock {
 
-    public Multiblock multiblock;
+    public MultiblockInstance multiblock;
     public TileEntityItemBus input;
     public TileEntityFluidHatch output;
     public RecipeGroupSI<?> recipeGroup;
     public RecipeEntrySI<?,?, RecipeProperties> currentRecipe;
-    private boolean isValidMultiblock = false;
-    private final TickTimer verifyTimer = new TickTimer(this,this::verifyIntegrity,20,true);
     public TileEntityReinforcedExtractor(){
-        multiblock = Multiblock.multiblocks.get("extractionManifold");
+        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("extractionManifold"));
         itemContents = new ItemStack[1];
         fluidContents = new FluidStack[0];
         fluidCapacity = new int[0];
@@ -44,17 +43,8 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
     }
 
     @Override
-    public Multiblock getMultiblock() {
+    public MultiblockInstance getMultiblock() {
         return multiblock;
-    }
-
-    public void verifyIntegrity(){
-        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
-        if(block != null){
-            isValidMultiblock = multiblock.isValidAtSilent(worldObj,new BlockInstance(block,new Vec3i(x,y,z),this),Direction.getDirectionFromSide(worldObj.getBlockMetadata(x,y,z)).getOpposite());
-        } else {
-            isValidMultiblock = false;
-        }
     }
 
     @Override
@@ -64,9 +54,8 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         input = null;
         output = null;
-        verifyTimer.tick();
-        if(isValidMultiblock){
-            ArrayList<BlockInstance> tileEntities = multiblock.getTileEntities(worldObj,new Vec3i(x,y,z), Direction.Z_POS);
+        if(multiblock.isValid()){
+            ArrayList<BlockInstance> tileEntities = multiblock.data.getTileEntities(worldObj,new Vec3i(x,y,z), Direction.Z_POS);
             for (BlockInstance tileEntity : tileEntities) {
                 if (tileEntity.tile instanceof IMultiblockPart) {
                     if(tileEntity.tile instanceof TileEntityItemBus && tileEntity.block == SIBlocks.reinforcedItemInputBus){
@@ -85,7 +74,7 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
     }
 
     public void work(){
-        if(input != null && output != null && isValidMultiblock){
+        if(input != null && output != null && multiblock.isValid()){
             boolean update = false;
             if(fuelBurnTicks > 0){
                 fuelBurnTicks--;
@@ -123,7 +112,7 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
 
     @Override
     public boolean isBurning() {
-        return super.isBurning() && isValidMultiblock;
+        return super.isBurning() && multiblock.isValid();
     }
 
     @NotNull
@@ -132,7 +121,7 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
     }
 
     private void processItem() {
-        if (currentRecipe instanceof RecipeEntryMachineFluid && isValidMultiblock) {
+        if (currentRecipe instanceof RecipeEntryMachineFluid && multiblock.isValid()) {
             RecipeEntryMachineFluid recipe = ((RecipeEntryMachineFluid) currentRecipe);
             FluidStack fluidStack = recipe.getOutput() == null ? null : recipe.getOutput().copy();
             int k = 0;
@@ -181,7 +170,7 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
     }
 
     private boolean canProcess() {
-        if(input != null && output != null && isValidMultiblock){
+        if(input != null && output != null && multiblock.isValid()){
             ArrayList<ItemStack> inputContents = getInputContents();
             if(inputContents.isEmpty()){
                 return false;
@@ -194,7 +183,7 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
 
 
     public void setCurrentRecipe(){
-        if(input != null && isValidMultiblock){
+        if(input != null && multiblock.isValid()){
             ArrayList<ItemStack> inputContents = getInputContents();
             currentRecipe = recipeGroup.findRecipe(RecipeExtendedSymbol.arrayOf(inputContents),tier);
         }

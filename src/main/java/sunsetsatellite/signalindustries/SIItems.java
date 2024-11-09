@@ -61,7 +61,7 @@ public class SIItems extends DataInitializer {
     public static Item dilithiumShard;
     public static Item monsterShard;
     public static Item infernalFragment;
-    public static Item evilCatalyst;
+    public static Item evilEye;
     public static Item infernalEye;
     public static Item dimensionalShard;
     public static Item warpOrb;
@@ -172,7 +172,7 @@ public class SIItems extends DataInitializer {
         dilithiumShard = simpleItem("dilithiumShard", "signalindustries:item/dilithiumshard");
         monsterShard = simpleItem("monsterShard", "signalindustries:item/monstershard");
         infernalFragment = simpleItem("infernalFragment", "signalindustries:item/infernalfragment");
-        evilCatalyst = simpleItem("evilCatalyst", "signalindustries:item/evilcatalyst").setMaxStackSize(4);
+        evilEye = simpleItem("evilEye", "signalindustries:item/evileye").setMaxStackSize(4);
         infernalEye = simpleItem("infernalEye", "signalindustries:item/infernaleye").setMaxStackSize(4);
         dimensionalShard = simpleItem("dimensionalShard", "signalindustries:item/dimensionalshard");
         crystalChip = simpleItem("crystalChip", "signalindustries:item/crystal_chip");

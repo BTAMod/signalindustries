@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "Signal Industries",
   "icon": "icon128.png",
-  "description": "Technomagical mod with cool gadgets and machines.",
+  "description": "A stylized technomagical mod centered around a special power source, cool gadgets included.",
   "authors": [
     "sunsetsatellite"
   ],

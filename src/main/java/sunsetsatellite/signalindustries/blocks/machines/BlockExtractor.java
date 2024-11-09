@@ -8,9 +8,6 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
-import sunsetsatellite.catalyst.core.util.BlockInstance;
-import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
@@ -19,7 +16,7 @@ import sunsetsatellite.signalindustries.containers.ContainerReinforcedExtractor;
 import sunsetsatellite.signalindustries.gui.GuiExtractor;
 import sunsetsatellite.signalindustries.gui.GuiReinforcedExtractor;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityExtractor;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityReinforcedExtractor;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityReinforcedExtractor;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class BlockExtractor extends BlockMachineBase {
@@ -65,7 +62,7 @@ public class BlockExtractor extends BlockMachineBase {
             if (tier == Tier.REINFORCED) {
                 TileEntityReinforcedExtractor tile = (TileEntityReinforcedExtractor) world.getBlockTileEntity(i, j, k);
                 if (tile != null) {
-                    if (tile.multiblock != null && tile.multiblock.isValidAt(world, new BlockInstance(this, new Vec3i(i, j, k), tile), Direction.getDirectionFromSide(world.getBlockMetadata(i, j, k)).getOpposite())) {
+                    if (tile.multiblock != null && tile.multiblock.isValid()) {
                         SignalIndustries.displayGui(entityplayer, () -> new GuiReinforcedExtractor(entityplayer.inventory, tile), new ContainerReinforcedExtractor(entityplayer.inventory, tile), tile, i, j, k);
                         entityplayer.triggerAchievement(SIAchievements.HORIZONS);
                     } else {

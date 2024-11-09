@@ -20,6 +20,7 @@ import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.util.IOPreview;
 
 import java.util.ArrayList;
@@ -116,10 +117,6 @@ public class TileEntityStabilizer extends TileEntityTieredContainer implements I
                                         SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,i+0.5,y+0.5,k+0.5,0,0,0,1.0f,1.0f,0.0f,1.0f,6));
                                     }
                                 }
-                            }
-                        } else if (connectedTo instanceof TileEntitySignalumReactor) {
-                            for (float i = 0; i < 12; i+=0.2f) {
-                                SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,x+0.5,y+i,z+0.5,0,0,0,1.0f,1.0f,0.0f,1.0f,6));
                             }
                         }
                     }

@@ -5,16 +5,12 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
 import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
-import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
-import sunsetsatellite.signalindustries.containers.ContainerAlloySmelter;
 import sunsetsatellite.signalindustries.containers.ContainerReinforcedExtractor;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityAlloySmelter;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityReinforcedExtractor;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityReinforcedExtractor;
 
 public class GuiReinforcedExtractor extends GuiFluid {
 

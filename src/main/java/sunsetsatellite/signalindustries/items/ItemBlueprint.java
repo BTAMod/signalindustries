@@ -24,7 +24,7 @@ public class ItemBlueprint extends Item implements ICustomDescription {
         TileEntity tile = world.getBlockTileEntity(blockX, blockY, blockZ);
         if(tile instanceof IMultiblock) {
             IMultiblock multiblock = (IMultiblock)tile;
-            stack.getData().putString("multiblock",multiblock.getMultiblock().translateKey);
+            stack.getData().putString("multiblock",multiblock.getMultiblock().data.translateKey);
             entityplayer.sendMessage("Blueprint written down!");
         }
         return super.onUseItemOnBlock(stack, entityplayer, world, blockX, blockY, blockZ, side, xPlaced, yPlaced);

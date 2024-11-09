@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.inventories.machines;
+package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
 
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
@@ -7,11 +7,11 @@ import net.minecraft.core.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
+import sunsetsatellite.catalyst.multiblocks.MultiblockInstance;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
@@ -24,20 +24,18 @@ import java.util.*;
 
 public class TileEntityInductionSmelter extends TileEntityTieredMachineBase implements IMultiblock {
 
-    public Multiblock multiblock;
+    public MultiblockInstance multiblock;
     public TileEntityItemBus input;
     public TileEntityItemBus output;
     public TileEntityEnergyConnector energy;
     public RecipeGroup<RecipeEntryFurnace> recipeGroup;
     public RecipeEntryFurnace currentRecipe;
-    private boolean isValidMultiblock = false;
-    private final TickTimer verifyTimer = new TickTimer(this,this::verifyIntegrity,20,true);
     private final int ticks = 100;
     public Random random = new Random();
     private final int cost = 40;
 
     public TileEntityInductionSmelter(){
-        multiblock = Multiblock.multiblocks.get("basicInductionSmelter");
+        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("basicInductionSmelter"));
         itemContents = new ItemStack[0];
         fluidContents = new FluidStack[0];
         fluidCapacity = new int[0];
@@ -46,17 +44,8 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
     }
 
     @Override
-    public Multiblock getMultiblock() {
+    public MultiblockInstance getMultiblock() {
         return multiblock;
-    }
-
-    public void verifyIntegrity(){
-        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
-        if(block != null){
-            isValidMultiblock = multiblock.isValidAtSilent(worldObj,new BlockInstance(block,new Vec3i(x,y,z),this),Direction.getDirectionFromSide(worldObj.getBlockMetadata(x,y,z)).getOpposite());
-        } else {
-            isValidMultiblock = false;
-        }
     }
 
     @Override
@@ -67,10 +56,9 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
         input = null;
         output = null;
         energy = null;
-        verifyTimer.tick();
-        if(isValidMultiblock){
+        if(multiblock.isValid()){
             Direction dir = Direction.getDirectionFromSide(getMovedData()).getOpposite();
-            ArrayList<BlockInstance> tileEntities = multiblock.getTileEntities(worldObj,new Vec3i(x,y,z), dir);
+            ArrayList<BlockInstance> tileEntities = multiblock.data.getTileEntities(worldObj,new Vec3i(x,y,z), dir);
             for (BlockInstance tileEntity : tileEntities) {
                 if (tileEntity.tile instanceof IMultiblockPart) {
                     if(tileEntity.tile instanceof TileEntityItemBus && tileEntity.block == SIBlocks.basicItemInputBus){
@@ -91,7 +79,7 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
     }
 
     public void work(){
-        if(input != null && output != null && energy != null && isValidMultiblock){
+        if(input != null && output != null && energy != null && multiblock.isValid()){
             boolean update = false;
             if(fuelBurnTicks > 0){
                 fuelBurnTicks--;
@@ -129,7 +117,7 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
 
     @Override
     public boolean isBurning() {
-        return super.isBurning() && isValidMultiblock;
+        return super.isBurning() && multiblock.isValid();
     }
 
     @NotNull
@@ -138,7 +126,7 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
     }
 
     private void processItem() {
-        if (currentRecipe instanceof RecipeEntryFurnace && isValidMultiblock && canProcess()) {
+        if (currentRecipe instanceof RecipeEntryFurnace && multiblock.isValid() && canProcess()) {
             ItemStack stack = currentRecipe.getOutput() == null ? null : currentRecipe.getOutput().copy();
             int parallelAmount = 1;
             int k = 0;
@@ -201,7 +189,7 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
     }
 
     private boolean canProcess() {
-        if(input != null && output != null && isValidMultiblock){
+        if(input != null && output != null && multiblock.isValid()){
             ArrayList<ItemStack> inputContents = getInputContents();
             if(inputContents.isEmpty()){
                 return false;
@@ -255,7 +243,7 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
 
 
     public void setCurrentRecipe(){
-        if(input != null && isValidMultiblock){
+        if(input != null && multiblock.isValid()){
             ArrayList<ItemStack> inputContents = getInputContents();
             List<RecipeEntryFurnace> list = Registries.RECIPES.getAllFurnaceRecipes();
             for (RecipeEntryFurnace recipe : list) {

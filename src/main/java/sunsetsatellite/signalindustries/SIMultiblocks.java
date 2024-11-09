@@ -10,6 +10,7 @@ import static sunsetsatellite.signalindustries.SignalIndustries.LOGGER;
 import static sunsetsatellite.signalindustries.SignalIndustries.MOD_ID;
 
 public class SIMultiblocks extends DataInitializer {
+    //FIXME: Multiblocks are rotated incorrectly (except for warp gate)
     public static SIMultiblock dimAnchorMultiblock;
     public static SIMultiblock wrathTree;
     public static SIMultiblock signalumReactor;

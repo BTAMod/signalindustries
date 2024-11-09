@@ -60,6 +60,7 @@ import sunsetsatellite.signalindustries.inventories.item.InventoryBackpack;
 import sunsetsatellite.signalindustries.inventories.item.InventoryHarness;
 import sunsetsatellite.signalindustries.inventories.item.InventoryPulsar;
 import sunsetsatellite.signalindustries.inventories.machines.*;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.*;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.render.*;
@@ -340,13 +341,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         EntityHelper.createSpecialTileEntity(TileEntityDimensionalAnchor.class, "Dimensional Anchor", RenderMultiblock::new);
         EntityHelper.createSpecialTileEntity(TileEntityStorageContainer.class, "Storage Container", RenderStorageContainer::new);
         EntityHelper.createSpecialTileEntity(TileEntityAutoMiner.class, "Automatic Miner", RenderAutoMiner::new);
+        //EntityHelper.createTileEntity(TileEntitySignalumReactor.class,"Signalum Reactor");
         EntityHelper.createSpecialTileEntity(TileEntitySignalumReactor.class, "Signalum Reactor", RenderSignalumReactor::new);
         EntityHelper.createSpecialTileEntity(TileEntityEnergyInjector.class, "Energy Injector", RenderEnergyInjector::new);
         EntityHelper.createSpecialTileEntity(TileEntityReinforcedWrathBeacon.class, "Reinforced Wrath Beacon", RenderReinforcedWrathBeacon::new);
         EntityHelper.createSpecialTileEntity(TileEntityInductionSmelter.class,"Induction Smelter", RenderMultiblock::new);
         EntityHelper.createSpecialTileEntity(TileEntityMultiConduit.class,"Multi Conduit", RenderFluidInMultiConduit::new);
         EntityHelper.createSpecialTileEntity(TileEntityBuilder.class,"Builder", RenderBuilderPreview::new);
-        EntityHelper.createSpecialTileEntity(TileEntityWarpGate.class,"Warp Gate", RenderMultiblock::new);
+        EntityHelper.createSpecialTileEntity(TileEntityWarpGate.class,"Warp Gate", RenderWarpGate::new);
 
         EntityHelper.createTileEntity(TileEntityInserter.class, "Inserter");
         EntityHelper.createTileEntity(TileEntityExtractor.class,"Extractor");
@@ -402,6 +404,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         addToNameGuiMap("Filter", GuiFilter.class, TileEntityFilter.class);
         addToNameGuiMap("Signalum Collector", GuiCollector.class, TileEntityCollector.class);
         addToNameGuiMap("Builder", GuiBuilder.class, TileEntityBuilder.class);
+        addToNameGuiMap("Warp Gate", GuiWarpGate.class, TileEntityWarpGate.class);
 
         addToNameGuiMap("The Pulsar", GuiPulsar.class, InventoryPulsar.class);
         addToNameGuiMap("Signalum Prototype Harness", GuiHarness.class, InventoryHarness.class);

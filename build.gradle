@@ -158,15 +158,14 @@ dependencies {
 	implementation project(path: ":catalyst:multiblocks",configuration: "namedElements")
 	implementation project(path: ":catalyst:effects",configuration: "namedElements")
 	implementation project(path: ":catalyst:multipart",configuration: "namedElements")
+	implementation project(path: ":catalyst:electric-example",configuration: "namedElements")
 
 	implementation project(path: ":retrostorage",configuration: "namedElements")
 
 	implementation project(path: ":btwaila",configuration: "namedElements")
 	implementation project(path: ":vintage-questing",configuration: "namedElements")
-
+	implementation project(path: ":guilib",configuration: "namedElements")
 	//implementation project(path: ":dragonfly",configuration: "namedElements")
-	//implementation project(path: ":btg",configuration: "namedElements")
-
 
 	modImplementation "DragonFly:dragonfly:${project.dragonfly_version}"
 	modImplementation "TerrainAPI:terrainapi:${project.terrain_api_version}"

@@ -40,6 +40,7 @@ public class GuiEnergyConnector extends GuiFluid {
                 i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/reinforced_energy_connector.png");
                 break;
             case AWAKENED:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/awakened_energy_connector.png");
                 break;
         }
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

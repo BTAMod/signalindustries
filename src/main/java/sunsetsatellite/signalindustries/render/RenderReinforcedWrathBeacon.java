@@ -5,8 +5,7 @@ import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.block.entity.TileEntity;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityAutoMiner;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityReinforcedWrathBeacon;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityReinforcedWrathBeacon;
 
 import java.util.ArrayList;
 

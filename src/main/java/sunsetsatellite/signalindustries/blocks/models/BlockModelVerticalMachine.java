@@ -17,7 +17,7 @@ public class BlockModelVerticalMachine extends BlockModelMachine {
 
     protected HashMap<Side, IconCoordinate> defaultVerticalTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
     protected HashMap<Side, IconCoordinate> activeVerticalTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
-    protected HashMap<Side, IconCoordinate> overbrightVerticalTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
+    protected HashMap<Side, IconCoordinate> overbrightVerticalTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], null));
     public static int[] orientationLookUpVertical = new int[]{1, 0, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5};
 
 
@@ -68,16 +68,6 @@ public class BlockModelVerticalMachine extends BlockModelMachine {
             }
         }
         return null;
-    }
-
-    @Override
-    public IconCoordinate getBlockOverbrightTextureFromSideAndMeta(Side side, int data) {
-        /*int index = Sides.orientationLookUpHorizontal[6 * Math.min(data, 5) + side.getId()];
-        if (index >= Sides.orientationLookUpHorizontal.length) return null;
-
-        Side id = Side.getSideById(index);*/
-
-        return null; //overbrightTextures.get(id);
     }
 
     @Override

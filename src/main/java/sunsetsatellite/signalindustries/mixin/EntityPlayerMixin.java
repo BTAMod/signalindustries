@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.mixin;
 
 
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.enums.EnumSleepStatus;
@@ -21,7 +22,9 @@ import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SIWeather;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
+import sunsetsatellite.signalindustries.interfaces.mixins.IWarpPlayer;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemNVGAttachment;
@@ -31,7 +34,7 @@ import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
         value = EntityPlayer.class,
         remap = false
 )
-public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerPowerSuit {
+public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerPowerSuit, IWarpPlayer {
 
     @Unique
     public SignalumPowerSuit powerSuit = null;
@@ -43,6 +46,11 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
     @Shadow protected float baseSpeed;
 
     @Shadow public Container inventorySlots;
+
+    @Unique
+    public boolean warping = false;
+    @Unique
+    public int warpingToDim = 0;
 
     public EntityPlayerMixin(World world) {
         super(world);
@@ -108,6 +116,26 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
     }
 
     @Inject(
+            method = "onLivingUpdate",
+            at = @At("HEAD")
+    )
+    public void warpPlayer(CallbackInfo ci) {
+        if(warping){
+            if(!world.isClientSide && vehicle != null)
+            {
+                startRiding(null);
+            }
+            Minecraft mc = Minecraft.getMinecraft(SignalIndustries.class);
+            if(mc.currentScreen != null)
+            {
+                mc.displayGuiScreen(null);
+            }
+            SignalIndustries.usePortal(warpingToDim);
+            finishWarping();
+        }
+    }
+
+    @Inject(
             method = "damageEntity",
             at = @At("HEAD"),
             cancellable = true
@@ -144,5 +172,22 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
         if(powerSuit != null){
             powerSuit.saveToStacks();
         }
+    }
+
+    @Override
+    public void warp(int dim) {
+        warping = true;
+        warpingToDim = dim;
+    }
+
+    @Override
+    public void finishWarping() {
+        warping = false;
+        warpingToDim = 0;
+    }
+
+    @Override
+    public boolean isWarping() {
+        return warping;
     }
 }

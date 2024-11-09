@@ -22,4 +22,12 @@ public class ItemWarpOrb extends Item implements ICustomDescription {
         }
         return "Points to: "+TextFormatting.LIGHT_GRAY+"Nowhere?";
     }
+
+    public String getLocationString(ItemStack stack) {
+        CompoundTag warpPosition = stack.getData().getCompound("position");
+        if(warpPosition.containsKey("x") && warpPosition.containsKey("y") && warpPosition.containsKey("z")){
+            return String.format("%d %d %d | %d",warpPosition.getInteger("x"),warpPosition.getInteger("y"),warpPosition.getInteger("z"),stack.getData().getInteger("dim"));
+        }
+        return "Unknown location";
+    }
 }

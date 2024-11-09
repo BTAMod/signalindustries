@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.inventories.machines;
+package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
 
 
 import com.mojang.nbt.CompoundTag;
@@ -6,39 +6,28 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
+import sunsetsatellite.catalyst.multiblocks.MultiblockInstance;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityStabilizer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase implements IMultiblock, IStabilizable {
 
-    public Multiblock multiblock;
+    public MultiblockInstance multiblock;
     public List<TileEntityStabilizer> stabilizers = new ArrayList<>();
     public int cost;
-    private boolean isValidMultiblock = false;
-    private final TickTimer verifyTimer = new TickTimer(this,this::verifyIntegrity,40,true);
-
-    private void verifyIntegrity() {
-        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
-        if(block != null){
-            isValidMultiblock = multiblock.isValidAtSilent(worldObj,new BlockInstance(block,new Vec3i(x,y,z),this),Direction.getDirectionFromSide(worldObj.getBlockMetadata(x,y,z)).getOpposite());
-        } else {
-            isValidMultiblock = false;
-        }
-    }
 
     public TileEntityDimensionalAnchor(){
         progressMaxTicks = 6000;
@@ -51,7 +40,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
         }
         acceptedFluids.get(0).add(SIBlocks.energyFlowing);
         itemContents = new ItemStack[1];
-        multiblock = Multiblock.multiblocks.get("dimensionalAnchor");
+        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("dimensionalAnchor"));
     }
 
     @Override
@@ -59,12 +48,11 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
         speedMultiplier = 1;
         extractFluids();
         stabilizers.clear();
-        verifyTimer.tick();
-        if(!isValidMultiblock){
+        if(!multiblock.isValid()){
             return;
         }
         Direction dir = Direction.getDirectionFromSide(getMovedData()).getOpposite();
-        ArrayList<BlockInstance> tileEntities = multiblock.getTileEntities(worldObj,new Vec3i(x,y,z),dir);
+        ArrayList<BlockInstance> tileEntities = multiblock.data.getTileEntities(worldObj,new Vec3i(x,y,z),dir);
         for (BlockInstance tileEntity : tileEntities) {
             if(tileEntity.tile instanceof TileEntityStabilizer){
                 ((TileEntityStabilizer) tileEntity.tile).connectedTo = this;
@@ -164,7 +152,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
     }
 
     @Override
-    public Multiblock getMultiblock() {
+    public MultiblockInstance getMultiblock() {
         return multiblock;
     }
 
@@ -180,7 +168,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
 
     @Override
     public boolean isBurning() {
-        return super.isBurning() && isValidMultiblock;
+        return super.isBurning() && multiblock.isValid();
     }
 
     @Override

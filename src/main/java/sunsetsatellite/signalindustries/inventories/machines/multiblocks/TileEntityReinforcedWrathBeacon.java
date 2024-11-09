@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.inventories.machines;
+package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.option.enums.Difficulty;
@@ -15,6 +15,7 @@ import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
+import sunsetsatellite.catalyst.multiblocks.MultiblockInstance;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIItems;
@@ -32,7 +33,7 @@ import java.util.Random;
 
 public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase implements IMultiblock {
     public Random random = new Random();
-    public Multiblock multiblock;
+    public MultiblockInstance multiblock;
     public boolean intermission = false;
     public int wave = 0;
     public int currentMaxAmount = 0;
@@ -56,7 +57,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
 
     public TileEntityReinforcedWrathBeacon(){
         tier = Tier.REINFORCED;
-        multiblock = Multiblock.multiblocks.get("wrathTree");
+        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("wrathTree"));
         ArrayList<Class<? extends EntityMonster>> mobList = new ArrayList<>();
         mobList.add(EntityCreeper.class);
         waves.add(new Wave(mobList,4,6,20));
@@ -131,7 +132,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Challenge complete!!");
                 player.triggerAchievement(SIAchievements.VICTORY_REINFORCED);
             }
-            for (BlockInstance bi : multiblock.getBlocks(new Vec3i(x, y, z), Direction.Z_POS)) {
+            for (BlockInstance bi : multiblock.data.getBlocks(new Vec3i(x, y, z), Direction.Z_POS)) {
                 if(worldObj.getBlockId(bi.pos.x,bi.pos.y,bi.pos.z) == SIBlocks.fueledEternalTreeLog.id){
                     worldObj.setBlockWithNotify(bi.pos.x, bi.pos.y, bi.pos.z, bi.block.id);
                 }
@@ -154,7 +155,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             worldObj.entityJoinedWorld(entityitem2);
         }
         if(!suddenDeath && active && ticksSinceStart % 30 == 0){
-            ArrayList<BlockInstance> blocks = multiblock.getBlocks(new Vec3i(x, y, z), Direction.Z_POS);
+            ArrayList<BlockInstance> blocks = multiblock.data.getBlocks(new Vec3i(x, y, z), Direction.Z_POS);
             int i = random.nextInt(blocks.size());
             BlockInstance block = blocks.get(i);
             while (worldObj.getBlockId(block.pos.x, block.pos.y, block.pos.z) == SIBlocks.fueledEternalTreeLog.id && !readyForSuddenDeath())
@@ -180,7 +181,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
     public void check(){
         if(getBlockType() != null && active){
             if(worldObj.getCurrentWeather() == SIWeather.weatherBloodMoon && !suddenDeath){
-                for (BlockInstance bi : multiblock.getSubstitutions(new Vec3i(x, y, z), Direction.Z_POS)) {
+                for (BlockInstance bi : multiblock.data.getSubstitutions(new Vec3i(x, y, z), Direction.Z_POS)) {
                     if(worldObj.getBlockId(bi.pos.x,bi.pos.y,bi.pos.z) == SIBlocks.eternalTreeLog.id){
                         worldObj.setBlockWithNotify(bi.pos.x, bi.pos.y, bi.pos.z, bi.block.id);
                     }
@@ -193,7 +194,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
                     Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Time has ran out... Brace yourself!");
                 }
             }
-            if(!multiblock.isValidAt(worldObj, new BlockInstance(getBlockType(), new Vec3i(x, y, z), this), Direction.getDirectionFromSide(worldObj.getBlockMetadata(x, y, z)).getOpposite())){
+            if(!multiblock.isValid()){
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon loses all its strength suddenly..");
                 worldObj.setBlockWithNotify(x,y,z,0);
                 EntityItem entityitem2 = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SIBlocks.reinforcedWrathBeacon, 1));
@@ -212,7 +213,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Now is not the time..");
                 return;
             }
-            if(!multiblock.isValidAt(worldObj, new BlockInstance(getBlockType(), new Vec3i(x, y, z), this), Direction.getDirectionFromSide(worldObj.getBlockMetadata(x,y,z)).getOpposite())){
+            if(!multiblock.isValid()){
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessageTranslate("event.signalindustries.invalidMultiblock");
                 return;
             }
@@ -314,7 +315,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
     }
 
     public boolean readyForSuddenDeath(){
-        for (BlockInstance substitution : multiblock.getSubstitutions(new Vec3i(x, y, z), Direction.Z_POS)) {
+        for (BlockInstance substitution : multiblock.data.getSubstitutions(new Vec3i(x, y, z), Direction.Z_POS)) {
             if(worldObj.getBlockId(substitution.pos.x,substitution.pos.y,substitution.pos.z) != SIBlocks.fueledEternalTreeLog.id){
                 return false;
             }
@@ -323,7 +324,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
     }
 
     @Override
-    public Multiblock getMultiblock() {
+    public MultiblockInstance getMultiblock() {
         return multiblock;
     }
 

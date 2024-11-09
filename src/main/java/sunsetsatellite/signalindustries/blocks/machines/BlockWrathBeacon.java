@@ -15,7 +15,7 @@ import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityWrathBeaconBase;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityReinforcedWrathBeacon;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityReinforcedWrathBeacon;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityWrathBeacon;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -55,7 +55,7 @@ public class BlockWrathBeacon extends BlockMachineBase {
                 }
             } else {
                 TileEntityReinforcedWrathBeacon tile = (TileEntityReinforcedWrathBeacon) world.getBlockTileEntity(i, j, k);
-                if (tile != null && tile.multiblock != null && tile.multiblock.isValidAt(world, new BlockInstance(this, new Vec3i(i, j, k), tile), Direction.getDirectionFromSide(world.getBlockMetadata(i, j, k)).getOpposite())) {
+                if (tile != null && tile.multiblock != null && tile.multiblock.isValid()) {
                     tile.activate(entityplayer);
                     entityplayer.triggerAchievement(SIAchievements.HORIZONS);
                     //Minecraft.getMinecraft(this).ingameGUI.addChatMessage("This world does not know such evil yet.");
@@ -77,7 +77,7 @@ public class BlockWrathBeacon extends BlockMachineBase {
             //world.newExplosion(null,i,j,k,5f,false,false);
             if (tier == Tier.REINFORCED) {
                 TileEntityReinforcedWrathBeacon w = (TileEntityReinforcedWrathBeacon) tile;
-                for (BlockInstance bi : w.multiblock.getBlocks(new Vec3i(i, j, k), Direction.Z_POS)) {
+                for (BlockInstance bi : w.multiblock.data.getBlocks(new Vec3i(i, j, k), Direction.Z_POS)) {
                     if (world.getBlockId(bi.pos.x, bi.pos.y, bi.pos.z) == SIBlocks.fueledEternalTreeLog.id) {
                         world.setBlockWithNotify(bi.pos.x, bi.pos.y, bi.pos.z, bi.block.id);
                     }

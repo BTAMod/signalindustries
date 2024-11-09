@@ -13,11 +13,15 @@ import java.util.Collections;
 
 import static sunsetsatellite.catalyst.Catalyst.listOf;
 
-public class SignalIndustriesFluidPlugin {
+public class SIFluids {
+
+    public static final FluidType SIGNALUM_ENERGY = new FluidType("signalindustries:energy",listOf(SIBlocks.energyFlowing,SIBlocks.energyStill));
+    public static final FluidType BURNT_SIGNALUM = new FluidType("signalindustries:burntSignalum",listOf(SIBlocks.burntSignalumFlowing,SIBlocks.burntSignalumStill));
+
     public void initializePlugin(Logger logger) {
         logger.info("Loading fluids from signalindustries..");
-        CatalystFluids.TYPES.register(new FluidType("signalindustries:energy",listOf(SIBlocks.energyFlowing,SIBlocks.energyStill)));
-        CatalystFluids.TYPES.register(new FluidType("signalindustries:burntSignalum",listOf(SIBlocks.burntSignalumFlowing,SIBlocks.burntSignalumStill)));
+        CatalystFluids.TYPES.register(SIGNALUM_ENERGY);
+        CatalystFluids.TYPES.register(BURNT_SIGNALUM);
         logger.info("Loading fluid containers from signalindustries..");
         FluidContainerRegistryEntry entry = new FluidContainerRegistryEntry(SignalIndustries.MOD_ID, SIItems.signalumCrystalBattery, SIItems.signalumCrystalBattery, Collections.singletonList(SIBlocks.energyFlowing));
         CatalystFluids.CONTAINERS.register(SignalIndustries.key("signalumCrystal"),entry);

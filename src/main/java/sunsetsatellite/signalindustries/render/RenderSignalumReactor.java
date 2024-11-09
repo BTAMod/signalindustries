@@ -3,7 +3,7 @@ package sunsetsatellite.signalindustries.render;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.block.entity.TileEntity;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumReactor;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntitySignalumReactor;
 
 
 public class RenderSignalumReactor extends RenderMultiblock {

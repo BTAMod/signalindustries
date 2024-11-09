@@ -7,14 +7,11 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
-import sunsetsatellite.catalyst.core.util.BlockInstance;
-import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.gui.GuiSignalumReactor;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumReactor;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntitySignalumReactor;
 import sunsetsatellite.signalindustries.util.Tier;
 
 
@@ -39,7 +36,7 @@ public class BlockSignalumReactorCore extends BlockMachineBase {
             return true;
         } else {
             TileEntitySignalumReactor tile = (TileEntitySignalumReactor) world.getBlockTileEntity(i, j, k);
-            if (tile.multiblock != null && tile.multiblock.isValidAt(world, new BlockInstance(this, new Vec3i(i, j, k), tile), Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)).getOpposite())) {
+            if (tile.multiblock != null && tile.multiblock.isValid()) {
                 SignalIndustries.displayGui(entityplayer, () -> new GuiSignalumReactor(entityplayer.inventory, tile), tile, i, j, k);
                 entityplayer.triggerAchievement(SIAchievements.HORIZONS);
             } else {

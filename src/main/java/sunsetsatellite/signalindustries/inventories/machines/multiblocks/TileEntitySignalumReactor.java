@@ -1,16 +1,15 @@
-package sunsetsatellite.signalindustries.inventories.machines;
+package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
+import sunsetsatellite.catalyst.multiblocks.MultiblockInstance;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
@@ -18,6 +17,7 @@ import sunsetsatellite.signalindustries.inventories.TileEntityEnergyConnector;
 import sunsetsatellite.signalindustries.inventories.TileEntityIgnitor;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemBus;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTiered;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityStabilizer;
 import sunsetsatellite.signalindustries.items.containers.ItemFuelCell;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Random;
 
 public class TileEntitySignalumReactor extends TileEntityTiered implements IMultiblock, IStabilizable, IActiveForm {
-    public Multiblock multiblock;
+    public MultiblockInstance multiblock;
     public List<TileEntityStabilizer> stabilizers = new ArrayList<>();
     public List<TileEntityIgnitor> ignitors = new ArrayList<>();
     public TileEntityEnergyConnector connector;
@@ -34,20 +34,9 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
     public State state = State.INACTIVE;
     public int stabilityField = 0;
     public int maxStabilityField = 100;
-    private boolean isValidMultiblock = false;
-    private final TickTimer verifyTimer = new TickTimer(this,this::verifyIntegrity,40,true);
-
-    private void verifyIntegrity() {
-        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
-        if(block != null){
-            isValidMultiblock = multiblock.isValidAtSilent(worldObj,new BlockInstance(block,new Vec3i(x,y,z),this),Direction.getDirectionFromSide(worldObj.getBlockMetadata(x,y,z)).getOpposite());
-        } else {
-            isValidMultiblock = false;
-        }
-    }
 
     public TileEntitySignalumReactor(){
-        multiblock = Multiblock.multiblocks.get("signalumReactor");
+        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("signalumReactor"));
     }
 
     @Override
@@ -82,13 +71,12 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
         super.tick();
         stabilizers.clear();
         ignitors.clear();
-        verifyTimer.tick();
-        if(!isValidMultiblock){
+        if(!multiblock.isValid()){
             state = State.INACTIVE;
             return;
         }
         Direction dir = Direction.getDirectionFromSide(getMovedData()).getOpposite();
-        ArrayList<BlockInstance> tileEntities = multiblock.getTileEntities(worldObj,new Vec3i(x,y,z),dir);
+        ArrayList<BlockInstance> tileEntities = multiblock.data.getTileEntities(worldObj,new Vec3i(x,y,z),dir);
         for (BlockInstance tileEntity : tileEntities) {
             if(tileEntity.tile instanceof IMultiblockPart){
                 if(tileEntity.tile instanceof TileEntityStabilizer){
@@ -218,7 +206,7 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
     }
 
     @Override
-    public Multiblock getMultiblock() {
+    public MultiblockInstance getMultiblock() {
         return multiblock;
     }
 }
