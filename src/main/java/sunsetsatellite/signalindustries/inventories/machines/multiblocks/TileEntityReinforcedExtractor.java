@@ -1,11 +1,13 @@
 package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
 
+import net.minecraft.core.block.Block;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
+import sunsetsatellite.catalyst.core.util.mixin.interfaces.ITileEntityInit;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
@@ -27,7 +29,7 @@ import sunsetsatellite.signalindustries.util.RecipeProperties;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase implements IMultiblock {
+public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase implements IMultiblock, ITileEntityInit {
 
     public MultiblockInstance multiblock;
     public TileEntityItemBus input;
@@ -35,11 +37,16 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
     public RecipeGroupSI<?> recipeGroup;
     public RecipeEntrySI<?,?, RecipeProperties> currentRecipe;
     public TileEntityReinforcedExtractor(){
-        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("extractionManifold"));
         itemContents = new ItemStack[1];
         fluidContents = new FluidStack[0];
         fluidCapacity = new int[0];
         recipeGroup = SIRecipes.EXTRACTOR;
+        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("extractionManifold"));
+    }
+
+    @Override
+    public void init(Block block) {
+        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("extractionManifold"));
     }
 
     @Override
@@ -49,6 +56,9 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
 
     @Override
     public void tick() {
+        if(multiblock == null){
+            return;
+        }
         super.tick();
         worldObj.markBlocksDirty(x,y,z,x,y,z);
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
@@ -69,6 +79,28 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
             if(block != null && input != null && output != null){
                 setCurrentRecipe();
                 work();
+            }
+
+            if(isBurning()){
+                Direction dir = Direction.getDirectionFromSide(getMovedData());
+                ArrayList<BlockInstance> blocks = multiblock.data.getBlocks(new Vec3i(x, y, z), dir);
+                for (BlockInstance structBlock : blocks) {
+                    if(structBlock.block == SIBlocks.reinforcedCasing2 || structBlock.block == SIBlocks.awakenedSocketCasing || structBlock.block == SIBlocks.awakenedCasing2) {
+                        if(structBlock.pos.getBlockMetadata(worldObj) != 1){
+                            worldObj.setBlockMetadata(structBlock.pos.x, structBlock.pos.y, structBlock.pos.z, 1);
+                        }
+                    }
+                }
+            } else {
+                Direction dir = Direction.getDirectionFromSide(getMovedData());
+                ArrayList<BlockInstance> blocks = multiblock.data.getBlocks(new Vec3i(x, y, z), dir);
+                for (BlockInstance structBlock : blocks) {
+                    if(structBlock.block == SIBlocks.reinforcedCasing2 || structBlock.block == SIBlocks.awakenedSocketCasing || structBlock.block == SIBlocks.awakenedCasing2) {
+                        if(structBlock.pos.getBlockMetadata(worldObj) == 1){
+                            worldObj.setBlockMetadata(structBlock.pos.x, structBlock.pos.y, structBlock.pos.z, 0);
+                        }
+                    }
+                }
             }
         }
     }

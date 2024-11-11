@@ -3,10 +3,12 @@ package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
+import sunsetsatellite.catalyst.core.util.mixin.interfaces.ITileEntityInit;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
@@ -23,7 +25,7 @@ import sunsetsatellite.signalindustries.inventories.machines.TileEntityStabilize
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase implements IMultiblock, IStabilizable {
+public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase implements IMultiblock, IStabilizable, ITileEntityInit {
 
     public MultiblockInstance multiblock;
     public List<TileEntityStabilizer> stabilizers = new ArrayList<>();
@@ -44,7 +46,15 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
     }
 
     @Override
+    public void init(Block block) {
+        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("dimensionalAnchor"));
+    }
+
+    @Override
     public void tick() {
+        if(multiblock == null){
+            return;
+        }
         speedMultiplier = 1;
         extractFluids();
         stabilizers.clear();

@@ -1,10 +1,12 @@
 package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
+import sunsetsatellite.catalyst.core.util.mixin.interfaces.ITileEntityInit;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.MultiblockInstance;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class TileEntitySignalumReactor extends TileEntityTiered implements IMultiblock, IStabilizable, IActiveForm {
+public class TileEntitySignalumReactor extends TileEntityTiered implements IMultiblock, IStabilizable, IActiveForm, ITileEntityInit {
     public MultiblockInstance multiblock;
     public List<TileEntityStabilizer> stabilizers = new ArrayList<>();
     public List<TileEntityIgnitor> ignitors = new ArrayList<>();
@@ -35,7 +37,12 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
     public int stabilityField = 0;
     public int maxStabilityField = 100;
 
-    public TileEntitySignalumReactor(){
+    public TileEntitySignalumReactor() {
+        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("signalumReactor"));
+    }
+
+    @Override
+    public void init(Block block) {
         multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("signalumReactor"));
     }
 
@@ -68,6 +75,9 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
 
     @Override
     public void tick() {
+        if(multiblock == null){
+            return;
+        }
         super.tick();
         stabilizers.clear();
         ignitors.clear();

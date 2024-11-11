@@ -1,10 +1,12 @@
 package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
 
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.Axis;
 import sunsetsatellite.catalyst.core.util.*;
+import sunsetsatellite.catalyst.core.util.mixin.interfaces.ITileEntityInit;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
@@ -28,7 +30,7 @@ import sunsetsatellite.signalindustries.items.ItemWarpOrb;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileEntityWarpGate extends TileEntityTieredMachineBase implements IMultiblock, IStabilizable {
+public class TileEntityWarpGate extends TileEntityTieredMachineBase implements IMultiblock, IStabilizable, ITileEntityInit {
 
     public MultiblockInstance multiblock;
     public TileEntityItemBus itemInput;
@@ -52,6 +54,11 @@ public class TileEntityWarpGate extends TileEntityTieredMachineBase implements I
         multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("warpGate"));
     }
 
+    @Override
+    public void init(Block block) {
+        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("warpGate"));
+    }
+
     public enum State {
         IDLE,
         CHARGING,
@@ -64,6 +71,9 @@ public class TileEntityWarpGate extends TileEntityTieredMachineBase implements I
 
     @Override
     public void tick() {
+        if(multiblock == null){
+            return;
+        }
         super.tick();
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         itemInput = null;

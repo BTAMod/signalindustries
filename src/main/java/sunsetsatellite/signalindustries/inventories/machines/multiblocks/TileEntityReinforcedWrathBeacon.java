@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.option.enums.Difficulty;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.monster.*;
@@ -13,6 +14,7 @@ import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
+import sunsetsatellite.catalyst.core.util.mixin.interfaces.ITileEntityInit;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.MultiblockInstance;
@@ -31,7 +33,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase implements IMultiblock {
+public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase implements IMultiblock, ITileEntityInit {
     public Random random = new Random();
     public MultiblockInstance multiblock;
     public boolean intermission = false;
@@ -57,7 +59,6 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
 
     public TileEntityReinforcedWrathBeacon(){
         tier = Tier.REINFORCED;
-        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("wrathTree"));
         ArrayList<Class<? extends EntityMonster>> mobList = new ArrayList<>();
         mobList.add(EntityCreeper.class);
         waves.add(new Wave(mobList,4,6,20));
@@ -91,11 +92,19 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
         //final wave, boss not included
         mobList.add(EntityInfernal.class);
         waves.add(new Wave(mobList,20,32,20));
+        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("wrathTree"));
     }
 
+    @Override
+    public void init(Block block) {
+        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("wrathTree"));
+    }
 
     @Override
     public void tick() {
+        if(multiblock == null){
+            return;
+        }
         worldObj.markBlocksDirty(x,y,z,x,y,z);
         if(active){
             spawnTimer.tick();

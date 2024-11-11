@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
 
+import net.minecraft.core.block.Block;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
@@ -8,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
+import sunsetsatellite.catalyst.core.util.mixin.interfaces.ITileEntityInit;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
@@ -22,7 +24,7 @@ import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine
 
 import java.util.*;
 
-public class TileEntityInductionSmelter extends TileEntityTieredMachineBase implements IMultiblock {
+public class TileEntityInductionSmelter extends TileEntityTieredMachineBase implements IMultiblock, ITileEntityInit {
 
     public MultiblockInstance multiblock;
     public TileEntityItemBus input;
@@ -35,12 +37,17 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
     private final int cost = 40;
 
     public TileEntityInductionSmelter(){
-        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("basicInductionSmelter"));
         itemContents = new ItemStack[0];
         fluidContents = new FluidStack[0];
         fluidCapacity = new int[0];
         recipeGroup = Registries.RECIPES.FURNACE;
         progressMaxTicks = ticks;
+        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("basicInductionSmelter"));
+    }
+
+    @Override
+    public void init(Block block) {
+        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("basicInductionSmelter"));
     }
 
     @Override
@@ -50,6 +57,9 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
 
     @Override
     public void tick() {
+        if(multiblock == null){
+            return;
+        }
         super.tick();
         worldObj.markBlocksDirty(x,y,z,x,y,z);
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
