@@ -41,6 +41,10 @@ public class TileEntityWarpGate extends TileEntityTieredMachineBase implements I
     private final TickTimer stabilityVerifyTimer = new TickTimer(this,this::verifyStability,20,true);
     public State state = State.IDLE;
 
+    //per tick
+    public static int chargeCost = 10;
+    public static int runCost = 1;
+
     public TileEntityWarpGate(){
         itemContents = new ItemStack[1];
         fluidContents = new FluidStack[0];
@@ -97,7 +101,19 @@ public class TileEntityWarpGate extends TileEntityTieredMachineBase implements I
                     state = State.IDLE;
                 }
             }
+            if(state == State.CHARGING && energy != null){
+                if(getEnergyAmount() >= chargeCost){
+                    energy.fluidContents[0].amount -= chargeCost;
+                } else {
+                    state = State.IDLE;
+                }
+            }
             if(state == State.CONNECTED_ONE_WAY || state == State.CONNECTED_TWO_WAY){
+                if(getEnergyAmount() >= runCost){
+                    energy.fluidContents[0].amount -= runCost;
+                } else {
+                    state = State.POWER_FAILURE;
+                }
                 //aabbs just don't work how i want them to so we're gonna do it the old-fashioned way
                 Axis axis = dir.shiftAxis().getAxis();
                 Vec3f offset = dir.getVecF().multiply(4);
@@ -111,7 +127,6 @@ public class TileEntityWarpGate extends TileEntityTieredMachineBase implements I
                 if(closestPlayer != null && warpOrbInserted()){
                     if(closestPlayer.x >= min.x && closestPlayer.y >= min.y && closestPlayer.z >= min.z){
                         if(closestPlayer.x <= max.x+1 && closestPlayer.y <= max.y && closestPlayer.z <= max.z+1){
-                            //FIXME: this crashes the goddamn game for some reason
                             ExplosionEnergy ex = new ExplosionEnergy(worldObj,closestPlayer,closestPlayer.x,closestPlayer.y,closestPlayer.z,3f);
                             ex.doExplosionA();
                             ex.doExplosionB(true,0.7f,0.0f,0.7f);
@@ -143,7 +158,7 @@ public class TileEntityWarpGate extends TileEntityTieredMachineBase implements I
     }
 
     public void verifyStability(){
-        if(state == State.CHARGING && checkIfStabilizersReady() && warpOrbInserted() && getEnergyAmount() > 0 && areCasingsCharged()){
+        if(state == State.CHARGING && checkIfStabilizersReady() && warpOrbInserted() && getEnergyAmount() >= runCost && areCasingsCharged()){
             state = State.CONNECTED_ONE_WAY;
         }
         if(state == State.CONNECTED_ONE_WAY || state == State.CONNECTED_TWO_WAY){
@@ -152,7 +167,7 @@ public class TileEntityWarpGate extends TileEntityTieredMachineBase implements I
             }
             if(!checkIfStabilizersReady()){
                 state = State.STABILIZATION_FAILURE;
-            } else if (getEnergyAmount() <= 0) {
+            } else if (getEnergyAmount() < runCost) {
                 state = State.POWER_FAILURE;
             }
         }

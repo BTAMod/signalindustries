@@ -36,9 +36,14 @@ public class BlockSignalumReactorCore extends BlockMachineBase {
             return true;
         } else {
             TileEntitySignalumReactor tile = (TileEntitySignalumReactor) world.getBlockTileEntity(i, j, k);
-            if (tile.multiblock != null && tile.multiblock.isValid()) {
-                SignalIndustries.displayGui(entityplayer, () -> new GuiSignalumReactor(entityplayer.inventory, tile), tile, i, j, k);
-                entityplayer.triggerAchievement(SIAchievements.HORIZONS);
+            if (tile.multiblock != null) {
+                tile.multiblock.verifyIntegrity();
+                if (tile.multiblock.isValid()) {
+                    SignalIndustries.displayGui(entityplayer, () -> new GuiSignalumReactor(entityplayer.inventory, tile), tile, i, j, k);
+                    entityplayer.triggerAchievement(SIAchievements.HORIZONS);
+                } else {
+                    entityplayer.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");
+                }
             } else {
                 entityplayer.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");
             }

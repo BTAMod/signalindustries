@@ -146,6 +146,10 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
         }
         FluidStack fluidStack = tile.getFluidInSlot(slot);
         if(fluidStack != null){
+            if(infinite){
+                fluidStack.amount = capacity;
+                return;
+            }
             int amount = fluidStack.amount;
             if(amount + saturation > capacity){
                 int remainder = (amount+saturation)-capacity;
