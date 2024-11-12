@@ -99,7 +99,7 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
             ExplosionEnergy explosion = new ExplosionEnergy(worldObj, null, x, y, z, 3);
             explosion.doExplosionA();
             explosion.doExplosionB(true);
-            EntityItem entityitem = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SIItems.energyCatalyst, 1));
+            EntityItem entityitem = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SIItems.clearKey, 1));
             worldObj.entityJoinedWorld(entityitem);
         }
         if(active){

@@ -129,9 +129,11 @@ item.signalindustries.infernalEye.desc=But they were, all of them, deceived for 
 item.signalindustries.infernalFragment.name=Infernal Fragment
 item.signalindustries.infernalFragment.desc=When the eclipse reaches totality, the monsters come out of hiding.
 
-item.signalindustries.energyCatalyst.name=Energy Catalyst
-item.signalindustries.energyCatalyst.desc=You've managed to fend off the monsters and release the evil, now all that remains here is your power.
-item.signalindustries.awakenedCatalyst.name=Awakened Catalyst
+item.signalindustries.clearKey.name=Clear Key
+item.signalindustries.clearKey.desc=Both a physical and metaphorical key to more power.
+item.signalindustries.saturatedKey.name=Saturated Key
+item.signalindustries.saturatedKey.desc=Can open many "doors", but only you can choose which will be actually opened.
+item.signalindustries.awakenedCatalyst.name=Awakened Key
 item.signalindustries.awakenedCatalyst.desc=When the stars align and the sunsets glow, you'll find me there after all.
 
 item.signalindustries.fuelCell.name=Fuel Cell
@@ -171,7 +173,6 @@ tile.signalindustries.awakened.casing2.name=Awakened Casing (Type 2)
 tile.signalindustries.awakened.casing2.desc=Alternative casing used for Awakened-tier multiblock machines.
 tile.signalindustries.reinforced.glass.name=Reinforced Glass
 tile.signalindustries.reinforced.glass.desc=Does not shatter when broken.
-
 
 tile.signalindustries.prototype.conduit.name=Prototype Signalum Conduit
 tile.signalindustries.prototype.conduit.desc=Transfers <Signalum Energy>.

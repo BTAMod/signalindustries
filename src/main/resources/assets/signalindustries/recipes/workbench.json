@@ -1273,7 +1273,7 @@
       {
         "symbol": "C",
         "stack": {
-          "key": "item.signalindustries.energyCatalyst",
+          "key": "item.signalindustries.saturatedKey",
           "amount": 1,
           "meta": 0
         }
@@ -1804,7 +1804,7 @@
       {
         "symbol": "E",
         "stack": {
-          "key": "item.signalindustries.energyCatalyst",
+          "key": "item.signalindustries.clearKey",
           "amount": 1,
           "meta": 0
         }

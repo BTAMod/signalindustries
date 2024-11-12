@@ -74,7 +74,8 @@ public class SIItems extends DataInitializer {
     public static Item romChipProjectile;
     public static Item romChipBoost;
     public static Item romChipShield;
-    public static Item energyCatalyst;
+    public static Item clearKey;
+    public static Item saturatedKey;
     public static Item signalumSaber;
     public static Item pulsar;
     public static ItemSignalumPowerSuit signalumPowerSuitHelmet;
@@ -262,9 +263,12 @@ public class SIItems extends DataInitializer {
         romChipShield = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/chip3")
                 .build(new ItemRomChip("romChip.shield", config.getInt("ItemIDs.romChipShield")));
-        energyCatalyst = new ItemBuilder(MOD_ID)
-                .setIcon("signalindustries:item/energycatalyst")
-                .build(new Item("energyCatalyst", config.getInt("ItemIDs.energyCatalyst")));
+        clearKey = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/clear_key")
+                .build(new Item("clearKey", config.getInt("ItemIDs.clearKey")));
+        saturatedKey = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/saturated_key")
+                .build(new Item("saturatedKey", config.getInt("ItemIDs.saturatedKey")));
         signalumSaber = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/signalumsaberunpowered")
                 .setItemModel((item) -> new ItemModelSaber(item, MOD_ID))

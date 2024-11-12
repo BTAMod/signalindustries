@@ -158,7 +158,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             ExplosionEnergy explosion = new ExplosionEnergy(worldObj, null, x, y, z, 3);
             explosion.doExplosionA();
             explosion.doExplosionB(true);
-            EntityItem entityitem = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SIItems.energyCatalyst, 1));
+            EntityItem entityitem = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SIItems.saturatedKey, 1));
             EntityItem entityitem2 = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SIBlocks.reinforcedWrathBeacon, 1));
             worldObj.entityJoinedWorld(entityitem);
             worldObj.entityJoinedWorld(entityitem2);

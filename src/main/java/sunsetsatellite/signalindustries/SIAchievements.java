@@ -77,7 +77,7 @@ public class SIAchievements extends DataInitializer {
         PROGRAMMER = new Achievement(nextAchievementID++, langKey("programmer"), 5, 5 - offsetY, SIBlocks.basicProgrammer, ROM_CHIP);
         TRIGGER = new Achievement(nextAchievementID++, langKey("trigger"), 7, 5 - offsetY, SIItems.nullTrigger, PROGRAMMER);
         CHALLENGE = new Achievement(nextAchievementID++, langKey("challenge"), 11, 5 - offsetY, SIBlocks.basicWrathBeacon, BASIC);
-        VICTORY = new Achievement(nextAchievementID++, langKey("victory"), 13, 5 - offsetY, SIItems.energyCatalyst, BASIC);
+        VICTORY = new Achievement(nextAchievementID++, langKey("victory"), 13, 5 - offsetY, SIItems.clearKey, BASIC);
         RELIC = new Achievement(nextAchievementID++, langKey("relic"), 9, 4 - offsetY, SIBlocks.glowingObsidian, BASIC);
         KNIGHTS_ALLOY = new Achievement(nextAchievementID++, langKey("knightAlloy"), 9, 6 - offsetY, SIItems.reinforcedCrystalAlloyIngot, RELIC);
         REINFORCED = new Achievement(nextAchievementID++, langKey("reinforced"), 9, 8 - offsetY, SIBlocks.reinforcedMachineCore, KNIGHTS_ALLOY);
