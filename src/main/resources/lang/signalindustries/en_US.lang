@@ -409,6 +409,8 @@ tile.signalindustries.basic.crusher.name=Basic Crusher
 tile.signalindustries.basic.crusher.desc=Grinds tougher materials into finer dusts.
 tile.signalindustries.reinforced.crusher.name=Reinforced Pulverizer
 tile.signalindustries.reinforced.crusher.desc=Crushes materials you wouldn't even think could be crushed.
+tile.signalindustries.reinforced.wakingCrusher.name=Waking Reinforced Pulverizer
+tile.signalindustries.reinforced.wakingCrusher.desc=A bigger version of the <Reinforced Pulverizer>! Can handle materials it shouldn't although at a cost.
 tile.signalindustries.awakened.crusher.name=Awakened Atomic Pulverizer Controller
 tile.signalindustries.awakened.crusher.desc=Will it blend? Only one way to find out!
 
@@ -501,6 +503,8 @@ tile.signalindustries.basic.alloySmelter.name=Basic Alloy Smelter
 tile.signalindustries.basic.alloySmelter.desc=Combines metals into alloys with more heat.
 tile.signalindustries.reinforced.alloySmelter.name=Reinforced Blast Alloy Smelter
 tile.signalindustries.reinforced.alloySmelter.desc=Combines even heat resistant metals with even more heat.
+tile.signalindustries.reinforced.wakingAlloySmelter.name=Waking Reinforced Blast Alloy Smelter
+tile.signalindustries.reinforced.wakingAlloySmelter.desc=A bigger version of the <Reinforced Blast Alloy Smelter>! Can handle materials it shouldn't although at a cost.
 tile.signalindustries.awakened.alloySmelter.name=Awakened Composite Forge Chamber Controller
 tile.signalindustries.awakened.alloySmelter.desc=Fuses even the most resistant metals with heat surpassing that of cores of stars.
 
@@ -517,6 +521,8 @@ tile.signalindustries.basic.plateFormer.name=Basic Metal Press
 tile.signalindustries.basic.plateFormer.desc=Bends and shapes metal ingots.
 tile.signalindustries.reinforced.plateFormer.name=Reinforced Compressor
 tile.signalindustries.reinforced.plateFormer.desc=Bends and shapes materials with more pressure.
+tile.signalindustries.reinforced.wakingPlateFormer.name=Waking Reinforced Compressor
+tile.signalindustries.reinforced.wakingPlateFormer.desc=A bigger version of the <Reinforced Compressor>! Can handle materials it shouldn't although at a cost.
 tile.signalindustries.awakened.plateFormer.name=Awakened Singularity Compressor Controller
 tile.signalindustries.awakened.plateFormer.desc=The raw power of this machine would be capable of compressing materials into black holes if it wasn't controlled.
 
@@ -540,6 +546,8 @@ tile.signalindustries.basic.infuser.name=Basic Infuser
 tile.signalindustries.basic.infuser.desc=Infuses materials into other materials.
 tile.signalindustries.reinforced.infuser.name=Reinforced Infuser
 tile.signalindustries.reinforced.infuser.desc=Infuses materials into other materials.
+tile.signalindustries.reinforced.wakingInfuser.name=Waking Reinforced Infuser
+tile.signalindustries.reinforced.wakingInfuser.desc=A bigger version of the <Reinforced Infuser>! Can handle materials it shouldn't although at a cost.
 tile.signalindustries.awakened.infuser.name=Awakened Saturating Infuser Controller
 tile.signalindustries.awakened.infuser.desc=Infuses materials into other materials.
 
