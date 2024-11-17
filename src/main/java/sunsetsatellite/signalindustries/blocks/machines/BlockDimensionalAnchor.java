@@ -15,7 +15,7 @@ import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.containers.ContainerDimAnchor;
 import sunsetsatellite.signalindustries.gui.GuiDimAnchor;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityStabilizer;
-import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityDimensionalAnchor;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.reinforced.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class BlockDimensionalAnchor extends BlockMachineBase {

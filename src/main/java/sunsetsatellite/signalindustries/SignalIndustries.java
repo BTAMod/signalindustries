@@ -60,7 +60,16 @@ import sunsetsatellite.signalindustries.inventories.item.InventoryBackpack;
 import sunsetsatellite.signalindustries.inventories.item.InventoryHarness;
 import sunsetsatellite.signalindustries.inventories.item.InventoryPulsar;
 import sunsetsatellite.signalindustries.inventories.machines.*;
-import sunsetsatellite.signalindustries.inventories.machines.multiblocks.*;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.awakened.TileEntityWarpGate;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.basic.TileEntityInductionSmelter;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.reinforced.TileEntityDimensionalAnchor;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.reinforced.TileEntityReinforcedExtractor;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.reinforced.TileEntityReinforcedWrathBeacon;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.reinforced.TileEntitySignalumReactor;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.waking.TileEntityWakingCrusher;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.waking.TileEntityWakingInfuser;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.waking.TileEntityWakingPlateFormer;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.render.*;
@@ -349,6 +358,10 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         EntityHelper.createSpecialTileEntity(TileEntityMultiConduit.class,"Multi Conduit", RenderFluidInMultiConduit::new);
         EntityHelper.createSpecialTileEntity(TileEntityBuilder.class,"Builder", RenderBuilderPreview::new);
         EntityHelper.createSpecialTileEntity(TileEntityWarpGate.class,"Warp Gate", RenderWarpGate::new);
+        EntityHelper.createSpecialTileEntity(TileEntityWakingCrusher.class,"Waking Crusher", RenderMultiblock::new);
+        EntityHelper.createSpecialTileEntity(TileEntityWakingAlloySmelter.class,"Waking Alloy Smelter", RenderMultiblock::new);
+        EntityHelper.createSpecialTileEntity(TileEntityWakingPlateFormer.class,"Waking Plate Former", RenderMultiblock::new);
+        EntityHelper.createSpecialTileEntity(TileEntityWakingInfuser.class,"Waking Infuser", RenderMultiblock::new);
 
         EntityHelper.createTileEntity(TileEntityInserter.class, "Inserter");
         EntityHelper.createTileEntity(TileEntityExtractor.class,"Extractor");
@@ -503,6 +516,21 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
                 Optional<ItemStack> existing = stacks.stream().filter((S) -> S.itemID == stack.itemID).findAny();
                 if (existing.isPresent()) {
                     existing.get().stackSize += stack.stackSize;
+                } else {
+                    stacks.add(stack.copy());
+                }
+            }
+        }
+        return stacks;
+    }
+
+    public static ArrayList<FluidStack> condenseFluidList(List<FluidStack> list) {
+        ArrayList<FluidStack> stacks = new ArrayList<>();
+        for (FluidStack stack : list) {
+            if (stack != null) {
+                Optional<FluidStack> existing = stacks.stream().filter((S) -> S.liquid.id == stack.liquid.id).findAny();
+                if (existing.isPresent()) {
+                    existing.get().amount += stack.amount;
                 } else {
                     stacks.add(stack.copy());
                 }

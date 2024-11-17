@@ -482,7 +482,72 @@
     },
     "consumeContainers": false
   },
-
+  {
+    "name": "signalindustries:workbench/reinforced_casing_2",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RRR",
+      "RSR",
+      "RRR"
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.casing2",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_grate",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RRR",
+      "SSS",
+      "RRR"
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.signalumAlloyMesh",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.grate",
+      "amount": 3,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
   {
     "name": "signalindustries:workbench/reinforced_glass",
     "type": "minecraft:crafting/shaped",
@@ -1199,6 +1264,202 @@
     ],
     "result": {
       "key": "tile.signalindustries.reinforced.builder",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/waking_alloy_smelter",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "SAS",
+      "EME",
+      "SAS"
+    ],
+    "symbols": [
+      {
+        "symbol": "A",
+        "stack": {
+          "key": "item.signalindustries.awakenedSignalumFragment",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.alloySmelter",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.wakingAlloySmelter",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/waking_crusher",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "SAS",
+      "EME",
+      "SAS"
+    ],
+    "symbols": [
+      {
+        "symbol": "A",
+        "stack": {
+          "key": "item.signalindustries.awakenedSignalumFragment",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.crusher",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.wakingCrusher",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/waking_plate_former",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "SAS",
+      "EME",
+      "SAS"
+    ],
+    "symbols": [
+      {
+        "symbol": "A",
+        "stack": {
+          "key": "item.signalindustries.awakenedSignalumFragment",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.plateFormer",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.wakingPlateFormer",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/waking_infuser",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "SAS",
+      "EME",
+      "SAS"
+    ],
+    "symbols": [
+      {
+        "symbol": "A",
+        "stack": {
+          "key": "item.signalindustries.awakenedSignalumFragment",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.infuser",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.wakingInfuser",
       "amount": 1,
       "meta": 0
     },

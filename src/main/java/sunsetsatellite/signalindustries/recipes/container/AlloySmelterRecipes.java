@@ -65,7 +65,7 @@ public class AlloySmelterRecipes implements MachineRecipesBase<RecipeGroup<Recip
                                 new RecipeExtendedSymbol(new ItemStack(Item.dustSugar,8))
                         },
                         new ItemStack(SIItems.condensedMilkCan,1),
-                        new RecipeProperties(200,40,Tier.PROTOTYPE,false).setConsumeContainers()
+                        new RecipeProperties(100,20,Tier.PROTOTYPE,false).setConsumeContainers()
                 )
         );
         group.register(
@@ -76,7 +76,7 @@ public class AlloySmelterRecipes implements MachineRecipesBase<RecipeGroup<Recip
                                 new RecipeExtendedSymbol(new ItemStack(Item.dustSugar,4))
                         },
                         new ItemStack(SIItems.bucketCaramel,1),
-                        new RecipeProperties(200,40,Tier.PROTOTYPE,false).setConsumeContainers()
+                        new RecipeProperties(100,20,Tier.PROTOTYPE,false).setConsumeContainers()
                 )
         );
         group.register(
@@ -87,7 +87,7 @@ public class AlloySmelterRecipes implements MachineRecipesBase<RecipeGroup<Recip
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.realityString,8))
                         },
                         new ItemStack(SIItems.voidAlloyIngot,1),
-                        new RecipeProperties(300,80,Tier.REINFORCED,false)
+                        new RecipeProperties(400,120,Tier.REINFORCED,false)
                 )
         );
     }

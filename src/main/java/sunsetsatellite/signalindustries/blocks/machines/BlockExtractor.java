@@ -16,7 +16,7 @@ import sunsetsatellite.signalindustries.containers.ContainerReinforcedExtractor;
 import sunsetsatellite.signalindustries.gui.GuiExtractor;
 import sunsetsatellite.signalindustries.gui.GuiReinforcedExtractor;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityExtractor;
-import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityReinforcedExtractor;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.reinforced.TileEntityReinforcedExtractor;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class BlockExtractor extends BlockMachineBase {

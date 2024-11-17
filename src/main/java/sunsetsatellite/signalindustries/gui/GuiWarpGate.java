@@ -9,7 +9,7 @@ import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerWarpGate;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
-import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityWarpGate;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.awakened.TileEntityWarpGate;
 import sunsetsatellite.signalindustries.items.ItemWarpOrb;
 
 public class GuiWarpGate extends GuiFluid {

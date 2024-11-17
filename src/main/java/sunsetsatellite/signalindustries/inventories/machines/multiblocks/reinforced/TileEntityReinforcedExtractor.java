@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
+package sunsetsatellite.signalindustries.inventories.machines.multiblocks.reinforced;
 
 import net.minecraft.core.block.Block;
 import net.minecraft.core.crafting.LookupFuelFurnace;
@@ -65,7 +65,8 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
         input = null;
         output = null;
         if(multiblock.isValid()){
-            ArrayList<BlockInstance> tileEntities = multiblock.data.getTileEntities(worldObj,new Vec3i(x,y,z), Direction.Z_POS);
+            Direction dir = Direction.getDirectionFromSide(getMovedData());
+            ArrayList<BlockInstance> tileEntities = multiblock.data.getTileEntities(worldObj,new Vec3i(x,y,z), dir);
             for (BlockInstance tileEntity : tileEntities) {
                 if (tileEntity.tile instanceof IMultiblockPart) {
                     if(tileEntity.tile instanceof TileEntityItemBus && tileEntity.block == SIBlocks.reinforcedItemInputBus){
@@ -82,7 +83,6 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
             }
 
             if(isBurning()){
-                Direction dir = Direction.getDirectionFromSide(getMovedData());
                 ArrayList<BlockInstance> blocks = multiblock.data.getBlocks(new Vec3i(x, y, z), dir);
                 for (BlockInstance structBlock : blocks) {
                     if(structBlock.block == SIBlocks.reinforcedCasing2 || structBlock.block == SIBlocks.awakenedSocketCasing || structBlock.block == SIBlocks.awakenedCasing2) {
@@ -92,7 +92,6 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
                     }
                 }
             } else {
-                Direction dir = Direction.getDirectionFromSide(getMovedData());
                 ArrayList<BlockInstance> blocks = multiblock.data.getBlocks(new Vec3i(x, y, z), dir);
                 for (BlockInstance structBlock : blocks) {
                     if(structBlock.block == SIBlocks.reinforcedCasing2 || structBlock.block == SIBlocks.awakenedSocketCasing || structBlock.block == SIBlocks.awakenedCasing2) {

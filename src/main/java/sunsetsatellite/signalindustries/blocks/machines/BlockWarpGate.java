@@ -12,7 +12,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.containers.ContainerWarpGate;
 import sunsetsatellite.signalindustries.gui.GuiWarpGate;
-import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityWarpGate;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.awakened.TileEntityWarpGate;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class BlockWarpGate extends BlockMachineBase {

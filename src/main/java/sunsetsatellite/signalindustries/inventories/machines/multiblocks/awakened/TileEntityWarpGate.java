@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
+package sunsetsatellite.signalindustries.inventories.machines.multiblocks.awakened;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.Block;

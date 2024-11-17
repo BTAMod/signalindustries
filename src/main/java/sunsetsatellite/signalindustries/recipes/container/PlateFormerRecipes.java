@@ -99,7 +99,7 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.voidAlloyIngot))
                         },
                         new ItemStack(SIItems.voidAlloyPlate,1),
-                        new RecipeProperties(200,80, Tier.REINFORCED,false)
+                        new RecipeProperties(400,120, Tier.REINFORCED,false)
                 )
         );
     }

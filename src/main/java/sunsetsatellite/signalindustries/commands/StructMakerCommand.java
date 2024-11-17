@@ -81,6 +81,9 @@ public class StructMakerCommand extends Command {
 			for (BlockInstance structBlock : structBlocks) {
 				structBlock.offset = distanceFromOrigin(structBlock.pos);
 			}
+			if(origin.meta != -1 && origin.meta != 5){
+				commandSender.sendMessage("Warning! The origin should be pointing east (meta 5)!");
+			}
 			commandSender.sendMessage("Origin set at " + posVec + " with meta "+ origin.meta + " as " + origin.block.getKey() + "!");
 		}
 		return true;

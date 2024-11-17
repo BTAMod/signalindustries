@@ -14,6 +14,10 @@ import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
 import sunsetsatellite.signalindustries.recipes.RecipeNamespaceSI;
 import sunsetsatellite.signalindustries.recipes.container.*;
+import sunsetsatellite.signalindustries.recipes.container.waking.WakingAlloySmelterRecipes;
+import sunsetsatellite.signalindustries.recipes.container.waking.WakingCrusherRecipes;
+import sunsetsatellite.signalindustries.recipes.container.waking.WakingInfuserRecipes;
+import sunsetsatellite.signalindustries.recipes.container.waking.WakingPlateFormerRecipes;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
 import turniplabs.halplibe.helper.RecipeBuilder;
@@ -25,7 +29,8 @@ import java.util.Collections;
 import java.util.List;
 
 import static sunsetsatellite.catalyst.Catalyst.listOf;
-import static sunsetsatellite.signalindustries.SignalIndustries.*;
+import static sunsetsatellite.signalindustries.SignalIndustries.LOGGER;
+import static sunsetsatellite.signalindustries.SignalIndustries.MOD_ID;
 
 public class SIRecipes implements RecipeEntrypoint {
     public static RecipeNamespaceSI SIGNAL_INDUSTRIES = new RecipeNamespaceSI();
@@ -33,12 +38,16 @@ public class SIRecipes implements RecipeEntrypoint {
     public static RecipeGroup<RecipeEntryFurnace> FURNACE;
     public static RecipeGroupSI<RecipeEntryMachineFluid> EXTRACTOR;
     public static RecipeGroupSI<RecipeEntryMachine> CRUSHER;
+    public static RecipeGroupSI<RecipeEntryMachine> WAKING_CRUSHER;
     public static RecipeGroupSI<RecipeEntryMachine> ALLOY_SMELTER;
+    public static RecipeGroupSI<RecipeEntryMachine> WAKING_ALLOY_SMELTER;
     public static RecipeGroupSI<RecipeEntryMachine> PLATE_FORMER;
+    public static RecipeGroupSI<RecipeEntryMachine> WAKING_PLATE_FORMER;
     public static RecipeGroupSI<RecipeEntryMachineFluid> PUMP;
     public static RecipeGroupSI<RecipeEntryMachine> CRYSTAL_CUTTER;
     public static RecipeGroupSI<RecipeEntryMachine> CRYSTAL_CHAMBER;
     public static RecipeGroupSI<RecipeEntryMachine> INFUSER;
+    public static RecipeGroupSI<RecipeEntryMachine> WAKING_INFUSER;
     public static RecipeGroupSI<RecipeEntryMachine> CENTRIFUGE;
     public static RecipeGroupSI<RecipeEntryMachineFluid> COLLECTOR;
 
@@ -63,9 +72,13 @@ public class SIRecipes implements RecipeEntrypoint {
         PUMP = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypePump),new ItemStack(SIBlocks.basicPump))));
         CRYSTAL_CUTTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypeCrystalCutter),new ItemStack(SIBlocks.basicCrystalCutter),new ItemStack(SIBlocks.reinforcedCrystalCutter))));
         CRYSTAL_CHAMBER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicCrystalChamber),new ItemStack(SIBlocks.reinforcedCrystalChamber))));
-        INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicInfuser))));
+        INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicInfuser),new ItemStack(SIBlocks.reinforcedInfuser))));
         CENTRIFUGE = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.reinforcedCentrifuge))));
         COLLECTOR = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicCollector))));
+        WAKING_CRUSHER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingCrusher))));
+        WAKING_PLATE_FORMER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingPlateFormer))));
+        WAKING_ALLOY_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingAlloySmelter))));
+        WAKING_INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingInfuser))));
     }
 
     public void load(){
@@ -99,6 +112,10 @@ public class SIRecipes implements RecipeEntrypoint {
         new InfuserRecipes().addRecipes(INFUSER);
         new CentrifugeRecipes().addRecipes(CENTRIFUGE);
         new CollectorRecipes().addRecipes(COLLECTOR);
+        new WakingCrusherRecipes().addRecipes(WAKING_CRUSHER);
+        new WakingPlateFormerRecipes().addRecipes(WAKING_PLATE_FORMER);
+        new WakingAlloySmelterRecipes().addRecipes(WAKING_ALLOY_SMELTER);
+        new WakingInfuserRecipes().addRecipes(WAKING_INFUSER);
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_prototype.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_basic.json");
@@ -127,6 +144,10 @@ public class SIRecipes implements RecipeEntrypoint {
         SIGNAL_INDUSTRIES.register("infuser",INFUSER);
         SIGNAL_INDUSTRIES.register("centrifuge",CENTRIFUGE);
         SIGNAL_INDUSTRIES.register("collector",COLLECTOR);
+        SIGNAL_INDUSTRIES.register("waking_crusher",WAKING_CRUSHER);
+        SIGNAL_INDUSTRIES.register("waking_plate_former",WAKING_PLATE_FORMER);
+        SIGNAL_INDUSTRIES.register("waking_alloy_smelter",WAKING_ALLOY_SMELTER);
+        SIGNAL_INDUSTRIES.register("waking_infuser",WAKING_INFUSER);
         Registries.RECIPES.register("signalindustries",SIGNAL_INDUSTRIES);
     }
 

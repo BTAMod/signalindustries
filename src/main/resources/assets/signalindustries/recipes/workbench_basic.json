@@ -1054,6 +1054,39 @@
     "consumeContainers": false
   },
   {
+    "name": "signalindustries:workbench/basic_casing2",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CCC",
+      "CSC",
+      "CCC"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.signalumCrystal",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.basic.casing2",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
     "name": "signalindustries:workbench/basic_item_conduit",
     "type": "minecraft:crafting/shaped",
     "pattern": [

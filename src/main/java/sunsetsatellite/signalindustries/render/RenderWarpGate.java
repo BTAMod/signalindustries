@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3f;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
-import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityWarpGate;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.awakened.TileEntityWarpGate;
 
 public class RenderWarpGate extends RenderMultiblock {
 

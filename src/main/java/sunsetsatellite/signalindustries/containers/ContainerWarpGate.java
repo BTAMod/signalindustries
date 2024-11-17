@@ -4,7 +4,7 @@ import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
-import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityWarpGate;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.awakened.TileEntityWarpGate;
 
 public class ContainerWarpGate extends ContainerFluid {
 

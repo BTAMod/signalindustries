@@ -72,6 +72,14 @@ public class GuiInfuser extends GuiFluid {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f1) {
         int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/infuser_basic.png");
+        switch (((BlockContainerTiered)tile.getBlockType()).tier){
+            case BASIC:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/infuser_basic.png");
+                break;
+            case REINFORCED:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/infuser_reinforced.png");
+                break;
+        }
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(i2);
         int i3 = (this.width - this.xSize) / 2;

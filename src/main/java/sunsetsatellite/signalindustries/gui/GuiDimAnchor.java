@@ -15,7 +15,7 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerDimAnchor;
-import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityDimensionalAnchor;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.reinforced.TileEntityDimensionalAnchor;
 
 public class GuiDimAnchor extends GuiFluid {
 

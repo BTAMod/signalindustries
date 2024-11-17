@@ -15,7 +15,7 @@ import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityWrathBeaconBase;
-import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityReinforcedWrathBeacon;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.reinforced.TileEntityReinforcedWrathBeacon;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityWrathBeacon;
 import sunsetsatellite.signalindustries.util.Tier;
 

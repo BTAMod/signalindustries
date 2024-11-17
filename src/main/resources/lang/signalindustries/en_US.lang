@@ -165,6 +165,8 @@ tile.signalindustries.reinforced.casing.name=Reinforced Casing
 tile.signalindustries.reinforced.casing.desc=Used for Reinforced-tier multiblock machines.
 tile.signalindustries.reinforced.casing2.name=Reinforced Casing (Type 2)
 tile.signalindustries.reinforced.casing2.desc=Alternative casing used for Reinforced-tier and above multiblock machines.
+tile.signalindustries.reinforced.grate.name=Reinforced Grate
+tile.signalindustries.reinforced.grate.desc=Alternative casing used for Reinforced-tier and above multiblock machines.
 tile.signalindustries.awakened.casing.name=Awakened Casing
 tile.signalindustries.awakened.casing.desc=Used for Awakened-tier multiblock machines.
 tile.signalindustries.awakened.casing.socket.name=Awakened Socket Casing
@@ -584,7 +586,7 @@ tile.signalindustries.basic.dynamo.desc=Generates universal energy units using S
 tile.signalindustries.reinforced.dynamo.name=Reinforced Signalite Dynamo
 tile.signalindustries.reinforced.dyname.desc=Generates more energy that it's basic counterpart.
 
-tile.signaindustries.reinforced.satellite.name=Satellite
+tile.signaindustries.reinforced.satellite.name=Reinforced Satellite
 tile.signaindustries.reinforced.satellite.desc=Satellite, shine on me tonight~ Release it into the skies to watch the world from above.
 
 tile.signalindustries.reinforced.chunkLoader.name=Spacetime Maintainer
@@ -594,6 +596,13 @@ tile.signalindustries.awakened.chunkLoader.desc=Keeps several chunks loaded arou
 
 tile.signalindustries.awakened.warpGate.name=Awakened Quantum Warp Gate Controller
 tile.signalindustries.awakened.warpGate.desc=Permanently links 2 locations together even across dimensions, allows same-dimension teleportation of fluids and items.
+
+tile.signalindustries.reinforced.parallelProcessor.name=Reinforced 2x Parallel Processor
+tile.signalindustries.reinforced.parallelProcessor.desc=Allows a machine to carry out 2 recipes at once!
+tile.signalindustries.awakened.parallelProcessor.name=Awakened 4x Parallel Superprocessor
+tile.signalindustries.awakened.parallelProcessor.desc=Allows a machine to carry out 4 recipes at once!
+tile.signalindustries.awakened.8x.parallelProcessor.name=Awakened 8x Parallel Hyperprocessor
+tile.signalindustries.awakened.8x.parallelProcessor.desc=Creates and collapses multiple timelines inside a machine to carry out 8 recipes at once!
 
 tile.signalindustries.recipeMaker.name=Recipe Maker
 tile.signalindustries.recipeMaker.desc=Development utility.
@@ -825,6 +834,10 @@ guidebook.section.signalindustries.extractor=Extractor
 guidebook.section.signalindustries.crusher=Crusher
 guidebook.section.signalindustries.alloySmelter=Alloy Smelter
 guidebook.section.signalindustries.plateFormer=Plate Former
+guidebook.section.signalindustries.wakingCrusher=Waking Crusher
+guidebook.section.signalindustries.wakingAlloySmelter=Waking Alloy Smelter
+guidebook.section.signalindustries.wakingPlateFormer=Waking Plate Former
+guidebook.section.signalindustries.wakingInfuser=Waking Infuser
 guidebook.section.signalindustries.pump=Pump
 guidebook.section.signalindustries.crystalCutter=Crystal Cutter
 guidebook.section.signalindustries.crystalChamber=Crystal Chamber
@@ -844,6 +857,10 @@ multiblock.signalindustries.wrathTree.name=Wrath Tree
 multiblock.signalindustries.extractionManifold.name=Extraction Manifold
 multiblock.signalindustries.basicInductionSmelter.name=Basic Induction Smelter
 multiblock.signalindustries.warpGate.name=Warp Gate
+multiblock.signalindustries.wakingCrusher.name=Waking Crusher
+multiblock.signalindustries.wakingAlloySmelter.name=Waking Alloy Smelter
+multiblock.signalindustries.wakingPlateFormer.name=Waking Plate Former
+
 
 gui.options.page.controls.category.signalindustries=Signal Industries
 
@@ -859,7 +876,7 @@ chapter.signalindustries.awakened.desc=The end game. Contains quests for the Awa
 quest.signalindustries.welcome.name=Welcome!
 quest.signalindustries.welcome.desc=Welcome to Signal Industries!\nSI is a technomagical mod with many machines and gadgets split between 4 tiers.\n\nEach tier has a dedicated chapter in the questbook.\n\nWhen finished, this questbook should contain quests for every block, item and feature added by this mod.\n\nTry holding CTRL while hovering over items, SI uses BTA descriptions to provide more info about blocks and items.\n\nDon't forget to check the guidebook by pressing [R], all recipes are there!
 quest.signalindustries.genesis.name=Genesis
-quest.signalindustries.genesis.desc=Your first task is finding a meteor containing a red ore that you will need a diamond pickaxe to mine, this will be the main resource of this mod.\n\nMeteors spawn randomly in the world and can be of 3 types:\n- Iron\n- Signalum\n- Dilithium\n\nYou don't need to worry about the last one for now.\n\nLater on you will be able to craft a special compass that will point you to the closest meteor.
+quest.signalindustries.genesis.desc=Your first task is finding a meteor containing a red ore that you will need a diamond pickaxe to mine, this will be the main resource of this mod.\n\nMeteors spawn randomly in the world and can be of 3 types:\n- Iron\n- Signalite\n- Dilithium\n\nYou don't need to worry about the last one for now.\n\nLater on you will be able to craft a special compass that will point you to the closest meteor.
 quest.signalindustries.tome.name=Tome of Knowledge
 quest.signalindustries.tome.desc=Having this book in your inventory unlocks an index of every item and block currently in the game that you can browse and look up recipes and usages for.
 quest.signalindustries.hammer.name=Hammer Time!
@@ -880,9 +897,9 @@ quest.signalindustries.prototypeExtractor.name=Prototype Signalum Extractor
 quest.signalindustries.prototypeExtractor.desc=This is the first machine you should make, it allows you to burn any furnace combustible fuel along with <Raw S. Crystal> to gain <Signalum Energy>.
 quest.signalindustries.prototypePlateFormer.name=Prototype Plate Former
 quest.signalindustries.prototypePlateFormer.desc=Makes plates out of various materials, higher yield for <Cobblestone & Stone Plates>, required for plates made out of more advanced materials.
-quest.signalindustries.crystal.name=Signalum Crystal
+quest.signalindustries.crystal.name=Signalite Crystal
 quest.signalindustries.crystal.desc=A bright red crystal with enormous power, used as a crafting ingredient in many recipes. You will need one for the next tier of <Machine Core>.
-quest.signalindustries.crystalBattery.name=Signalum Crystal (Battery)
+quest.signalindustries.crystalBattery.name=Signalite Crystal (Battery)
 quest.signalindustries.crystalBattery.desc=This is a modified crystal that can store and release <S. Energy>. Simply click with it in on any slot that contains or accepts <S. Energy>.
 quest.signalindustries.energy.name=Signalum Energy
 quest.signalindustries.energy.desc=This is the power source for all machines and gadgets in Signal Industries.\n\nGained from extracting <Raw S. Crystals> in an <Extractor>, or later on collected passively from the air.\n\nCan be transported either by conduits designed for it or by a crystal battery\n\nTechnically a fluid.
@@ -944,7 +961,7 @@ quest.signalindustries.saturatedAlloy.name=Saturated Alloy Ingots
 quest.signalindustries.saturatedAlloy.desc=Infusing crystal alloy with signalum dust creates this saturated alloy. Useful later on.
 quest.signalindustries.saturatedAlloyPlate.name=Saturated Alloy Plates
 quest.signalindustries.saturatedAlloyPlate.desc=As with most materials you can make it into a plate.
-quest.signalindustries.signalumAlloyMesh.name=Signalum Alloy Mesh
+quest.signalindustries.signalumAlloyMesh.name=Signalite Alloy Mesh
 quest.signalindustries.signalumAlloyMesh.desc=A thin plate of <Signalum Alloy> with holes cut into it. Used in the making of a certain machine.
 quest.signalindustries.basicChamber.name=Basic Crystal Chamber
 quest.signalindustries.basicChamber.desc=Allows you to combine crystal batteries together to increase their size and therefore capacity.

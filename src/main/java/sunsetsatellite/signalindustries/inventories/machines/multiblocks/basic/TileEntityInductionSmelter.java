@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
+package sunsetsatellite.signalindustries.inventories.machines.multiblocks.basic;
 
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.registry.Registries;
@@ -67,7 +67,7 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
         output = null;
         energy = null;
         if(multiblock.isValid()){
-            Direction dir = Direction.getDirectionFromSide(getMovedData()).getOpposite();
+            Direction dir = Direction.getDirectionFromSide(getMovedData());
             ArrayList<BlockInstance> tileEntities = multiblock.data.getTileEntities(worldObj,new Vec3i(x,y,z), dir);
             for (BlockInstance tileEntity : tileEntities) {
                 if (tileEntity.tile instanceof IMultiblockPart) {

@@ -32,105 +32,155 @@ public class SIBlocks extends DataInitializer {
     public static Block signalumOre;
     public static Block dilithiumOre;
     public static Block dimensionalShardOre;
+
     public static Block dilithiumBlock;
     public static Block emptyCrystalBlock;
     public static Block rawCrystalBlock;
     public static Block awakenedSignalumCrystalBlock;
+
     public static Block dilithiumCrystalBlock;
+
     public static Block prototypeMachineCore;
     public static Block basicMachineCore;
     public static Block reinforcedMachineCore;
     public static Block awakenedMachineCore;
+
     public static Block basicCasing;
     public static Block reinforcedCasing;
     public static Block reinforcedCasing2;
+    public static Block reinforcedGrate;
     public static Block awakenedCasing;
     public static Block awakenedSocketCasing;
     public static Block awakenedCasing2;
     public static Block basicCasing2;
     //public static Block connectedTexture;
+
     public static Block reinforcedGlass;
+
     public static Block prototypeConduit;
     public static Block basicConduit;
     public static Block reinforcedConduit;
     public static Block awakenedConduit;
+
     public static Block prototypeFluidConduit;
     public static Block basicFluidConduit;
     public static Block reinforcedFluidConduit;
+
     public static Block prototypeItemConduit;
     public static Block basicItemConduit;
     public static Block basicRestrictItemConduit;
     public static Block basicSensorItemConduit;
+
     public static Block multiConduit;
+
     public static Block basicCatalystConduit;
     public static Block reinforcedCatalystConduit;
     public static Block awakenedCatalystConduit;
+
     public static Block infiniteEnergyCell;
     public static Block prototypeEnergyCell;
     public static Block basicEnergyCell;
     public static Block reinforcedEnergyCell;
+
     public static Block prototypeFluidTank;
     public static Block infiniteFluidTank;
     public static Block basicFluidTank;
+
     public static Block prototypeExtractor;
     public static Block basicExtractor;
     public static Block reinforcedExtractor;
+
     public static Block basicCollector;
+
     public static Block prototypeCrusher;
     public static Block basicCrusher;
     public static Block reinforcedCrusher;
+    public static Block wakingCrusher;
+
     public static Block prototypeAlloySmelter;
     public static Block basicAlloySmelter;
     public static Block reinforcedAlloySmelter;
+    public static Block wakingAlloySmelter;
+
     public static Block basicInductionSmelter;
+
     public static Block prototypePlateFormer;
     public static Block basicPlateFormer;
     public static Block reinforcedPlateFormer;
+    public static Block wakingPlateFormer;
+
     public static Block prototypeCrystalCutter;
     public static Block basicCrystalCutter;
     public static Block reinforcedCrystalCutter;
+
     public static Block basicCrystalChamber;
     public static Block reinforcedCrystalChamber;
+
     public static Block basicInfuser;
+    public static Block reinforcedInfuser;
+    public static Block wakingInfuser;
+
     public static Block basicAssembler;
+
     public static Block prototypeStorageContainer;
     public static Block infiniteStorageContainer;
     public static Block basicStorageContainer;
     public static Block reinforcedStorageContainer;
+
     public static Block basicWrathBeacon;
     public static Block reinforcedWrathBeacon;
+
     public static Block dimensionalAnchor;
+
     public static Block dilithiumStabilizer;
+
     public static Block redstoneBooster;
     public static Block dilithiumBooster;
     public static Block awakenedBooster; //TODO: W.I.P.
+
     public static Block prototypePump;
     public static Block basicPump;
+
     public static Block prototypeInserter;
     public static Block basicInserter;
+
     public static Block prototypeFilter;
+
     public static Block basicAutomaticMiner;
+
     public static Block externalIo;
     public static Block reinforcedExternalIo;
+
     public static Block reinforcedCentrifuge;
+
     public static Block reinforcedIgnitor;
+
     public static Block signalumReactorCore;
+
     public static Block awakenedEnergyConnector;
     public static Block reinforcedEnergyConnector;
     public static Block basicEnergyConnector;
+
     public static Block basicFluidInputHatch;
     public static Block basicFluidOutputHatch;
     public static Block basicItemInputBus;
     public static Block basicItemOutputBus;
+
     public static Block reinforcedFluidInputHatch;
     public static Block reinforcedFluidOutputHatch;
     public static Block reinforcedItemInputBus;
     public static Block reinforcedItemOutputBus;
+
     public static Block basicEnergyInjector;
+
     public static Block basicSignalumDynamo;
+
     public static Block basicProgrammer;
+
     public static Block reinforcedChunkloader;
+
     public static Block reinforcedBuilder;
+
     public static Block warpGate;
 
     public static Block cobblestoneBricks;
@@ -140,7 +190,6 @@ public class SIBlocks extends DataInitializer {
     public static Block dilithiumCoil;
     public static Block awakenedAlloyCoil;
 
-    //public static Block warpGatePortal;
     public static Block portalEternity;
     public static Block realityFabric;
     public static Block rootedFabric;
@@ -296,6 +345,13 @@ public class SIBlocks extends DataInitializer {
                 .setResistance(2000)
                 .setBlockModel((block -> new BlockModelConnectedTextureExtra(block,"signalindustries:block/reinforced_casing_2","signalindustries:block/reinforced_casing_2_active")))
                 .build(new BlockNonSolid("reinforced.casing2", config.getInt("BlockIDs.reinforcedCasing2"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+        reinforcedGrate = new BlockBuilder(MOD_ID)
+                .setTextures("signalindustries:block/reinforced_grate")
+                .setLuminance(0)
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(10)
+                .setResistance(2000)
+                .build(new BlockNonSolid("reinforced.grate", config.getInt("BlockIDs.reinforcedGrate"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
         /*connectedTexture = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/connected_texture_0")
                 .setLuminance(0)
@@ -751,6 +807,21 @@ public class SIBlocks extends DataInitializer {
                         .withOverbrightTopTexture("crusher_overlay")
                 )
                 .build(new BlockCrusher("reinforced.crusher", config.getInt("BlockIDs.reinforcedCrusher"), Tier.REINFORCED, Material.metal));
+        wakingCrusher = new BlockBuilder(MOD_ID)
+                .setHardness(1)
+                .setResistance(3)
+                .setBlockSound(BlockSounds.METAL)
+                .setTextures("signalindustries:block/reinforced_blank")
+                .setTopTexture("signalindustries:block/crusher_reinforced_top_inactive")
+                .setSouthTexture("signalindustries:block/waking_crusher_reinforced_side")
+                .setBlockModel((block) -> new BlockModelMachine(block, Tier.REINFORCED)
+                        .withDefaultTopTexture("crusher_reinforced_top_inactive")
+                        .withDefaultNorthTexture("waking_crusher_reinforced_side")
+                        .withActiveTopTexture("crusher_reinforced_top_active")
+                        .withActiveNorthTexture("waking_crusher_reinforced_side")
+                        .withOverbrightTopTexture("crusher_overlay")
+                )
+                .build(new BlockWakingCrusher("reinforced.wakingCrusher", config.getInt("BlockIDs.wakingCrusher"), Tier.REINFORCED, Material.metal));
         prototypeAlloySmelter = new BlockBuilder(MOD_ID)
                 .setHardness(1)
                 .setResistance(3)
@@ -787,6 +858,18 @@ public class SIBlocks extends DataInitializer {
                         .withOverbrightNorthTexture("alloy_smelter_reinforced_overlay")
                 )
                 .build(new BlockAlloySmelter("reinforced.alloySmelter", config.getInt("BlockIDs.reinforcedAlloySmelter"), Tier.REINFORCED, Material.metal));
+        wakingAlloySmelter = new BlockBuilder(MOD_ID)
+                .setHardness(1)
+                .setResistance(3)
+                .setBlockSound(BlockSounds.METAL)
+                .setTextures("signalindustries:block/reinforced_blank")
+                .setSouthTexture("signalindustries:block/alloy_smelter_reinforced_inactive")
+                .setBlockModel((block) -> new BlockModelMachine(block, Tier.REINFORCED)
+                        .withDefaultNorthTexture("alloy_smelter_reinforced_inactive")
+                        .withActiveNorthTexture("waking_alloy_smelter_reinforced_active")
+                        .withOverbrightNorthTexture("waking_alloy_smelter_overlay")
+                )
+                .build(new BlockWakingAlloySmelter("reinforced.wakingAlloySmelter", config.getInt("BlockIDs.wakingAlloySmelter"), Tier.REINFORCED, Material.metal));
         basicInductionSmelter = new BlockBuilder(MOD_ID)
                 .setHardness(1)
                 .setResistance(3)
@@ -839,6 +922,18 @@ public class SIBlocks extends DataInitializer {
                         .withOverbrightNorthTexture("plate_former_overlay")
                 )
                 .build(new BlockPlateFormer("reinforced.plateFormer", config.getInt("BlockIDs.reinforcedPlateFormer"), Tier.REINFORCED, Material.metal));
+        wakingPlateFormer = new BlockBuilder(MOD_ID)
+                .setHardness(1)
+                .setResistance(3)
+                .setBlockSound(BlockSounds.METAL)
+                .setTextures("signalindustries:block/reinforced_blank")
+                .setSouthTexture("signalindustries:block/plate_former_reinforced_inactive")
+                .setBlockModel((block) -> new BlockModelMachine(block, Tier.REINFORCED)
+                        .withDefaultNorthTexture("plate_former_reinforced_inactive")
+                        .withActiveNorthTexture("waking_plate_former_reinforced_active")
+                        .withOverbrightNorthTexture("waking_plate_former_overlay")
+                )
+                .build(new BlockWakingPlateFormer("reinforced.wakingPlateFormer", config.getInt("BlockIDs.wakingPlateFormer"), Tier.REINFORCED, Material.metal));
         prototypeCrystalCutter = new BlockBuilder(MOD_ID)
                 .setHardness(1)
                 .setResistance(3)
@@ -911,6 +1006,30 @@ public class SIBlocks extends DataInitializer {
                         .withOverbrightSideTextures("infuser_overlay")
                 )
                 .build(new BlockInfuser("basic.infuser", config.getInt("BlockIDs.basicInfuser"), Tier.BASIC, Material.metal));
+        reinforcedInfuser = new BlockBuilder(MOD_ID)
+                .setHardness(1)
+                .setResistance(3)
+                .setBlockSound(BlockSounds.METAL)
+                .setTextures("signalindustries:block/reinforced_blank")
+                .setSideTextures("signalindustries:block/infuser_reinforced_side_inactive")
+                .setBlockModel((block) -> new BlockModelMachine(block, Tier.REINFORCED)
+                        .withDefaultSideTextures("infuser_reinforced_side_inactive")
+                        .withActiveSideTextures("infuser_reinforced_side_active")
+                        .withOverbrightSideTextures("reinforced_infuser_overlay")
+                )
+                .build(new BlockInfuser("reinforced.infuser", config.getInt("BlockIDs.reinforcedInfuser"), Tier.REINFORCED, Material.metal));
+        wakingInfuser = new BlockBuilder(MOD_ID)
+                .setHardness(1)
+                .setResistance(3)
+                .setBlockSound(BlockSounds.METAL)
+                .setTextures("signalindustries:block/reinforced_blank")
+                .setSideTextures("signalindustries:block/infuser_reinforced_side_inactive")
+                .setBlockModel((block) -> new BlockModelMachine(block, Tier.REINFORCED)
+                        .withDefaultSideTextures("infuser_reinforced_side_inactive")
+                        .withActiveSideTextures("waking_infuser_side_active")
+                        .withOverbrightSideTextures("waking_infuser_overlay")
+                )
+                .build(new BlockWakingInfuser("reinforced.wakingInfuser", config.getInt("BlockIDs.wakingInfuser"), Tier.REINFORCED, Material.metal));
         basicAssembler = new BlockBuilder(MOD_ID)
                 .setHardness(1)
                 .setResistance(3)

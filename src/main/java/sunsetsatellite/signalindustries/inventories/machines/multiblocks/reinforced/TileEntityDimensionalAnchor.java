@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
+package sunsetsatellite.signalindustries.inventories.machines.multiblocks.reinforced;
 
 
 import com.mojang.nbt.CompoundTag;
@@ -61,7 +61,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
         if(!multiblock.isValid()){
             return;
         }
-        Direction dir = Direction.getDirectionFromSide(getMovedData()).getOpposite();
+        Direction dir = Direction.getDirectionFromSide(getMovedData());
         ArrayList<BlockInstance> tileEntities = multiblock.data.getTileEntities(worldObj,new Vec3i(x,y,z),dir);
         for (BlockInstance tileEntity : tileEntities) {
             if(tileEntity.tile instanceof TileEntityStabilizer){

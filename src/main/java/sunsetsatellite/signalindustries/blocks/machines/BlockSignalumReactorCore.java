@@ -11,7 +11,7 @@ import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.gui.GuiSignalumReactor;
-import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntitySignalumReactor;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.reinforced.TileEntitySignalumReactor;
 import sunsetsatellite.signalindustries.util.Tier;
 
 

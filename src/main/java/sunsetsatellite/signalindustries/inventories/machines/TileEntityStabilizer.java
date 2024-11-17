@@ -20,7 +20,7 @@ import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
-import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityDimensionalAnchor;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.reinforced.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.util.IOPreview;
 
 import java.util.ArrayList;

@@ -53,7 +53,7 @@ public class GuiEnergyConnector extends GuiFluid {
             TileEntityTieredMachineBase tile = (TileEntityTieredMachineBase) this.tile.connectedTo;
             if(tile.isBurning()){
                 i5 = tile.getBurnTimeRemainingScaled(12);
-                this.drawTexturedModalRect(i3 + 80, i4 + 17 + 12 - i5, 176, 12 - i5, 14, i5 + 2);
+                this.drawTexturedModalRect(i3 + 80, i4 + 17 + 12 - i5, 176, 32 + 12 - i5, 14, i5 + 2);
             }
         }
     }

@@ -10,7 +10,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerReinforcedExtractor;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
-import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityReinforcedExtractor;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.reinforced.TileEntityReinforcedExtractor;
 
 public class GuiReinforcedExtractor extends GuiFluid {
 

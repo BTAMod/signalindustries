@@ -10,7 +10,7 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
-import sunsetsatellite.signalindustries.inventories.machines.multiblocks.TileEntityInductionSmelter;
+import sunsetsatellite.signalindustries.inventories.machines.multiblocks.basic.TileEntityInductionSmelter;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class BlockInductionSmelter extends BlockMachineBase {

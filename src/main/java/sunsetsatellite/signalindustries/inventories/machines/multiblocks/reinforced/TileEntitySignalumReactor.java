@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.inventories.machines.multiblocks;
+package sunsetsatellite.signalindustries.inventories.machines.multiblocks.reinforced;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;

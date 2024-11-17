@@ -2145,7 +2145,7 @@
     ],
     "result": {
       "key": "tile.signalindustries.signalumAlloyCoil",
-      "amount": 2,
+      "amount": 4,
       "meta": 0
     },
     "consumeContainers": false
