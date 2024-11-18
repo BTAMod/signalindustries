@@ -71,7 +71,9 @@ public class BlockConduit extends BlockConduitBase {
                 multipartTag.putString("Type",multipart.type.name);
                 multipartTag.putInt("Block", multipart.block.id);
                 multipartTag.putInt("Meta", multipart.meta);
-                multipartTag.putInt("Side", multipart.side.getId());
+                if(multipart.side != null){
+                    multipartTag.putInt("Side", multipart.side.getId());
+                }
                 tag.putCompound("Multipart",multipartTag);
                 stack.setData(tag);
                 list.add(stack);

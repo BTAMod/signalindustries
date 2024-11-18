@@ -1671,6 +1671,7 @@ public class SIBlocks extends DataInitializer {
         awakenedSocketCasing.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
         awakenedCasing.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
         awakenedCasing2.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        reinforcedGrate.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
 
         setInitialized(true);
     }

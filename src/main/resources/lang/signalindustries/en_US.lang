@@ -399,11 +399,11 @@ tile.signalindustries.awakened.extractor.name=Awakened Signalite Extraction Faci
 tile.signalindustries.awakened.extractor.desc=Will extract all <Signalum Energy> from a huge amount of <Raw Signalite Crystals> all at once with extraordinary efficiency.
 
 tile.signalindustries.basic.collector.name=Basic Signalite Collector
-tile.signalindustries.basic.collector.desc=Captures lingering <Signalum Energy> in the air. More efficient near signalum meteor impact sites. Must be placed in an open environment.
+tile.signalindustries.basic.collector.desc=Captures lingering <Signalum Energy> in the air. More efficient near signalite meteor impact sites. Must be placed in an open environment.
 tile.signalindustries.reinforced.collector.name=Reinforced Signalite Absorber
-tile.signalindustries.reinforced.collector.desc=Captures lingering <Signalum Energy> in the air. More efficient near signalum meteor impact sites. Must be placed in an open environment.
+tile.signalindustries.reinforced.collector.desc=Captures lingering <Signalum Energy> in the air. More efficient near signalite meteor impact sites. Must be placed in an open environment.
 tile.signalindustries.awakened.collector.name=Awakened Signalite Collection Array Controller
-tile.signalindustries.awakened.collector.desc=Captures lingering <Signalum Energy> in the air. More efficient near signalum meteor impact sites. Must be placed in an open environment.
+tile.signalindustries.awakened.collector.desc=Captures lingering <Signalum Energy> in the air. More efficient near signalite meteor impact sites. Must be placed in an open environment.
 
 tile.signalindustries.prototype.crusher.name=Prototype Crusher
 tile.signalindustries.prototype.crusher.desc=Grinds materials into dusts.
