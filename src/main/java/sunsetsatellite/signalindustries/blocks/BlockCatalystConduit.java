@@ -12,17 +12,16 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.CatalystMultipart;
 import sunsetsatellite.catalyst.core.util.ConduitCapability;
-import sunsetsatellite.catalyst.core.util.IConduitBlock;
 import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
 import sunsetsatellite.catalyst.multipart.api.Multipart;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockConduitBase;
 import sunsetsatellite.signalindustries.inventories.TileEntityCatalystConduit;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlockCatalystConduit extends BlockContainerTiered implements IConduitBlock {
+public class BlockCatalystConduit extends BlockConduitBase {
 
     public BlockCatalystConduit(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
@@ -30,10 +29,6 @@ public class BlockCatalystConduit extends BlockContainerTiered implements ICondu
 
     protected TileEntity getNewBlockEntity() {
         return new TileEntityCatalystConduit();
-    }
-
-    public boolean isSolidRender() {
-        return false;
     }
 
     public boolean renderAsNormalBlock() {
@@ -64,7 +59,9 @@ public class BlockCatalystConduit extends BlockContainerTiered implements ICondu
                 multipartTag.putString("Type",multipart.type.name);
                 multipartTag.putInt("Block", multipart.block.id);
                 multipartTag.putInt("Meta", multipart.meta);
-                multipartTag.putInt("Side", multipart.side.getId());
+                if(multipart.side != null){
+                    multipartTag.putInt("Side", multipart.side.getId());
+                }
                 tag.putCompound("Multipart",multipartTag);
                 stack.setData(tag);
                 list.add(stack);
