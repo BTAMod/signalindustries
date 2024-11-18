@@ -1,24 +1,37 @@
 package sunsetsatellite.signalindustries.blocks.base;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.util.collection.Pair;
+import net.minecraft.core.world.WorldSource;
 import net.minecraft.core.util.helper.Side;
+import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.*;
+import sunsetsatellite.catalyst.multipart.api.Multipart;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.items.ItemConfigurationTablet;
 import sunsetsatellite.signalindustries.util.ConfigurationTabletMode;
 import sunsetsatellite.signalindustries.util.Tier;
 
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Objects;
 
 public abstract class BlockConduitBase extends BlockContainerTiered implements IConduitBlock, ISideInteractable {
     public BlockConduitBase(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
+        setBlockBounds(0.3f, 0.3f, 0.3f, 0.7f, 0.7f, 0.7f);
+    }
+
+    @Override
+    public boolean isSolidRender() {
+        return false;
     }
 
     @Override
@@ -68,5 +81,32 @@ public abstract class BlockConduitBase extends BlockContainerTiered implements I
         }
     }
 
+    @Override
+    public void setBlockBoundsBasedOnState(WorldSource world, int x, int y, int z) {
+        float bx = 0.3f, by = 0.3f, bz = 0.3f;
+        float tx = 0.7f, ty = 0.7f, tz = 0.7f;
+        // Loop de-loop
+        for (Direction dir : Direction.values()) {
+            Vec3i v = dir.getVec();
+            TileEntity te = world.getBlockTileEntity(x + v.x, y + v.y, z + v.z);
+            Block b = world.getBlock(x + v.x, y + v.y, z + v.z);
+            if (
+                te == null || !(te instanceof TileEntityFluidPipe) ||
+                getConduitCapability() != ((IConduitBlock) b).getConduitCapability()
+            ) continue;
+            if (v.x > 0) tx = 1.0f;
+            else if (v.x < 0) bx = 0.0f;
+            if (v.z > 0) tz = 1.0f;
+            else if (v.z < 0) bz = 0.0f;
+            if (v.y > 0) ty = 1.0f;
+            else if (v.y < 0) by = 0.0f;
+        }
+        setBlockBounds(bx, by, bz, tx, ty, tz);
+    }
 
+    @Override
+    public AABB getCollisionBoundingBoxFromPool(WorldSource world, int x, int y, int z) {
+        setBlockBoundsBasedOnState(world, x, y, z);
+        return super.getCollisionBoundingBoxFromPool(world, x, y, z);
+    }
 }
