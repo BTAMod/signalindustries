@@ -3,12 +3,10 @@ package sunsetsatellite.signalindustries.inventories;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.BlockFluid;
-import net.minecraft.core.block.entity.TileEntity;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
-import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
@@ -95,18 +93,6 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
     @Override
     public String getInvName() {
         return "SI Fluid Tank";
-    }
-
-    public void extractFluids(){
-        for (Map.Entry<Direction, Connection> e : fluidConnections.entrySet()) {
-            Direction dir = e.getKey();
-            Connection connection = e.getValue();
-            TileEntity tile = dir.getTileEntity(worldObj,this);
-            if (tile instanceof TileEntityFluidPipe) {
-                moveFluids(dir, (TileEntityFluidPipe) tile);
-                ((TileEntityFluidPipe) tile).rememberTicks = 100;
-            }
-        }
     }
 
     @Override

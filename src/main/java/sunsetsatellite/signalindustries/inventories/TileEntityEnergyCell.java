@@ -115,19 +115,6 @@ public class TileEntityEnergyCell extends TileEntityTieredContainer implements I
         return "Energy Cell";
     }
 
-    public void extractFluids(){
-        for (Map.Entry<Direction, Connection> e : fluidConnections.entrySet()) {
-            Direction dir = e.getKey();
-            Connection connection = e.getValue();
-            TileEntity tile = dir.getTileEntity(worldObj,this);
-            if (tile instanceof TileEntityFluidPipe) {
-                pressurizePipes((TileEntityFluidPipe) tile, new ArrayList<>());
-                moveFluids(dir, (TileEntityFluidPipe) tile);
-                ((TileEntityFluidPipe) tile).rememberTicks = 100;
-            }
-        }
-    }
-
     public void pressurizePipes(TileEntityFluidPipe pipe, ArrayList<HashMap<String,Integer>> already){
         for (Direction dir : Direction.values()) {
             TileEntity tile = dir.getTileEntity(worldObj,pipe);

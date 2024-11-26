@@ -6,7 +6,6 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3f;
@@ -26,7 +25,6 @@ import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 public class TileEntityBooster extends TileEntityTieredContainer implements IHasIOPreview, IActiveForm {
@@ -228,19 +226,6 @@ public class TileEntityBooster extends TileEntityTieredContainer implements IHas
     public boolean isDisabled() {
         //TODO:
         return false;
-    }
-
-    public void extractFluids(){
-        for (Map.Entry<Direction, Connection> e : fluidConnections.entrySet()) {
-            Direction dir = e.getKey();
-            Connection connection = e.getValue();
-            TileEntity tile = dir.getTileEntity(worldObj,this);
-            if (tile instanceof TileEntityFluidPipe) {
-                pressurizePipes((TileEntityFluidPipe) tile, new ArrayList<>());
-                moveFluids(dir, (TileEntityFluidPipe) tile);
-                ((TileEntityFluidPipe) tile).rememberTicks = 100;
-            }
-        }
     }
 
     public void pressurizePipes(TileEntityFluidPipe pipe, ArrayList<HashMap<String,Integer>> already){
