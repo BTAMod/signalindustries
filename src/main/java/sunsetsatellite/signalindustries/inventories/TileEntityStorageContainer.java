@@ -2,6 +2,8 @@ package sunsetsatellite.signalindustries.inventories;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.player.inventory.IInventory;
 import sunsetsatellite.catalyst.fluids.util.NBTHelper;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTiered;
@@ -9,7 +11,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.Map;
 
-public class TileEntityStorageContainer extends TileEntityTiered {
+public class TileEntityStorageContainer extends TileEntityTiered implements IInventory {
     public ItemStack contents = null;
     public int capacity = 4096;
     public boolean infinite = false;
@@ -149,4 +151,58 @@ public class TileEntityStorageContainer extends TileEntityTiered {
             }
         }
     }
+
+    // IInventory (for mod compat)
+    @Override
+    public int getSizeInventory() {
+        return 1;
+    }
+
+    @Override
+    public ItemStack getStackInSlot(int paramInt) {
+        if (paramInt == 0) return contents;
+        return null;
+    }
+
+    @Override
+    public ItemStack decrStackSize(int paramInt1, int paramInt2) {
+        if (unlimited) return contents.copy();
+        if (paramInt1 != 0 || contents == null) return null;
+        if (contents.stackSize <= paramInt2) {
+            ItemStack ret = contents.copy();
+            contents.stackSize = 0;
+            return ret;
+        } else {
+            ItemStack ret = contents.splitStack(paramInt2);
+            return ret;
+        }
+    }
+
+    @Override
+    public void setInventorySlotContents(int paramInt, ItemStack paramItemStack) {
+        if (paramInt != 0) return;
+        if (locked && paramItemStack == null && contents != null) contents.stackSize = 0;
+        else contents = paramItemStack;
+    }
+
+    @Override
+    public String getInvName() {
+        return "SI:StorageContainer";
+    }
+
+    @Override
+    public int getInventoryStackLimit() {
+        return unlimited ? Integer.MAX_VALUE : (int) (4096 * (Math.pow(2, tier.ordinal())));
+    }
+
+    @Override
+    public void onInventoryChanged() {}
+
+    @Override
+    public boolean canInteractWith(EntityPlayer paramEntityPlayer) {
+        return false;
+    }
+
+    @Override
+    public void sortInventory() {}
 }
