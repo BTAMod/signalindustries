@@ -9,7 +9,6 @@ import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3f;
-import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIItems;
@@ -24,7 +23,6 @@ import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 public class TileEntityBooster extends TileEntityTieredContainer implements IHasIOPreview, IActiveForm {
@@ -226,44 +224,6 @@ public class TileEntityBooster extends TileEntityTieredContainer implements IHas
     public boolean isDisabled() {
         //TODO:
         return false;
-    }
-
-    public void pressurizePipes(TileEntityFluidPipe pipe, ArrayList<HashMap<String,Integer>> already){
-        for (Direction dir : Direction.values()) {
-            TileEntity tile = dir.getTileEntity(worldObj,pipe);
-            if (tile instanceof TileEntityFluidPipe) {
-                for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.x && V2.get("y") == tile.y && V2.get("z") == tile.z) {
-                        return;
-                    }
-                }
-                HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.x);
-                list.put("y",tile.y);
-                list.put("z",tile.z);
-                already.add(list);
-                pressurizePipes((TileEntityFluidPipe) tile,already);
-            }
-        }
-    }
-
-    public void unpressurizePipes(TileEntityFluidPipe pipe,ArrayList<HashMap<String,Integer>> already){
-        for (Direction dir : Direction.values()) {
-            TileEntity tile = dir.getTileEntity(worldObj,pipe);
-            if (tile instanceof TileEntityFluidPipe) {
-                for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.x && V2.get("y") == tile.y && V2.get("z") == tile.z) {
-                        return;
-                    }
-                }
-                HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.x);
-                list.put("y",tile.y);
-                list.put("z",tile.z);
-                already.add(list);
-                unpressurizePipes((TileEntityFluidPipe) tile,already);
-            }
-        }
     }
 
     @Override

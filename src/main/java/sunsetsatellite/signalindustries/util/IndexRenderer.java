@@ -10,6 +10,7 @@ import net.minecraft.client.gui.guidebook.GuidebookSections;
 import net.minecraft.client.gui.guidebook.PageManager;
 import net.minecraft.client.gui.guidebook.SearchableGuidebookSection;
 import net.minecraft.client.gui.guidebook.search.SearchPage;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.item.Item;
@@ -22,6 +23,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import sunsetsatellite.catalyst.core.util.Vec2i;
 import sunsetsatellite.signalindustries.api.impl.catalyst.multipart.SIMultipartIndexPlugin;
+import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -39,6 +41,7 @@ public class IndexRenderer {
     public static HashMap<IdMetaPair,ItemStack> items = new HashMap<>();
     private static HashSet<Map.Entry<IdMetaPair, ItemStack>> sortedEntries;
     private static boolean initialized = false;
+    public static boolean show = true;
 
     public static void init() {
         for (ItemStack stack : ContainerPlayerCreative.creativeItems) {
@@ -63,6 +66,9 @@ public class IndexRenderer {
     public static void drawScreen(Minecraft mc, int mouseX, int mouseY, int width, int height, float partialTick){
         if(!initialized) {
             init();
+            return;
+        }
+        if(!show){
             return;
         }
         if(debounce > 0) debounce--;
@@ -228,6 +234,10 @@ public class IndexRenderer {
     }
 
     public static void keyTyped(char c, int i, int mouseX, int mouseY) {
+        KeyBinding showIndexKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalindustries$activateTomeOfRaziel();
+        if(showIndexKey.isPressed()){
+            show = !show;
+        }
         if(i == Keyboard.KEY_ADD || i == Keyboard.KEY_RIGHT){
             if(page < pageMax) page++;
         } else if (i == Keyboard.KEY_SUBTRACT || i == Keyboard.KEY_LEFT) {

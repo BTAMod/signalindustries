@@ -10,6 +10,8 @@ public interface IKeybinds {
 
     KeyBinding signalIndustries$getKeySwitchMode();
 
+    KeyBinding signalindustries$activateTomeOfRaziel();
+
     KeyBinding signalIndustries$getKeyActivateHeadLensAttachment();
 
     KeyBinding signalIndustries$getKeyActivateHeadTopAttachment();

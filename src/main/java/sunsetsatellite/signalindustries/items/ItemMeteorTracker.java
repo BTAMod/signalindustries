@@ -18,15 +18,6 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
         super(name, id);
     }
 
-    /*@Override
-    public int getIconFromDamage(int id) {
-        if(id == 1){
-            int[] a = TextureHelper.getOrCreateItemTexture(SignalIndustries.MOD_ID,"meteor_tracker.png");
-            return Item.iconCoordToIndex(a[0],a[1]);
-        }
-        return iconIndex;
-    }*/
-
     @Override
     public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if(itemstack.getMetadata() == 0){

@@ -293,6 +293,8 @@ item.signalindustries.awakenedAbilityModule.desc=Container for <Signalum Power S
 
 item.signalindustries.meteorTracker.name=Meteor Tracker
 item.signalindustries.meteorTracker.desc=Points to the closest meteor to you.
+item.signalindustries.reinforced.meteorTracker.name=Reinforced Meteor Tracker
+item.signalindustries.reinforced.meteorTracker.desc=Powerful enough to detect the presence of <Signalite Crystal Ore> even through many layers of rock.
 item.signalindustries.configurationTablet.rotation.name=Configuration Tablet (Rotation)
 item.signalindustries.configurationTablet.rotation.desc=Used to change an already placed blocks rotation. Shift+RMB to change mode.
 item.signalindustries.configurationTablet.item.name=Configuration Tablet (Item I/O)
@@ -815,6 +817,7 @@ achievement.signalindustries.divineKnowledge.desc=Craft the Tome of Raziel, cont
 key.signalindustries.openSuit=Open Suit
 key.signalindustries.activateAbility=Activate Suit Ability
 key.signalindustries.switchMode=Switch Mode
+key.signalindustries.switchMode=Show/Hide Index (Tome of Raziel)
 key.signalindustries.headTopActivate=Activate Head Top Attachment
 key.signalindustries.headLensActivate=Activate Head Lens Attachment
 key.signalindustries.armBackLActivate=Activate Arm Back Left Attachment
