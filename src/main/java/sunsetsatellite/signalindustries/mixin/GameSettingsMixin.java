@@ -142,7 +142,7 @@ public class GameSettingsMixin
     }
 
     @Override
-    public KeyBinding signalindustries$activateTomeOfRaziel() {
+    public KeyBinding signalindustries$getKeyShowIndex() {
         return keyRazielIndex;
     }
 

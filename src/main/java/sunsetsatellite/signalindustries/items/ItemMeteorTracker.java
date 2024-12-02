@@ -38,14 +38,14 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
             }
             if(chunk != null){
                 if(entityplayer.isSneaking() && distance < 5){
-                    mc.ingameGUI.addChatMessage("This meteor will no longer be tracked.");
+                    entityplayer.sendStatusMessage("This meteor will no longer be tracked.");
                     final ChunkCoordinates finalChunk = chunk;
                     SignalIndustries.meteorLocations.removeIf((L)->L.location == finalChunk);
                 } else {
-                    mc.ingameGUI.addChatMessage(String.format("Distance: %.0f blocks | Type: %s", distance,type));
+                    entityplayer.sendStatusMessage(String.format("Distance: %.0f blocks | Type: %s", distance,type));
                 }
             } else {
-                mc.ingameGUI.addChatMessage("No meteors detected nearby.");
+                entityplayer.sendStatusMessage("No meteors detected nearby.");
             }
         }
         return super.onUseItem(itemstack, world, entityplayer);

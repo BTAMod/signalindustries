@@ -234,7 +234,7 @@ public class IndexRenderer {
     }
 
     public static void keyTyped(char c, int i, int mouseX, int mouseY) {
-        KeyBinding showIndexKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalindustries$activateTomeOfRaziel();
+        KeyBinding showIndexKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalindustries$getKeyShowIndex();
         if(showIndexKey.isPressed()){
             show = !show;
         }

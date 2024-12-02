@@ -36,11 +36,11 @@ public class ItemReinforcedMeteorTracker extends Item implements ICustomDescript
                 }
             }
             if (oreFound > 0 && oreYLevel < entityplayer.y) {
-                entityplayer.sendMessage(String.format("%d Signalite Ore blocks detected, approx. %d blocks underground.", oreFound, (int) entityplayer.y - oreYLevel));
+                entityplayer.sendStatusMessage(String.format("%d Signalite Ore blocks detected, approx. %d blocks underground.", oreFound, (int) entityplayer.y - oreYLevel));
             } else if(oreFound > 0 && oreYLevel > entityplayer.y) {
-                entityplayer.sendMessage(String.format("%d Signalite Ore blocks detected, approx. %d blocks above.", oreFound,  oreYLevel - (int) entityplayer.y));
+                entityplayer.sendStatusMessage(String.format("%d Signalite Ore blocks detected, approx. %d blocks above.", oreFound,  oreYLevel - (int) entityplayer.y));
             } else {
-                entityplayer.sendMessage("No nearby traces of Signalite could be found.");
+                entityplayer.sendStatusMessage("No nearby traces of Signalite could be found.");
             }
         }
         return super.onUseItem(itemstack, world, entityplayer);
