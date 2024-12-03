@@ -37,6 +37,7 @@ public class BlockWarpGate extends BlockMachineBase {
             if (tile.multiblock != null && tile.multiblock.isValid()) {
                 SignalIndustries.displayGui(entityplayer, () -> new GuiWarpGate(entityplayer.inventory, tile), new ContainerWarpGate(entityplayer.inventory, tile), tile, i, j, k);
                 entityplayer.triggerAchievement(SIAchievements.HORIZONS);
+                entityplayer.triggerAchievement(SIAchievements.GATE);
             } else {
                 entityplayer.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");
             }

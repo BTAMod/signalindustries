@@ -33,6 +33,7 @@ public class BlockWakingPlateFormer extends BlockMachineBase {
             TileEntityWakingPlateFormer tile = (TileEntityWakingPlateFormer) world.getBlockTileEntity(i, j, k);
             if (tile.getMultiblock() != null && tile.getMultiblock().isValid()) {
                 entityplayer.triggerAchievement(SIAchievements.HORIZONS);
+                entityplayer.triggerAchievement(SIAchievements.WAKING2);
             } else {
                 entityplayer.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");
             }

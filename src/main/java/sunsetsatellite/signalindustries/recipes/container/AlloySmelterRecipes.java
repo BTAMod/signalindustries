@@ -54,7 +54,7 @@ public class AlloySmelterRecipes implements MachineRecipesBase<RecipeGroup<Recip
                                 new RecipeExtendedSymbol(new ItemStack(SIBlocks.glowingObsidian,2))
                         },
                         new ItemStack(SIItems.reinforcedCrystalAlloyIngot,1),
-                        new RecipeProperties(100,80,Tier.BASIC,false)
+                        new RecipeProperties(200,80,Tier.BASIC,false)
                 )
         );
         group.register(

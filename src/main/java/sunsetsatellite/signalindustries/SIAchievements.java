@@ -55,6 +55,14 @@ public class SIAchievements extends DataInitializer {
     public static Achievement ECLIPSE;
     public static Achievement STARFALL;
     public static Achievement DIVINE_KNOWLEDGE;
+    public static Achievement WAKING1;
+    public static Achievement WAKING2;
+    public static Achievement WAKING3;
+    public static Achievement WAKING4;
+    public static Achievement GATE;
+
+    public static Achievement AWAKENED;
+    public static Achievement ENDGAME;
 
     public void init() {
         if(initialized) return;
@@ -97,11 +105,18 @@ public class SIAchievements extends DataInitializer {
         WINGS = new Achievement(nextAchievementID++, langKey("wings"), 1, 7 - offsetY, SIItems.crystalWings, POWER_SUIT);
         HORIZONS = new Achievement(nextAchievementID++, langKey("horizons"), 9, 10 - offsetY, SIBlocks.reinforcedEnergyConnector, REINFORCED);
         REACTOR = new Achievement(nextAchievementID++, langKey("reactor"), 9, 12 - offsetY, SIBlocks.signalumReactorCore, HORIZONS);
-        RISING_ABOVE = new Achievement(nextAchievementID++, langKey("comingSoon"), 9, 14 - offsetY, SIItems.awakenedSignalumFragment, REACTOR);
+        RISING_ABOVE = new Achievement(nextAchievementID++, langKey("risingAbove"), 9, 14 - offsetY, SIItems.awakenedSignalumFragment, REACTOR);
         BLOOD_MOON = new Achievement(nextAchievementID++, langKey("bloodMoon"), -2, 2 - offsetY, SIItems.monsterShard, null);
         ECLIPSE = new Achievement(nextAchievementID++, langKey("eclipse"), -2, 4 - offsetY, SIItems.infernalFragment, null);
         STARFALL = new Achievement(nextAchievementID++, langKey("starfall"), -2, 8 - offsetY, Block.lampActive, null);
         DIVINE_KNOWLEDGE = new Achievement(nextAchievementID++, langKey("divineKnowledge"), -2, 10 - offsetY, SIItems.raziel, null);
+        WAKING1 = new Achievement(nextAchievementID++, langKey("waking1"), 6, 16 - offsetY, SIBlocks.wakingCrusher, RISING_ABOVE);
+        WAKING2 = new Achievement(nextAchievementID++, langKey("waking2"), 8, 16 - offsetY, SIBlocks.wakingPlateFormer, RISING_ABOVE);
+        WAKING3 = new Achievement(nextAchievementID++, langKey("waking3"), 10, 16 - offsetY, SIBlocks.wakingInfuser, RISING_ABOVE);
+        WAKING4 = new Achievement(nextAchievementID++, langKey("waking4"), 12, 16 - offsetY, SIBlocks.wakingAlloySmelter, RISING_ABOVE);
+        AWAKENED = new Achievement(nextAchievementID++, langKey("awakened"), 9, 18 - offsetY, SIItems.awakenedSignalumCrystal, RISING_ABOVE);
+        ENDGAME = new Achievement(nextAchievementID++, langKey("endgame"), 9, 20 - offsetY, SIBlocks.awakenedMachineCore, AWAKENED);
+        GATE = new Achievement(nextAchievementID++, langKey("gate"), 10, 21 - offsetY, SIBlocks.warpGate, ENDGAME);
 
         Field[] achievements = SIAchievements.class.getDeclaredFields();
         Arrays.stream(achievements).filter((F)->F.getType().equals(Achievement.class)).forEach((F)->{

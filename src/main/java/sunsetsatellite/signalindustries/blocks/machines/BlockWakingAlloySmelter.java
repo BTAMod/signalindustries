@@ -33,6 +33,7 @@ public class BlockWakingAlloySmelter extends BlockMachineBase {
             TileEntityWakingAlloySmelter tile = (TileEntityWakingAlloySmelter) world.getBlockTileEntity(i, j, k);
             if (tile.getMultiblock() != null && tile.getMultiblock().isValid()) {
                 entityplayer.triggerAchievement(SIAchievements.HORIZONS);
+                entityplayer.triggerAchievement(SIAchievements.WAKING4);
             } else {
                 entityplayer.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");
             }

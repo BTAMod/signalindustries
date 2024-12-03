@@ -7,6 +7,7 @@ import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumCrystal;
@@ -63,6 +64,9 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachineSimple impl
             }
             if(itemContents[itemOutputs[0]].getItem() instanceof ItemSignalumCrystal && !Global.isServer){
                 Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.COMBINED);
+            }
+            if(itemContents[itemOutputs[0]].getItem().id == SIItems.awakenedSignalumCrystal.id){
+                Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.AWAKENED);
             }
         }
     }
