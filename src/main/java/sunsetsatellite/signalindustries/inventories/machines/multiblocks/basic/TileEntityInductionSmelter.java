@@ -1,32 +1,31 @@
 package sunsetsatellite.signalindustries.inventories.machines.multiblocks.basic;
 
 import net.minecraft.core.block.Block;
-import net.minecraft.core.data.registry.Registries;
-import net.minecraft.core.data.registry.recipe.RecipeGroup;
-import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
-import net.minecraft.core.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
-import sunsetsatellite.catalyst.core.util.BlockInstance;
-import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.core.util.Vec3i;
-import sunsetsatellite.catalyst.core.util.mixin.interfaces.ITileEntityInit;
-import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.MultiblockInstance;
-import sunsetsatellite.signalindustries.SIBlocks;
-import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
-import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
-import sunsetsatellite.signalindustries.inventories.TileEntityEnergyConnector;
-import sunsetsatellite.signalindustries.inventories.TileEntityItemBus;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
+import sunsetsatellite.signalindustries.SIRecipes;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMultiblock;
+import sunsetsatellite.signalindustries.util.Tier;
 
-import java.util.*;
+public class TileEntityInductionSmelter extends TileEntityTieredMultiblock {
 
-public class TileEntityInductionSmelter extends TileEntityTieredMachineBase implements IMultiblock, ITileEntityInit {
+    @Override
+    public void init(Block block) {
+        usesEnergy = true;
+        usesItemInput = true;
+        usesItemOutput = true;
+        minimumEnergyTier = Tier.BASIC;
+        minimumItemInputTier = Tier.BASIC;
+        minimumItemOutputTier = Tier.BASIC;
 
-    public MultiblockInstance multiblock;
+        recipeGroup = SIRecipes.INDUCTION_SMELTER;
+
+        multiblock = new MultiblockInstance(this, Multiblock.multiblocks.get("basicInductionSmelter"));
+
+        parallel = 16;
+    }
+
+    /*public MultiblockInstance multiblock;
     public TileEntityItemBus input;
     public TileEntityItemBus output;
     public TileEntityEnergyConnector energy;
@@ -136,6 +135,7 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
     }
 
     private void processItem() {
+        //TODO: this is broken -> possibly works without actually processing anything, will not work if the first slot is full but others are not
         if (currentRecipe instanceof RecipeEntryFurnace && multiblock.isValid() && canProcess()) {
             ItemStack stack = currentRecipe.getOutput() == null ? null : currentRecipe.getOutput().copy();
             int parallelAmount = 1;
@@ -167,7 +167,7 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
                     ItemStack[] itemStacks = this.output.itemContents;
                     for (int i = 0; i < itemStacks.length; i++) {
                         ItemStack outputStack = itemStacks[i];
-                        if (outputStack != null && outputStack.isItemEqual(recipeInputStack)) {
+                        if (outputStack != null && outputStack.isItemEqual(stack)) {
                             outputStack.stackSize += ((stack.stackSize * parallelAmount) * multiplier);
                             break;
                         } else if (outputStack == null) {
@@ -267,5 +267,5 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
                 }
             }
         }
-    }
+    }*/
 }

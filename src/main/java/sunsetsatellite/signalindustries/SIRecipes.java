@@ -50,6 +50,7 @@ public class SIRecipes implements RecipeEntrypoint {
     public static RecipeGroupSI<RecipeEntryMachine> WAKING_INFUSER;
     public static RecipeGroupSI<RecipeEntryMachine> CENTRIFUGE;
     public static RecipeGroupSI<RecipeEntryMachineFluid> COLLECTOR;
+    public static RecipeGroupSI<RecipeEntryMachine> INDUCTION_SMELTER;
 
     @Override
     public void onRecipesReady() {
@@ -79,6 +80,7 @@ public class SIRecipes implements RecipeEntrypoint {
         WAKING_PLATE_FORMER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingPlateFormer))));
         WAKING_ALLOY_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingAlloySmelter))));
         WAKING_INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingInfuser))));
+        INDUCTION_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicInductionSmelter))));
     }
 
     public void load(){
@@ -122,7 +124,11 @@ public class SIRecipes implements RecipeEntrypoint {
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_reinforced.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_awakened.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/furnace.json");
-        LOGGER.info(SIGNAL_INDUSTRIES.getAllRecipes().size()+" recipes in "+SIGNAL_INDUSTRIES.size()+" groups.");
+        LOGGER.info("{} recipes in {} groups.", SIGNAL_INDUSTRIES.getAllRecipes().size(), SIGNAL_INDUSTRIES.size());
+    }
+
+    public static void loadSpecial(){
+        new InductionSmelterRecipes().addRecipes(SIRecipes.INDUCTION_SMELTER);
     }
 
     @Override
@@ -148,6 +154,7 @@ public class SIRecipes implements RecipeEntrypoint {
         SIGNAL_INDUSTRIES.register("waking_plate_former",WAKING_PLATE_FORMER);
         SIGNAL_INDUSTRIES.register("waking_alloy_smelter",WAKING_ALLOY_SMELTER);
         SIGNAL_INDUSTRIES.register("waking_infuser",WAKING_INFUSER);
+        SIGNAL_INDUSTRIES.register("induction_smelter",INDUCTION_SMELTER);
         Registries.RECIPES.register("signalindustries",SIGNAL_INDUSTRIES);
     }
 

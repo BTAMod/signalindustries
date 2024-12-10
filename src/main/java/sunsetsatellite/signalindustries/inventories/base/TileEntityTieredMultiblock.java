@@ -30,6 +30,7 @@ import sunsetsatellite.signalindustries.util.RecipeProperties;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachineBase implements IMultiblock, ITileEntityInit {
 
@@ -53,6 +54,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
     public RecipeEntrySI<?, ?, RecipeProperties> currentRecipe;
     public Random random = new Random();
 
+    public int parallel = 1;
 
     public TileEntityTieredMultiblock(){
         super();
@@ -238,8 +240,30 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
     public void setCurrentRecipe(){
         if(allPartsPresent()){
             List<Object> objs = new ArrayList<>();
-            if(usesItemInput) objs.addAll(getItemInputContents());
-            if(usesFluidInput) objs.addAll(getFluidInputContents());
+            if(usesItemInput) {
+                List<ItemStack> items = getItemInputContents().stream().map(ItemStack::copy).collect(Collectors.toList());
+                items.forEach(stack -> stack.stackSize /= parallel);
+                objs.addAll(items);
+            }
+            if(usesFluidInput) {
+                List<FluidStack> fluids = getFluidInputContents().stream().map(FluidStack::copy).collect(Collectors.toList());
+                fluids.forEach(stack -> stack.amount /= parallel);
+                objs.addAll(fluids);
+            }
+            objs = objs.stream().map(o -> {
+                if(o instanceof ItemStack){
+                    if (((ItemStack) o).stackSize <= 0) {
+                        return null;
+                    }
+                } else if (o instanceof FluidStack) {
+                    if (((FluidStack) o).amount <= 0) {
+                        return null;
+                    }
+                } else {
+                    return null;
+                }
+                return o;
+            }).filter(Objects::nonNull).collect(Collectors.toList());
             RecipeExtendedSymbol[] symbols = RecipeExtendedSymbol.arrayOf(objs);
             currentRecipe = recipeGroup.findRecipe(symbols,tier);
         }
@@ -270,11 +294,14 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
     public boolean areItemOutputsValid(ItemStack stack){
         if(!usesItemOutput) return true;
         int outputAmountRemaining;
-        if(yield > 1){
-            outputAmountRemaining = (stack.stackSize*((int) Math.ceil(yield)));
-        } else {
-            outputAmountRemaining = stack.stackSize;
-        }
+//        if(yield > 1){
+//            outputAmountRemaining = (stack.stackSize*((int) Math.ceil(yield)));
+//        } else {
+        outputAmountRemaining = stack.stackSize;
+//        }
+
+        outputAmountRemaining *= parallel;
+
         if(outputAmountRemaining <= 0) return true;
         for (ItemStack outputStack : itemOutput.itemContents) {
             if (outputStack != null) {
@@ -299,11 +326,14 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
     public boolean areFluidOutputsValid(FluidStack stack){
         if(!usesFluidOutput) return true;
         int outputAmountRemaining;
-        if(yield > 1){
-            outputAmountRemaining = (stack.amount*((int) Math.ceil(yield)));
-        } else {
-            outputAmountRemaining = stack.amount;
-        }
+//        if(yield > 1){
+//            outputAmountRemaining = (stack.amount*((int) Math.ceil(yield)));
+//        } else {
+        outputAmountRemaining = stack.amount;
+//        }
+
+        outputAmountRemaining *= parallel;
+
         if(outputAmountRemaining <= 0) return true;
         FluidStack[] contents = fluidOutput.fluidContents;
         for (int i = 0; i < contents.length; i++) {
@@ -336,11 +366,12 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                     consumeInputs();
                     if(random.nextFloat() <= recipe.getData().chance){
                         int multiplier = 1;
-                        float fraction = Float.parseFloat("0."+(String.valueOf(yield).split("\\.")[1]));
+                        /*float fraction = Float.parseFloat("0."+(String.valueOf(yield).split("\\.")[1]));
                         if(fraction <= 0) fraction = 1;
                         if(yield > 1 && random.nextFloat() <= fraction){
                             multiplier = (int) Math.ceil(yield);
-                        }
+                        }*/
+                        multiplier *= parallel;
                         int outputAmountRemaining = stack.stackSize * multiplier;
                         for (int i = 0; i < itemOutput.itemContents.length; i++) {
                             ItemStack outputStack = itemOutput.itemContents[i];
@@ -377,11 +408,12 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                     consumeInputs();
                     if(random.nextFloat() <= recipe.getData().chance) {
                         int multiplier = 1;
-                        float fraction = Float.parseFloat("0."+(String.valueOf(yield).split("\\.")[1]));
+                        /*float fraction = Float.parseFloat("0."+(String.valueOf(yield).split("\\.")[1]));
                         if(fraction <= 0) fraction = 1;
                         if(yield > 1 && random.nextFloat() <= fraction){
                             multiplier = (int) Math.ceil(yield);
-                        }
+                        }*/
+                        multiplier *= parallel;
                         int outputAmountRemaining = fluidStack.amount * multiplier;
                         for (int i = 0; i < fluidOutput.itemContents.length; i++) {
                             FluidStack outputStack = fluidOutput.fluidContents[i];
@@ -432,7 +464,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                         if(inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers){
                             itemInput.setInventorySlotContents(i, inputStack.getItem().getContainerItem().getDefaultStack());
                         } else {
-                            recipeStack.ifPresent(stack -> inputStack.stackSize -= stack.stackSize);
+                            recipeStack.ifPresent(stack -> inputStack.stackSize -= stack.stackSize * parallel);
                             if (inputStack.stackSize <= 0) {
                                 itemInput.setInventorySlotContents(i, null);
                             }
@@ -450,7 +482,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                                 .filter(Objects::nonNull)
                                 .filter(stack -> stack.isFluidEqual(inputStack))
                                 .findFirst();
-                        recipeStack.ifPresent(stack -> inputStack.amount -= stack.amount);
+                        recipeStack.ifPresent(stack -> inputStack.amount -= stack.amount * parallel);
                         if (inputStack.amount <= 0) {
                             fluidInput.setFluidInSlot(i, null);
                         }
@@ -474,7 +506,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                         if (inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers) {
                             itemInput.setInventorySlotContents(i, inputStack.getItem().getContainerItem().getDefaultStack());
                         } else {
-                            recipeStack.ifPresent(stack -> inputStack.stackSize -= stack.stackSize);
+                            recipeStack.ifPresent(stack -> inputStack.stackSize -= stack.stackSize * parallel);
                             if (inputStack.stackSize <= 0) {
                                 itemInput.setInventorySlotContents(i, null);
                             }
@@ -491,7 +523,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                                 .filter(Objects::nonNull)
                                 .filter(stack -> stack.isFluidEqual(inputStack))
                                 .findFirst();
-                        recipeStack.ifPresent(stack -> inputStack.amount -= stack.amount);
+                        recipeStack.ifPresent(stack -> inputStack.amount -= stack.amount * parallel);
                         if (inputStack.amount <= 0) {
                             fluidInput.setFluidInSlot(i, null);
                         }

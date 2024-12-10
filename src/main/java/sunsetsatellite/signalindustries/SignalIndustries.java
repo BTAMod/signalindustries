@@ -779,6 +779,9 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         entry = new FluidContainerRegistryEntry(SignalIndustries.MOD_ID, Item.itemsList[SIBlocks.basicFluidTank.id], Item.itemsList[SIBlocks.basicFluidTank.id], fluidsWithoutSE);
         CatalystFluids.CONTAINERS.register(SignalIndustries.key("basicFluidTank"),entry);
 
+        //here to load after every other mods recipes
+        SIRecipes.loadSpecial();
+
         //BlockDataExporter.export(SIBlocks.class);
     }
 
