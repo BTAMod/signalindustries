@@ -4,12 +4,11 @@ package sunsetsatellite.signalindustries.containers;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
-import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 
 
-public class ContainerDimAnchor extends ContainerFluid {
+public class ContainerDimAnchor extends ContainerMachine {
 
     public ContainerDimAnchor(IInventory iInventory, TileEntityFluidItemContainer tileEntity){
         super(iInventory, tileEntity);

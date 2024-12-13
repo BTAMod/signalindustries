@@ -289,8 +289,8 @@
     "name": "signalindustries:workbench/prototype_crystal_cutter",
     "type": "minecraft:crafting/shaped",
     "pattern": [
-      "PSP",
-      "GMG",
+      "PGP",
+      "SMS",
       "PSP"
     ],
     "symbols": [

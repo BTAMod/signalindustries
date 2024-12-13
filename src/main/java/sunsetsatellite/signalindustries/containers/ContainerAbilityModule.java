@@ -1,6 +1,8 @@
 package sunsetsatellite.signalindustries.containers;
 
 
+import net.minecraft.core.InventoryAction;
+import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
@@ -8,6 +10,8 @@ import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.signalindustries.items.attachments.ItemAbilityModule;
 import sunsetsatellite.catalyst.fluids.util.NBTHelper;
 import sunsetsatellite.signalindustries.util.SlotApplication;
+
+import java.util.List;
 
 public class ContainerAbilityModule extends ContainerItemFluid {
     public ContainerAbilityModule(IInventory inventoryPlayer, ItemInventoryFluid inv) {
@@ -35,4 +39,13 @@ public class ContainerAbilityModule extends ContainerItemFluid {
         }
     }
 
+
+    @Override
+    public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, EntityPlayer entityPlayer) {
+        int lastDeviceSlot = inv.getSizeInventory() - 1;
+        if (slot.id <= lastDeviceSlot) {
+            return getSlots(lastDeviceSlot+1, 36, true);
+        }
+        return getSlots(0, Math.max(lastDeviceSlot+1,1), false);
+    }
 }

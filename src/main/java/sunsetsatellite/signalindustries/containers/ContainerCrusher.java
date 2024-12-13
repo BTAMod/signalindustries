@@ -1,16 +1,14 @@
 package sunsetsatellite.signalindustries.containers;
 
 
-import net.minecraft.core.crafting.ICrafting;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
-import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityCrusher;
 
-public class ContainerCrusher extends ContainerFluid {
+public class ContainerCrusher extends ContainerMachine {
 
     private final TileEntityCrusher machine = ((TileEntityCrusher) tile);
 
@@ -39,8 +37,6 @@ public class ContainerCrusher extends ContainerFluid {
             addSlot(new Slot(iInventory, k, 8 + k * 18, 142));
         }
     }
-
-    
 
     @Override
     public boolean isUsableByPlayer(EntityPlayer entityPlayer1) {

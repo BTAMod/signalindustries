@@ -2,11 +2,10 @@ package sunsetsatellite.signalindustries.containers;
 
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
-import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class ContainerItemBus extends ContainerFluid {
+public class ContainerItemBus extends ContainerMachine {
 
     public ContainerItemBus(IInventory iInventory, TileEntityTieredContainer tile) {
         super(iInventory, tile);

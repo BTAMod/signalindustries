@@ -2,11 +2,10 @@ package sunsetsatellite.signalindustries.containers;
 
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
-import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 import sunsetsatellite.signalindustries.inventories.machines.multiblocks.awakened.TileEntityWarpGate;
 
-public class ContainerWarpGate extends ContainerFluid {
+public class ContainerWarpGate extends ContainerMachine {
 
     private final TileEntityWarpGate machine = ((TileEntityWarpGate) tile);
 

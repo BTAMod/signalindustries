@@ -1,16 +1,14 @@
 package sunsetsatellite.signalindustries.containers;
 
 
-import net.minecraft.core.crafting.ICrafting;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
-import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityPlateFormer;
 
-public class ContainerPlateFormer extends ContainerFluid {
+public class ContainerPlateFormer extends ContainerMachine {
 
     private final TileEntityPlateFormer machine = ((TileEntityPlateFormer) tile);
 

@@ -3,11 +3,10 @@ package sunsetsatellite.signalindustries.containers;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
-import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumDynamo;
 
-public class ContainerSignalumDynamo extends ContainerFluid {
+public class ContainerSignalumDynamo extends ContainerMachine {
 
     public ContainerSignalumDynamo(IInventory iInventory, TileEntitySignalumDynamo tileEntity){
         super(iInventory,tileEntity);

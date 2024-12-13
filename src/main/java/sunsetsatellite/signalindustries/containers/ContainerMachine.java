@@ -1,25 +1,18 @@
 package sunsetsatellite.signalindustries.containers;
 
-
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
-import sunsetsatellite.signalindustries.util.Tier;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 
 import java.util.List;
 
-public class ContainerTiered extends ContainerFluid {
-    public ContainerTiered(IInventory iInventory, TileEntityTieredContainer tileEntityTieredMachine) {
-        super(iInventory, tileEntityTieredMachine);
+public abstract class ContainerMachine extends ContainerFluid {
+    public ContainerMachine(IInventory iInventory, TileEntityFluidItemContainer tileEntityFluidItemContainer) {
+        super(iInventory, tileEntityFluidItemContainer);
     }
-
-    protected TileEntityTieredContainer tile = (TileEntityTieredContainer) super.tile;
-    protected TileEntityTieredMachineBase machine = (TileEntityTieredMachineBase) tile;
-    public Tier tier = Tier.PROTOTYPE;
 
     @Override
     public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, EntityPlayer entityPlayer) {

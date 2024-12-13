@@ -1,15 +1,13 @@
 package sunsetsatellite.signalindustries.containers;
 
 
-import net.minecraft.core.crafting.ICrafting;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
-import sunsetsatellite.signalindustries.util.Tier;
 
-public class ContainerExtractor extends ContainerTiered {
+public class ContainerExtractor extends ContainerMachine {
 
     public ContainerExtractor(IInventory iInventory, TileEntityTieredMachineBase tileEntity){
         super(iInventory, tileEntity);
