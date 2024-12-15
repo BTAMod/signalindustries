@@ -31,12 +31,22 @@ public class InfuserRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntr
                 "saturated_crystal_alloy",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                //new RecipeExtendedSymbol(new ItemStack(Block.fluidLavaFlowing,1000)),
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.crystalAlloyIngot,1)),
-                                new RecipeExtendedSymbol(new ItemStack(SIItems.saturatedSignalumCrystalDust,4))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.saturatedSignalumCrystalDust,2))
                         },
                         new ItemStack(SIItems.saturatedSignalumAlloyIngot,1),
-                        new RecipeProperties(400,80,Tier.BASIC,false)
+                        new RecipeProperties(400,80,Tier.BASIC,true)
+                )
+        );
+        group.register(
+                "saturated_crystal_alloy_reinforced",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.crystalAlloyIngot,1)),
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.saturatedSignalumCrystalDust,1))
+                        },
+                        new ItemStack(SIItems.saturatedSignalumAlloyIngot,1),
+                        new RecipeProperties(400,80,Tier.REINFORCED,false)
                 )
         );
     }

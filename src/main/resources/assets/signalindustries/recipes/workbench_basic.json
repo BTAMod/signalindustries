@@ -1071,7 +1071,7 @@
         }
       },
       {
-        "symbol": "C",
+        "symbol": "S",
         "stack": {
           "key": "item.signalindustries.signalumCrystal",
           "amount": 1,

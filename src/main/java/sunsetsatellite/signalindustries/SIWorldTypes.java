@@ -13,7 +13,7 @@ public class SIWorldTypes extends DataInitializer {
     public void init(){
         if(initialized) return;
         LOGGER.info("Initializing world types...");
-        eternityWorld = WorldTypes.register("signalindustries:eternity", new WorldTypeEternity(key("eternity")));
+        eternityWorld = WorldTypes.register("signalindustries:eternity", new WorldTypeEternity("signalindustries.eternity"));
         setInitialized(true);
     }
 

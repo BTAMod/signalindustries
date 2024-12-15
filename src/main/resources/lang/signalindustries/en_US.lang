@@ -662,7 +662,7 @@ tile.signalindustries.awakenedAlloyCoil.desc=A coil of Awakened Alloy.
 dimension.signalindustries.eternity.name=Eternity
 biome.eternity=Eternity
 signalindustries.eternity.name=Eternity
-signalindustries.eternity.desc=The void between worlds\nconnected through the fabric of reality.\nHaving an active link to one of these worlds is the only way out.
+signalindustries.eternity.desc=The void between worlds\nconnected through the fabric of reality.
 
 weather.bloodMoon.name=Blood Moon
 weather.solarEclipse.name=Solar Eclipse
@@ -1041,7 +1041,7 @@ quest.signalindustries.basicItemInput.desc=A 4 slot item input for multiblocks.
 quest.signalindustries.basicItemOutput.name=Basic Item Output Bus
 quest.signalindustries.basicItemOutput.desc=A 4 slot item output for multiblocks.
 quest.signalindustries.signaliteAlloyCoil.name=Saturated Signalite Alloy Coil
-quest.signalindustries.signaliteAlloyCoil.desc=A coil of saturated signalite alloy wrapped around a rod of (unsaturated) <Crystal Alloy>. Used in multiblocks mainly as a heating component.
+quest.signalindustries.signaliteAlloyCoil.desc=A coil of saturated signalite alloy wrapped around a rod of unsaturated <Crystal Alloy>. Used in multiblocks mainly as a heating component.
 quest.signalindustries.reinforcedAlloy.name=Reinforced Crystal Alloy Ingot
 quest.signalindustries.reinforcedAlloy.desc=Combining <Crystal Alloy> with <Glowing Obsidian> creates a super strong dark alloy. It is the basis of the Reinforced tier.
 quest.signalindustries.reinforcedAlloyPlates.name=Reinforced Crystal Alloy Plate

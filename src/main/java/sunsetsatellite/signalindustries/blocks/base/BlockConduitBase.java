@@ -13,6 +13,7 @@ import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.*;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.items.ItemConfigurationTablet;
 import sunsetsatellite.signalindustries.util.ConfigurationTabletMode;
@@ -80,6 +81,13 @@ public abstract class BlockConduitBase extends BlockContainerTiered implements I
 
     @Override
     public void setBlockBoundsBasedOnState(WorldSource world, int x, int y, int z) {
+        TileEntity tile = world.getBlockTileEntity(x, y, z);
+        if (tile instanceof ISupportsMultiparts) {
+            if (((ISupportsMultiparts) tile).getParts().values().stream().anyMatch(Objects::nonNull)) {
+                setBlockBounds(0,0,0,1,1,1);
+                return;
+            }
+        }
         float bx = 0.3f, by = 0.3f, bz = 0.3f;
         float tx = 0.7f, ty = 0.7f, tz = 0.7f;
         // Loop de-loop

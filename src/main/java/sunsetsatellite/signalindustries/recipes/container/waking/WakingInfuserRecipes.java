@@ -34,7 +34,7 @@ public class WakingInfuserRecipes implements MachineRecipesBase<RecipeGroup<Reci
                         new RecipeExtendedSymbol[]{
                                 //new RecipeExtendedSymbol(new ItemStack(Block.fluidLavaFlowing,1000)),
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.crystalAlloyIngot,1)),
-                                new RecipeExtendedSymbol(new ItemStack(SIItems.saturatedSignalumCrystalDust,4))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.saturatedSignalumCrystalDust,1))
                         },
                         new ItemStack(SIItems.saturatedSignalumAlloyIngot,1),
                         new RecipeProperties(100,80,Tier.REINFORCED,false)
