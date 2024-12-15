@@ -202,7 +202,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
         InventoryPlayer inv = player.inventory;
         ItemStack saber = inv.getCurrentItem();
         int i = (inv.armorItemInSlot(2) != null && inv.armorItemInSlot(2).getItem() instanceof ItemSignalumPrototypeHarness) ? height - 128 : height - 64;
-        fontRenderer.drawStringWithShadow("Signalum Saber", 4, i += 16, 0xFFFF0000);
+        fontRenderer.drawStringWithShadow("Signalite Saber", 4, i += 16, 0xFFFF0000);
         fontRenderer.drawStringWithShadow("Energy: ", 4, i += 16, 0xFFFFFFFF);
         fontRenderer.drawStringWithShadow(String.valueOf(saber.getData().getInteger("energy")), 4 + fontRenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
         fontRenderer.drawStringWithShadow(saber.getData().getBoolean("active") ? "Active" : "Inactive", 4, i +=10, saber.getData().getBoolean("active") ? 0xFF00FF00 : 0xFF808080);

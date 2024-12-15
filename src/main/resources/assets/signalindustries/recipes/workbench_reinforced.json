@@ -1464,5 +1464,54 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_collector",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " M ",
+      "RCR",
+      " X "
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "tile.signalindustries.basic.collector",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "item.signalindustries.signalumAlloyMesh",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.collector",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]

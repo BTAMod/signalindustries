@@ -20,7 +20,25 @@ public class CollectorRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal))
                         },
                         new FluidStack(SIBlocks.energyFlowing,1),
-                        new RecipeProperties(10, Tier.BASIC,false))
+                        new RecipeProperties(10, Tier.BASIC,true))
+        );
+        group.register(
+                "reinforced",
+                new RecipeEntryMachineFluid(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal))
+                        },
+                        new FluidStack(SIBlocks.energyFlowing,2),
+                        new RecipeProperties(10, Tier.REINFORCED,true))
+        );
+        group.register(
+                "reinforced_aw_frag",
+                new RecipeEntryMachineFluid(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.awakenedSignalumFragment))
+                        },
+                        new FluidStack(SIBlocks.energyFlowing,4),
+                        new RecipeProperties(10, Tier.REINFORCED,true))
         );
     }
 }

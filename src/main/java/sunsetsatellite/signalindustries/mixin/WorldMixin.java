@@ -126,7 +126,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         int dayLength = Global.DAY_LENGTH_TICKS;
         int dayTime = (int)(worldTime % (long)dayLength);
         int triggerTime = worldType.getSunriseTick(thisAs)+dayTicks+(nightTicks/4);
-        if((dayTime == triggerTime && (getCurrentWeather() != SIWeather.weatherBloodMoon || getCurrentWeather() != SIWeather.weatherEclipse))){
+        if((dayTime == triggerTime && dimension != Dimension.nether && (getCurrentWeather() != SIWeather.weatherBloodMoon || getCurrentWeather() != SIWeather.weatherEclipse))){
             if(rand.nextInt(16) == 0 && getCurrentWeather() != SIWeather.weatherMeteorShower){
                 for (EntityPlayer player : players) {
                     player.sendMessage(TextFormatting.LIGHT_BLUE+"A Meteor Shower is happening!");

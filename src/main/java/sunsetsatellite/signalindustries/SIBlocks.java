@@ -91,6 +91,7 @@ public class SIBlocks extends DataInitializer {
     public static Block reinforcedExtractor;
 
     public static Block basicCollector;
+    public static Block reinforcedCollector;
 
     public static Block prototypeCrusher;
     public static Block basicCrusher;
@@ -750,6 +751,21 @@ public class SIBlocks extends DataInitializer {
                         .withOverbrightSideTextures("crystal_overlay")
                 )
                 .build(new BlockCollector("basic.collector", config.getInt("BlockIDs.basicCollector"), Tier.BASIC, Material.metal));
+        reinforcedCollector = new BlockBuilder(MOD_ID)
+                .setHardness(1)
+                .setResistance(3)
+                .setBlockSound(BlockSounds.METAL)
+                .setTextures("signalindustries:block/reinforced_blank")
+                .setSideTextures("signalindustries:block/reinforced_collector_side_inactive")
+                .setBlockModel((block) -> new BlockModelMachine(block, Tier.REINFORCED)
+                        .withDefaultTopTexture("reinforced_collector_top_inactive")
+                        .withActiveTopTexture("reinforced_collector_top")
+                        .withOverbrightTopTexture("collector_overlay")
+                        .withDefaultSideTextures("reinforced_collector_side_inactive")
+                        .withActiveSideTextures("reinforced_collector_side")
+                        .withOverbrightSideTextures("crystal_overlay")
+                )
+                .build(new BlockCollector("reinforced.collector", config.getInt("BlockIDs.reinforcedCollector"), Tier.REINFORCED, Material.metal));
         reinforcedExtractor = new BlockBuilder(MOD_ID)
                 .setHardness(1)
                 .setResistance(3)

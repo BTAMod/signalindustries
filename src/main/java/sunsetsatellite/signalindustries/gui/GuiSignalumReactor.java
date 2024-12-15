@@ -27,7 +27,7 @@ public class GuiSignalumReactor extends GuiTileEntity<TileEntitySignalumReactor>
 
     @Override
     protected void drawGuiContainerForegroundLayer() {
-        fontRenderer.drawCenteredString("Signalum Reactor", 128, 6, 0xFFFF0000);
+        fontRenderer.drawCenteredString("Signalite Reactor", 128, 6, 0xFFFF0000);
         //fontRenderer.drawCenteredString("State: "+tile.state,128,20,0xFFFFFFFF);
         //fontRenderer.drawCenteredString("Fuel: "+tile.getFuel()+"|"+tile.getDepletedFuel(),128,30,0xFFFFFFFF);
         float capacity = ((float)(tile.getFuel()+tile.getDepletedFuel())/(4000*9))*100;

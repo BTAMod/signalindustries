@@ -75,7 +75,7 @@ public class SIRecipes implements RecipeEntrypoint {
         CRYSTAL_CHAMBER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicCrystalChamber),new ItemStack(SIBlocks.reinforcedCrystalChamber))));
         INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicInfuser),new ItemStack(SIBlocks.reinforcedInfuser))));
         CENTRIFUGE = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.reinforcedCentrifuge))));
-        COLLECTOR = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicCollector))));
+        COLLECTOR = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicCollector),new ItemStack(SIBlocks.reinforcedCollector))));
         WAKING_CRUSHER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingCrusher))));
         WAKING_PLATE_FORMER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingPlateFormer))));
         WAKING_ALLOY_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingAlloySmelter))));

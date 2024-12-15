@@ -16,7 +16,7 @@ import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumD
 
 public class GuiSignalumDynamo extends GuiFluid {
 
-    public String name = "Signalum Dynamo";
+    public String name = "Signalite Dynamo";
     public TileEntitySignalumDynamo tile;
     public EntityPlayer entityplayer;
     public GuiSignalumDynamo(InventoryPlayer inventoryPlayer, TileEntitySignalumDynamo tile) {

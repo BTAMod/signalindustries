@@ -716,6 +716,14 @@ public class VintageQuestingSIPlugin {
                 listOf(crystalAlloyPlates),basicEnergyConnector,
                 64,
                 0);
+        QuestTemplate redstoneBooster = simpleQuest("redstoneBooster", SIBlocks.redstoneBooster,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(SIBlocks.redstoneBooster,1)
+                        )),
+                listOf(basicCore,basicEnergyCore),basicEnergyCore,
+                -80-32,
+                16);
         return listOf(
                 emptyCrystal, steel, crystalDust, crystalAlloy, crystalAlloyPlates, meteorCompass,
                 steelPlates, basicCore, basicExtractor, basicCollector, basicCrusher, netherCoalDust,
@@ -726,7 +734,7 @@ public class VintageQuestingSIPlugin {
                 basicEnergyConduit, basicFluidConduit, basicAssembler, basicDynamo, basicCatalystConduit,
                 basicInjector, covers, conveyorCover, pumpCover, redstoneCover, switchCover, voidCover,
                 glowingObsidian, basicDrill, signaliteAlloyCoil, basicInductionSmelter, basicEnergyConnector,
-                basicItemInput, basicItemOutput, basicCasing
+                basicItemInput, basicItemOutput, basicCasing, redstoneBooster
         );
     }
 

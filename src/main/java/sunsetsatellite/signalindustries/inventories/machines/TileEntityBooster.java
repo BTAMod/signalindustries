@@ -33,7 +33,7 @@ public class TileEntityBooster extends TileEntityTieredContainer implements IHas
     public int progressMaxTicks = 200;
     public int efficiency = 1;
     public int speedMultiplier = 1;
-    public int cost = 160;
+    public int cost = 40;
     public Random random = new Random();
     public IOPreview preview = IOPreview.NONE;
     public TickTimer IOPreviewTimer = new TickTimer(this,this::disableIOPreview,20,false);

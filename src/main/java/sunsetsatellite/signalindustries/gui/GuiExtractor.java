@@ -18,10 +18,9 @@ import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine
 
 public class GuiExtractor extends GuiFluid {
 
-    public String name = "Signalum Extractor";
+    public String name = "Signalite Extractor";
     public EntityPlayer entityplayer;
     public TileEntityExtractor tile;
-
 
     public GuiExtractor(InventoryPlayer inventoryPlayer, TileEntity tile) {
         super(new ContainerExtractor(inventoryPlayer, (TileEntityTieredMachineBase) tile),inventoryPlayer);
