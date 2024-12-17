@@ -298,14 +298,14 @@ public class SIBlocks extends DataInitializer {
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(10)
                 .setResistance(2000)
-                .build(new Block("basic.casing", config.getInt("BlockIDs.basicCasing"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+                .build(new BlockCasing("basic.casing", config.getInt("BlockIDs.basicCasing"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
         reinforcedCasing = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/reinforced_casing")
                 .setLuminance(0)
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(10)
                 .setResistance(2000)
-                .build(new Block("reinforced.casing", config.getInt("BlockIDs.reinforcedCasing"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+                .build(new BlockCasing("reinforced.casing", config.getInt("BlockIDs.reinforcedCasing"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
         awakenedCasing = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/awakened_casing_0")
                 .setLuminance(0)
@@ -313,7 +313,7 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(10)
                 .setResistance(2000)
                 .setBlockModel((block -> new BlockModelConnectedTexture(block,"signalindustries:block/awakened_casing", Catalyst.listOf(awakenedSocketCasing))))
-                .build(new Block("awakened.casing", config.getInt("BlockIDs.awakenedCasing"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+                .build(new BlockCasing("awakened.casing", config.getInt("BlockIDs.awakenedCasing"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
         awakenedSocketCasing = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/awakened_socket_casing_0")
                 .setLuminance(0)
@@ -321,7 +321,7 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(10)
                 .setResistance(2000)
                 .setBlockModel((block -> new BlockModelConnectedTextureExtra(block,"signalindustries:block/awakened_socket_casing", "signalindustries:block/awakened_socket_casing_active", "signalindustries:block/awakened_socket_overlay", Catalyst.listOf(awakenedCasing))))
-                .build(new Block("awakened.casing.socket", config.getInt("BlockIDs.awakenedSocketCasing"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+                .build(new BlockCasing("awakened.casing.socket", config.getInt("BlockIDs.awakenedSocketCasing"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
         awakenedCasing2 = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/awakened_casing_2_0")
                 .setLuminance(0)
@@ -329,7 +329,7 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(10)
                 .setResistance(2000)
                 .setBlockModel((block -> new BlockModelConnectedTextureExtra(block,"signalindustries:block/awakened_casing_2","signalindustries:block/awakened_casing_2_active")))
-                .build(new BlockNonSolid("awakened.casing2", config.getInt("BlockIDs.awakenedCasing2"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+                .build(new BlockCasingNonSolid("awakened.casing2", config.getInt("BlockIDs.awakenedCasing2"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
         basicCasing2 = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/basic_casing_2_0")
                 .setLuminance(0)
@@ -337,7 +337,7 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(10)
                 .setResistance(2000)
                 .setBlockModel((block -> new BlockModelConnectedTexture(block,"signalindustries:block/basic_casing_2")))
-                .build(new BlockNonSolid("basic.casing2", config.getInt("BlockIDs.basicCasing2"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+                .build(new BlockCasingNonSolid("basic.casing2", config.getInt("BlockIDs.basicCasing2"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
         reinforcedCasing2 = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/reinforced_casing_2_0")
                 .setLuminance(0)
@@ -345,14 +345,14 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(10)
                 .setResistance(2000)
                 .setBlockModel((block -> new BlockModelConnectedTextureExtra(block,"signalindustries:block/reinforced_casing_2","signalindustries:block/reinforced_casing_2_active")))
-                .build(new BlockNonSolid("reinforced.casing2", config.getInt("BlockIDs.reinforcedCasing2"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+                .build(new BlockCasingNonSolid("reinforced.casing2", config.getInt("BlockIDs.reinforcedCasing2"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
         reinforcedGrate = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/reinforced_grate")
                 .setLuminance(0)
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(10)
                 .setResistance(2000)
-                .build(new BlockNonSolid("reinforced.grate", config.getInt("BlockIDs.reinforcedGrate"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+                .build(new BlockCasingNonSolid("reinforced.grate", config.getInt("BlockIDs.reinforcedGrate"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
         /*connectedTexture = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/connected_texture_0")
                 .setLuminance(0)
