@@ -836,9 +836,9 @@
     "name": "signalindustries:workbench/dilithium_rail",
     "type": "minecraft:crafting/shaped",
     "pattern": [
-      "PDP",
-      "STS",
-      "PDP"
+      "PTP",
+      "DTD",
+      "PTP"
     ],
     "symbols": [
       {
