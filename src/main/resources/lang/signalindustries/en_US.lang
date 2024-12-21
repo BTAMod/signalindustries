@@ -573,6 +573,11 @@ tile.signalindustries.reinforced.automaticMiner.desc=Can fully mine out a severa
 tile.signalindustries.awakened.automaticMiner.name=Awakened Galactic Excavation Facility Controller
 tile.signalindustries.awakened.automaticMiner.name=Can mine out whole worlds across the galaxy in search of rare ore remotely!
 
+tile.signalindustries.basic.stoneworks.name=Basic Stoneworks
+tile.signalindustries.basic.stoneworks.desc=Mixes water and lava in various quantities creating various types of rocks.
+tile.signalindustries.reinforced.stoneworks.name=Reinforced Stoneworks
+tile.signalindustries.reinforced.stoneworks.desc=Mixes water and lava in various quantities creating various types of rocks.
+
 tile.signalindustries.basic.externalIO.name=External I/O
 tile.signalindustries.basic.externalIO.desc=Allows item/fluid I/O configuration even for blocks that don't support it natively.
 tile.signalindustries.reinforced.externalIO.name=Reinforced External I/O
@@ -850,6 +855,7 @@ guidebook.section.signalindustries.wakingAlloySmelter=Waking Alloy Smelter
 guidebook.section.signalindustries.wakingPlateFormer=Waking Plate Former
 guidebook.section.signalindustries.wakingInfuser=Waking Infuser
 guidebook.section.signalindustries.pump=Pump
+guidebook.section.signalindustries.stoneworks=Stoneworks
 guidebook.section.signalindustries.crystalCutter=Crystal Cutter
 guidebook.section.signalindustries.crystalChamber=Crystal Chamber
 guidebook.section.signalindustries.infuser=Infuser

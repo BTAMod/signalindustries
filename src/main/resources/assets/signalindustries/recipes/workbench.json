@@ -1537,7 +1537,7 @@
         "stack": {
           "key": "item.armor.helmet.steel",
           "amount": 1,
-          "meta": 0
+          "meta": -1
         }
       },
       {
@@ -1545,7 +1545,7 @@
         "stack": {
           "key": "item.signalindustries.basic.prototypeHarnessGoggles",
           "amount": 1,
-          "meta": 0
+          "meta": -1
         }
       }
     ],
@@ -1602,7 +1602,7 @@
         "stack": {
           "key": "item.armor.chestplate.steel",
           "amount": 1,
-          "meta": 0
+          "meta": -1
         }
       },
       {
@@ -1610,7 +1610,7 @@
         "stack": {
           "key": "item.signalindustries.basic.prototypeHarness",
           "amount": 1,
-          "meta": 0
+          "meta": -1
         }
       }
     ],
@@ -1667,7 +1667,7 @@
         "stack": {
           "key": "item.armor.leggings.steel",
           "amount": 1,
-          "meta": 0
+          "meta": -1
         }
       }
     ],
@@ -1724,7 +1724,7 @@
         "stack": {
           "key": "item.armor.boots.steel",
           "amount": 1,
-          "meta": 0
+          "meta": -1
         }
       }
     ],

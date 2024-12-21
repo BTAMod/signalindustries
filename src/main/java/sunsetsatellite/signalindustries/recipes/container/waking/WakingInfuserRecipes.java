@@ -21,7 +21,7 @@ public class WakingInfuserRecipes implements MachineRecipesBase<RecipeGroup<Reci
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new FluidStack((BlockFluid) Block.fluidLavaFlowing,1000)),
-                                new RecipeExtendedSymbol(new ItemStack(Block.obsidian,2)),
+                                new RecipeExtendedSymbol(new ItemStack(Block.obsidian,1)),
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.netherCoalDust,1))
                         },
                         new ItemStack(SIBlocks.glowingObsidian,1),

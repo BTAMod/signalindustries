@@ -142,6 +142,8 @@ public class SIBlocks extends DataInitializer {
     public static Block prototypePump;
     public static Block basicPump;
 
+    public static Block basicStoneworks;
+
     public static Block prototypeInserter;
     public static Block basicInserter;
 
@@ -387,7 +389,7 @@ public class SIBlocks extends DataInitializer {
                             return modelMultipart;
                         }
                 )
-                .build(new BlockConduit("prototype.conduit", config.getInt("BlockIDs.prototypeConduit"), Tier.PROTOTYPE, Material.glass));
+                .build(new BlockConduit("prototype.conduit", config.getInt("BlockIDs.prototypeConduit"), Tier.PROTOTYPE, Material.glass)).withTags(BlockTags.MINEABLE_BY_PICKAXE);
         basicConduit = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/conduit_basic")
                 .setLuminance(0)
@@ -406,7 +408,7 @@ public class SIBlocks extends DataInitializer {
                             return modelMultipart;
                         }
                 )
-                .build(new BlockConduit("basic.conduit", config.getInt("BlockIDs.basicConduit"), Tier.BASIC, Material.glass));
+                .build(new BlockConduit("basic.conduit", config.getInt("BlockIDs.basicConduit"), Tier.BASIC, Material.glass)).withTags(BlockTags.MINEABLE_BY_PICKAXE);
         reinforcedConduit = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/conduit_reinforced")
                 .setLuminance(0)
@@ -425,7 +427,7 @@ public class SIBlocks extends DataInitializer {
                             return modelMultipart;
                         }
                 )
-                .build(new BlockConduit("reinforced.conduit", config.getInt("BlockIDs.reinforcedConduit"), Tier.REINFORCED, Material.glass));
+                .build(new BlockConduit("reinforced.conduit", config.getInt("BlockIDs.reinforcedConduit"), Tier.REINFORCED, Material.glass)).withTags(BlockTags.MINEABLE_BY_PICKAXE);
         awakenedConduit = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/conduit_awakened")
                 .setLuminance(0)
@@ -444,7 +446,7 @@ public class SIBlocks extends DataInitializer {
                             return modelMultipart;
                         }
                 )
-                .build(new BlockConduit("awakened.conduit", config.getInt("BlockIDs.awakenedConduit"), Tier.AWAKENED, Material.glass));
+                .build(new BlockConduit("awakened.conduit", config.getInt("BlockIDs.awakenedConduit"), Tier.AWAKENED, Material.glass)).withTags(BlockTags.MINEABLE_BY_PICKAXE);
         basicCatalystConduit = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/catalyst_energy_conduit_basic")
                 .setLuminance(0)
@@ -463,7 +465,7 @@ public class SIBlocks extends DataInitializer {
                             return modelMultipart;
                         }
                 )
-                .build(new BlockCatalystConduit("basic.conduit.catalyst", config.getInt("BlockIDs.basicCatalystConduit"), Tier.BASIC, Material.glass));
+                .build(new BlockCatalystConduit("basic.conduit.catalyst", config.getInt("BlockIDs.basicCatalystConduit"), Tier.BASIC, Material.glass)).withTags(BlockTags.MINEABLE_BY_PICKAXE);
         reinforcedCatalystConduit = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/catalyst_energy_conduit_reinforced")
                 .setLuminance(0)
@@ -482,7 +484,7 @@ public class SIBlocks extends DataInitializer {
                             return modelMultipart;
                         }
                 )
-                .build(new BlockCatalystConduit("reinforced.conduit.catalyst", config.getInt("BlockIDs.reinforcedCatalystConduit"), Tier.REINFORCED, Material.glass));
+                .build(new BlockCatalystConduit("reinforced.conduit.catalyst", config.getInt("BlockIDs.reinforcedCatalystConduit"), Tier.REINFORCED, Material.glass)).withTags(BlockTags.MINEABLE_BY_PICKAXE);
         awakenedCatalystConduit = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/catalyst_energy_conduit_awakened")
                 .setLuminance(0)
@@ -501,7 +503,7 @@ public class SIBlocks extends DataInitializer {
                             return modelMultipart;
                         }
                 )
-                .build(new BlockCatalystConduit("awakened.conduit.catalyst", config.getInt("BlockIDs.awakenedCatalystConduit"), Tier.AWAKENED, Material.glass));
+                .build(new BlockCatalystConduit("awakened.conduit.catalyst", config.getInt("BlockIDs.awakenedCatalystConduit"), Tier.AWAKENED, Material.glass)).withTags(BlockTags.MINEABLE_BY_PICKAXE);
         prototypeFluidConduit = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/fluid_conduit_prototype")
                 .setLuminance(0)
@@ -520,7 +522,7 @@ public class SIBlocks extends DataInitializer {
                             return modelMultipart;
                         }
                 )
-                .build(new BlockFluidConduit("prototype.conduit.fluid", config.getInt("BlockIDs.prototypeFluidConduit"), Tier.PROTOTYPE, Material.glass));
+                .build(new BlockFluidConduit("prototype.conduit.fluid", config.getInt("BlockIDs.prototypeFluidConduit"), Tier.PROTOTYPE, Material.glass)).withTags(BlockTags.MINEABLE_BY_PICKAXE);
         basicFluidConduit = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/fluid_conduit_basic")
                 .setLuminance(0)
@@ -539,7 +541,7 @@ public class SIBlocks extends DataInitializer {
                             return modelMultipart;
                         }
                 )
-                .build(new BlockFluidConduit("basic.conduit.fluid", config.getInt("BlockIDs.basicFluidConduit"), Tier.BASIC, Material.glass));
+                .build(new BlockFluidConduit("basic.conduit.fluid", config.getInt("BlockIDs.basicFluidConduit"), Tier.BASIC, Material.glass)).withTags(BlockTags.MINEABLE_BY_PICKAXE);;
         reinforcedFluidConduit = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/fluid_conduit_reinforced")
                 .setLuminance(0)
@@ -558,7 +560,7 @@ public class SIBlocks extends DataInitializer {
                             return modelMultipart;
                         }
                 )
-                .build(new BlockFluidConduit("reinforced.conduit.fluid", config.getInt("BlockIDs.reinforcedFluidConduit"), Tier.REINFORCED, Material.glass));
+                .build(new BlockFluidConduit("reinforced.conduit.fluid", config.getInt("BlockIDs.reinforcedFluidConduit"), Tier.REINFORCED, Material.glass)).withTags(BlockTags.MINEABLE_BY_PICKAXE);;
         prototypeItemConduit = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/item_conduit_prototype")
                 .setLuminance(0)
@@ -577,7 +579,7 @@ public class SIBlocks extends DataInitializer {
                             return modelMultipart;
                         }
                 )
-                .build(new BlockItemConduit("prototype.conduit.item", config.getInt("BlockIDs.prototypeItemConduit"), Tier.PROTOTYPE, Material.glass, PipeType.NORMAL));
+                .build(new BlockItemConduit("prototype.conduit.item", config.getInt("BlockIDs.prototypeItemConduit"), Tier.PROTOTYPE, Material.glass, PipeType.NORMAL)).withTags(BlockTags.MINEABLE_BY_PICKAXE);;
         basicItemConduit = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/item_conduit_basic")
                 .setLuminance(0)
@@ -596,7 +598,7 @@ public class SIBlocks extends DataInitializer {
                             return modelMultipart;
                         }
                 )
-                .build(new BlockItemConduit("basic.conduit.item", config.getInt("BlockIDs.basicItemConduit"), Tier.BASIC, Material.glass, PipeType.NORMAL));
+                .build(new BlockItemConduit("basic.conduit.item", config.getInt("BlockIDs.basicItemConduit"), Tier.BASIC, Material.glass, PipeType.NORMAL)).withTags(BlockTags.MINEABLE_BY_PICKAXE);;
         basicRestrictItemConduit = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/item_conduit_basic")
                 .setLuminance(0)
@@ -615,7 +617,7 @@ public class SIBlocks extends DataInitializer {
                             return modelMultipart;
                         }
                 )
-                .build(new BlockItemConduit("basic.conduit.item.restrict", config.getInt("BlockIDs.basicRestrictItemConduit"), Tier.BASIC, Material.glass, PipeType.RESTRICT));
+                .build(new BlockItemConduit("basic.conduit.item.restrict", config.getInt("BlockIDs.basicRestrictItemConduit"), Tier.BASIC, Material.glass, PipeType.RESTRICT)).withTags(BlockTags.MINEABLE_BY_PICKAXE);;
         basicSensorItemConduit = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/item_conduit_basic_sensor_off")
                 .setLuminance(0)
@@ -634,7 +636,7 @@ public class SIBlocks extends DataInitializer {
                             return modelMultipart;
                         }
                 )
-                .build(new BlockItemConduit("basic.conduit.item.sensor", config.getInt("BlockIDs.basicSensorItemConduit"), Tier.BASIC, Material.glass, PipeType.SENSOR));
+                .build(new BlockItemConduit("basic.conduit.item.sensor", config.getInt("BlockIDs.basicSensorItemConduit"), Tier.BASIC, Material.glass, PipeType.SENSOR)).withTags(BlockTags.MINEABLE_BY_PICKAXE);;
         multiConduit = new BlockBuilder(MOD_ID)
                 .setHardness(1)
                 .setResistance(3)
@@ -651,7 +653,7 @@ public class SIBlocks extends DataInitializer {
                             return modelMultipart;
                         }
                 )
-                .build(new BlockMultiConduit("reinforced.conduit.multi", config.getInt("BlockIDs.multiConduit"), Tier.REINFORCED, Material.metal ).withTags(SIGNALUM_CONDUITS_CONNECT,ITEM_CONDUITS_CONNECT,FLUID_CONDUITS_CONNECT));
+                .build(new BlockMultiConduit("reinforced.conduit.multi", config.getInt("BlockIDs.multiConduit"), Tier.REINFORCED, Material.metal ).withTags(SIGNALUM_CONDUITS_CONNECT,ITEM_CONDUITS_CONNECT,FLUID_CONDUITS_CONNECT)).withTags(BlockTags.MINEABLE_BY_PICKAXE);;
         infiniteEnergyCell = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/cell_prototype")
                 .setLuminance(1)
@@ -1225,6 +1227,17 @@ public class SIBlocks extends DataInitializer {
                 .setTopTexture("signalindustries:block/basic_pump_top_empty")
                 .setSideTextures("signalindustries:block/basic_pump_side_empty")
                 .build(new BlockPump("basic.pump", config.getInt("BlockIDs.basicPump"), Tier.BASIC, Material.metal));
+        basicStoneworks = new BlockBuilder(MOD_ID)
+                .setHardness(1)
+                .setResistance(3)
+                .setBlockSound(BlockSounds.METAL)
+                .setTextures("signalindustries:block/basic_blank")
+                .setSideTextures("signalindustries:block/basic_stoneworks_inactive_side")
+                .setBlockModel((block) -> new BlockModelMachine(block,Tier.BASIC)
+                        .withDefaultSideTextures("basic_stoneworks_inactive_side")
+                        .withActiveSideTextures("basic_stoneworks_active_side")
+                )
+                .build(new BlockStoneworks("basic.stoneworks", config.getInt("BlockIDs.basicStoneworks"), Tier.BASIC, Material.metal));
         prototypeInserter = new BlockBuilder(MOD_ID)
                 .setHardness(1)
                 .setResistance(3)

@@ -31,6 +31,7 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
     private final SearchableGuidebookSubsection plateFormer = new MachineSection(this,SIRecipes.PLATE_FORMER.getAllRecipes(), PlateFormerPage.class);
     private final SearchableGuidebookSubsection wakingPlateFormer = new MachineSection(this,SIRecipes.WAKING_PLATE_FORMER.getAllRecipes(), WakingPlateFormerPage.class);
     private final SearchableGuidebookSubsection pump = new FluidMachineSection(this,SIRecipes.PUMP.getAllRecipes(), PumpPage.class);
+    private final SearchableGuidebookSubsection stoneworks = new MachineSection(this,SIRecipes.STONEWORKS.getAllRecipes(), StoneworksPage.class);
     private final SearchableGuidebookSubsection crystalCutter = new MachineSection(this,SIRecipes.CRYSTAL_CUTTER.getAllRecipes(), CrystalCutterPage.class);
     private final SearchableGuidebookSubsection crystalChamber = new MachineSection(this,SIRecipes.CRYSTAL_CHAMBER.getAllRecipes(), CrystalChamberPage.class);
     private final SearchableGuidebookSubsection infuser = new MachineSection(this,SIRecipes.INFUSER.getAllRecipes(), InfuserPage.class);
@@ -52,6 +53,7 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.plateFormer"),plateFormer.getPages().get(0)));
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.wakingPlateFormer"),plateFormer.getPages().get(0)));
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.pump"),pump.getPages().get(0)));
+        indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.stoneworks"),stoneworks.getPages().get(0)));
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.crystalCutter"),crystalCutter.getPages().get(0)));
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.crystalChamber"),crystalChamber.getPages().get(0)));
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.infuser"),infuser.getPages().get(0)));
@@ -69,6 +71,7 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
         subsections.add(plateFormer);
         subsections.add(wakingPlateFormer);
         subsections.add(pump);
+        subsections.add(stoneworks);
         subsections.add(crystalCutter);
         subsections.add(crystalChamber);
         subsections.add(infuser);

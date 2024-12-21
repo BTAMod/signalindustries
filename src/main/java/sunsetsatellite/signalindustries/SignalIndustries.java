@@ -374,6 +374,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         EntityHelper.createSpecialTileEntity(TileEntityWakingAlloySmelter.class,"Waking Alloy Smelter", RenderMultiblock::new);
         EntityHelper.createSpecialTileEntity(TileEntityWakingPlateFormer.class,"Waking Plate Former", RenderMultiblock::new);
         EntityHelper.createSpecialTileEntity(TileEntityWakingInfuser.class,"Waking Infuser", RenderMultiblock::new);
+        EntityHelper.createSpecialTileEntity(TileEntityStoneworks.class,"Stoneworks", RenderStoneworks::new);
 
         EntityHelper.createTileEntity(TileEntityInserter.class, "Inserter");
         EntityHelper.createTileEntity(TileEntityExtractor.class,"Extractor");
@@ -413,7 +414,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         addToNameGuiMap("Dilithium Booster", GuiBooster.class, TileEntityBooster.class);
         addToNameGuiMap("Dilithium Stabilizer", GuiStabilizer.class, TileEntityStabilizer.class);
         addToNameGuiMap("Crystal Chamber", GuiCrystalChamber.class, TileEntityCrystalChamber.class);
-        addToNameGuiMap("Pump", GuiPump.class, TileEntityCrystalChamber.class);
+        addToNameGuiMap("Pump", GuiPump.class, TileEntityPump.class);
+        addToNameGuiMap("Stoneworks", GuiStoneworks.class, TileEntityStoneworks.class);
         addToNameGuiMap("SI Assembler", GuiAssembler.class, TileEntityAssembler.class);
         addToNameGuiMap("Dimensional Anchor", GuiDimAnchor.class, TileEntityDimensionalAnchor.class);
         addToNameGuiMap("Automatic Miner", GuiAutoMiner.class, TileEntityAutoMiner.class);

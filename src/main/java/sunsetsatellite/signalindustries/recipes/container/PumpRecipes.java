@@ -24,7 +24,7 @@ public class PumpRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntryMa
                         new RecipeExtendedSymbol("minecraft:lava")
                 },
                 new FluidStack((BlockFluid) Block.fluidLavaFlowing,1000),
-                new RecipeProperties(600,30, Tier.BASIC,false)
+                new RecipeProperties(600,5, Tier.BASIC,false)
         ));
     }
 }
