@@ -1,15 +1,11 @@
 package sunsetsatellite.signalindustries.inventories;
 
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
-import sunsetsatellite.catalyst.fluids.util.NBTHelper;
-import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTiered;
 import sunsetsatellite.signalindustries.util.Tier;
-
-import java.util.Map;
 
 public class TileEntityStorageContainer extends TileEntityTiered implements IInventory {
     public ItemStack contents = null;
@@ -31,11 +27,11 @@ public class TileEntityStorageContainer extends TileEntityTiered implements IInv
         if(contents != null){
             CompoundTag contentsTag = new CompoundTag();
             contentsTag.putShort("id", (short)contents.itemID);
-            contentsTag.putInt("Count", (byte)contents.stackSize);
+            contentsTag.putInt("Count", contents.stackSize);
             contentsTag.putShort("Damage", (short)contents.getMetadata());
             contentsTag.putByte("Expanded", (byte)1);
             contentsTag.putInt("Version", 19134);
-            if (contents.getData() != null && !contents.getData().getValue().isEmpty()) {
+            if (!contents.getData().getValue().isEmpty()) {
                 contentsTag.putCompound("Data", contents.getData());
             }
             nbttagcompound.put("Contents", contentsTag);
