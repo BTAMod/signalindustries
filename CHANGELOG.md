@@ -1,0 +1,3 @@
+- Fixed a bug with the induction smelter where it consumed more items in processing than it was supposed to.
+- Added missing recipes for reinforced-tier machines.
+- Fixed a bug where storage containers reset when they had more than 256 items stored in them.
