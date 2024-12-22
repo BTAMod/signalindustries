@@ -451,37 +451,56 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
         if(currentRecipe instanceof RecipeEntryMachine) {
             RecipeEntryMachine recipe = ((RecipeEntryMachine) currentRecipe);
             if(usesItemInput){
+                List<ItemStack> recipeStacks = SignalIndustries.condenseList(
+                        Arrays.stream(recipe.getInput())
+                                .flatMap(symbol -> symbol.resolve().stream())
+                                .filter(Objects::nonNull)
+                                .map(ItemStack::copy).collect(Collectors.toList())
+                );
+                List<ItemStack> remainingRecipeStacks = recipeStacks.stream().map(ItemStack::copy).collect(Collectors.toList());
                 for (int i = 0; i < itemInput.itemContents.length; i++) {
                     ItemStack inputStack = itemInput.getStackInSlot(i);
                     if(inputStack != null && inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers){
-                        setInventorySlotContents(i, new ItemStack(inputStack.getItem().getContainerItem()));
-                    } else if (inputStack != null) {
-                        Optional<ItemStack> recipeStack = Arrays.stream(recipe.getInput())
-                                .flatMap(symbol -> symbol.resolve().stream())
-                                .filter(Objects::nonNull)
-                                .filter(stack -> stack.isItemEqual(inputStack))
-                                .findFirst();
-                        if(inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers){
-                            itemInput.setInventorySlotContents(i, inputStack.getItem().getContainerItem().getDefaultStack());
-                        } else {
-                            recipeStack.ifPresent(stack -> inputStack.stackSize -= stack.stackSize * parallel);
-                            if (inputStack.stackSize <= 0) {
-                                itemInput.setInventorySlotContents(i, null);
-                            }
+                        itemInput.setInventorySlotContents(i, new ItemStack(inputStack.getItem().getContainerItem()));
+                    } else if (inputStack != null){
+                        Optional<ItemStack> recipeStack = recipeStacks.stream().filter(stack -> stack.isItemEqual(inputStack)).findFirst();
+                        Optional<ItemStack> remainingRecipeStack = remainingRecipeStacks.stream().filter(stack -> stack.isItemEqual(inputStack)).findFirst();
+                        recipeStack.ifPresent(stack -> {
+                            remainingRecipeStack.ifPresent(remainingStack -> {
+                                if(remainingStack.stackSize > 0){
+                                    int willTake = Math.min(stack.stackSize * parallel, inputStack.stackSize);
+                                    inputStack.stackSize -= willTake;
+                                    remainingStack.stackSize -= stack.stackSize;
+                                }
+                            });
+                        });
+                        if (inputStack.stackSize <= 0) {
+                            itemInput.setInventorySlotContents(i, null);
                         }
-
                     }
                 }
             }
             if(usesFluidInput){
                 for (int i = 0; i < fluidInput.fluidContents.length; i++) {
                     FluidStack inputStack = fluidInput.getFluidInSlot(i);
+                    List<FluidStack> recipeStacks = Arrays.stream(recipe.getInput())
+                            .flatMap(symbol -> symbol.resolveFluids().stream())
+                            .filter(Objects::nonNull)
+                            .map(FluidStack::copy)
+                            .collect(Collectors.toList());
+                    List<FluidStack> remainingRecipeStacks = recipeStacks.stream().map(FluidStack::copy).collect(Collectors.toList());
                     if(inputStack != null){
-                        Optional<FluidStack> recipeStack = Arrays.stream(recipe.getInput())
-                                .flatMap(symbol -> symbol.resolveFluids().stream())
-                                .filter(Objects::nonNull)
-                                .filter(stack -> stack.isFluidEqual(inputStack))
-                                .findFirst();
+                        Optional<FluidStack> recipeStack = recipeStacks.stream().filter(stack -> stack.isFluidEqual(inputStack)).findFirst();
+                        Optional<FluidStack> remainingRecipeStack = remainingRecipeStacks.stream().filter(stack -> stack.isFluidEqual(inputStack)).findFirst();
+                        recipeStack.ifPresent(stack -> {
+                            remainingRecipeStack.ifPresent(remainingStack -> {
+                                if(remainingStack.amount > 0){
+                                    int willTake = Math.min(stack.amount * parallel, inputStack.amount);
+                                    inputStack.amount -= willTake;
+                                    remainingStack.amount -= stack.amount;
+                                }
+                            });
+                        });
                         recipeStack.ifPresent(stack -> inputStack.amount -= stack.amount * parallel);
                         if (inputStack.amount <= 0) {
                             fluidInput.setFluidInSlot(i, null);
@@ -492,24 +511,32 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
 
         } else if (currentRecipe instanceof RecipeEntryMachineFluid) {
             RecipeEntryMachineFluid recipe = ((RecipeEntryMachineFluid) currentRecipe);
-            if(usesItemInput) {
-                for (int i = 0; i < itemInput.itemContents.length; i++) {
-                    ItemStack inputStack = itemInput.getStackInSlot(i);
-                    if (inputStack != null && inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers) {
-                        setInventorySlotContents(i, new ItemStack(inputStack.getItem().getContainerItem()));
-                    } else if (inputStack != null) {
-                        Optional<ItemStack> recipeStack = Arrays.stream(recipe.getInput())
+            if(usesItemInput){
+                List<ItemStack> recipeStacks = SignalIndustries.condenseList(
+                        Arrays.stream(recipe.getInput())
                                 .flatMap(symbol -> symbol.resolve().stream())
                                 .filter(Objects::nonNull)
-                                .filter(stack -> stack.isItemEqual(inputStack))
-                                .findFirst();
-                        if (inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers) {
-                            itemInput.setInventorySlotContents(i, inputStack.getItem().getContainerItem().getDefaultStack());
-                        } else {
-                            recipeStack.ifPresent(stack -> inputStack.stackSize -= stack.stackSize * parallel);
-                            if (inputStack.stackSize <= 0) {
-                                itemInput.setInventorySlotContents(i, null);
-                            }
+                                .map(ItemStack::copy).collect(Collectors.toList())
+                );
+                List<ItemStack> remainingRecipeStacks = recipeStacks.stream().map(ItemStack::copy).collect(Collectors.toList());
+                for (int i = 0; i < itemInput.itemContents.length; i++) {
+                    ItemStack inputStack = itemInput.getStackInSlot(i);
+                    if(inputStack != null && inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers){
+                        itemInput.setInventorySlotContents(i, new ItemStack(inputStack.getItem().getContainerItem()));
+                    } else if (inputStack != null){
+                        Optional<ItemStack> recipeStack = recipeStacks.stream().filter(stack -> stack.isItemEqual(inputStack)).findFirst();
+                        Optional<ItemStack> remainingRecipeStack = remainingRecipeStacks.stream().filter(stack -> stack.isItemEqual(inputStack)).findFirst();
+                        recipeStack.ifPresent(stack -> {
+                            remainingRecipeStack.ifPresent(remainingStack -> {
+                                if(remainingStack.stackSize > 0){
+                                    int willTake = Math.min(stack.stackSize * parallel, inputStack.stackSize);
+                                    inputStack.stackSize -= willTake;
+                                    remainingStack.stackSize -= stack.stackSize;
+                                }
+                            });
+                        });
+                        if (inputStack.stackSize <= 0) {
+                            itemInput.setInventorySlotContents(i, null);
                         }
                     }
                 }
@@ -517,12 +544,24 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
             if(usesFluidInput){
                 for (int i = 0; i < fluidInput.fluidContents.length; i++) {
                     FluidStack inputStack = fluidInput.getFluidInSlot(i);
+                    List<FluidStack> recipeStacks = Arrays.stream(recipe.getInput())
+                            .flatMap(symbol -> symbol.resolveFluids().stream())
+                            .filter(Objects::nonNull)
+                            .map(FluidStack::copy)
+                            .collect(Collectors.toList());
+                    List<FluidStack> remainingRecipeStacks = recipeStacks.stream().map(FluidStack::copy).collect(Collectors.toList());
                     if(inputStack != null){
-                        Optional<FluidStack> recipeStack = Arrays.stream(recipe.getInput())
-                                .flatMap(symbol -> symbol.resolveFluids().stream())
-                                .filter(Objects::nonNull)
-                                .filter(stack -> stack.isFluidEqual(inputStack))
-                                .findFirst();
+                        Optional<FluidStack> recipeStack = recipeStacks.stream().filter(stack -> stack.isFluidEqual(inputStack)).findFirst();
+                        Optional<FluidStack> remainingRecipeStack = remainingRecipeStacks.stream().filter(stack -> stack.isFluidEqual(inputStack)).findFirst();
+                        recipeStack.ifPresent(stack -> {
+                            remainingRecipeStack.ifPresent(remainingStack -> {
+                                if(remainingStack.amount > 0){
+                                    int willTake = Math.min(stack.amount * parallel, inputStack.amount);
+                                    inputStack.amount -= willTake;
+                                    remainingStack.amount -= stack.amount;
+                                }
+                            });
+                        });
                         recipeStack.ifPresent(stack -> inputStack.amount -= stack.amount * parallel);
                         if (inputStack.amount <= 0) {
                             fluidInput.setFluidInSlot(i, null);
