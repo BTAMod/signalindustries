@@ -17,13 +17,14 @@ public class ItemReinforcedMeteorTracker extends Item implements ICustomDescript
 
     @Override
     public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+        int range = 4;
         if(itemstack.getMetadata() == 0){
             itemstack.setMetadata(1);
         } else {
             int oreFound = 0;
             int oreYLevel = -1;
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
+            for (int i = -range; i < range; i++) {
+                for (int j = -range; j < range; j++) {
                     for (int k = 0; k < world.getHeightValue((int) (entityplayer.x + i), (int) (entityplayer.z + j)); k++) {
                         int blockId = world.getBlockId((int) (entityplayer.x + i), k, (int) (entityplayer.z + j));
                         if (blockId == SIBlocks.signalumOre.id) {

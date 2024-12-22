@@ -208,6 +208,8 @@ public class SIBlocks extends DataInitializer {
     public static BlockFluid burntSignalumStill;
     public static BlockFluid energyFlowing;
 
+    //public static Block recipeMaker;
+
     public void init() {
         if(initialized) return;
         LOGGER.info("Initializing blocks...");
@@ -1642,13 +1644,6 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setResistance(3)
                 .build(new BlockVoidContainer("voidContainer", config.getInt("BlockIDs.voidContainer"), Material.metal));
-            /*public static final Block recipeMaker = new BlockBuilder(MOD_ID)
-            .setTextures("signalindustries:block/prototype_connection")
-            .setLuminance(0)
-            .setHardness(1)
-            .setResistance(5)
-            .setBlockSound(BlockSounds.STONE)
-            .build(new BlockRecipeMaker("recipeMaker",config.getInt("BlockIDs.recipeMaker"),Material.stone));*/
 
         energyFlowing = (BlockFluid) new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/signalum_energy_transparent")
@@ -1666,6 +1661,14 @@ public class SIBlocks extends DataInitializer {
                 .setTextures("signalindustries:block/burnt_signalum")
                 .setBlockModel(BlockModelFluid::new)
                 .build(new BlockFluidStill("burntSignalum", config.getInt("BlockIDs.burntSignalumStill"), Material.water).withTags(BlockTags.NOT_IN_CREATIVE_MENU, BlockTags.PLACE_OVERWRITES));
+
+        /*recipeMaker = new BlockBuilder(MOD_ID)
+                .setTextures("signalindustries:block/prototype_connection")
+                .setLuminance(0)
+                .setHardness(1)
+                .setResistance(5)
+                .setBlockSound(BlockSounds.STONE)
+                .build(new BlockRecipeMaker("recipeMaker",config.getInt("BlockIDs.recipeMaker"),Material.stone));*/
 
         cobblestoneBricks.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
         crystalAlloyBricks.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
