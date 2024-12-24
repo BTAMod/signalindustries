@@ -86,6 +86,8 @@ item.signalindustries.trigger.shield.name=Trigger: Shield
 item.signalindustries.trigger.shield.desc=Generates a shield of energy protecting you from combat damage for a short period of time.
 item.signalindustries.trigger.boost.name=Trigger: Boost
 item.signalindustries.trigger.boost.desc=Launches you in the direction you're looking at.
+item.signalindustries.trigger.scan.name=Trigger: Scan
+item.signalindustries.trigger.scan.desc=Tries to find and highlight ores in the world.
 
 item.signalindustries.romChip.projectile.name=ROM Chip: Projectile
 item.signalindustries.romChip.projectile.desc=Contains code for a <Trigger> ability.
@@ -93,6 +95,8 @@ item.signalindustries.romChip.boost.name=ROM Chip: Boost
 item.signalindustries.romChip.boost.desc=Contains code for a <Trigger> ability.
 item.signalindustries.romChip.shield.name=ROM Chip: Shield
 item.signalindustries.romChip.shield.desc=Contains code for a <Trigger> ability.
+item.signalindustries.romChip.scan.name=ROM Chip: Scan
+item.signalindustries.romChip.scan.desc=Contains code for a <Trigger> ability.
 
 item.signalindustries.romChip.blank.name=Blank ROM Chip
 item.signalindustries.romChip.blank.desc=Unprogrammed ROM chip.
@@ -697,6 +701,9 @@ ability.signalindustries.basic.projectile.desc=Shoots out an orb of energy from 
 
 ability.signalindustries.basic.boost.name=Boost
 ability.signalindustries.basic.boost.desc=Launches you in the direction you're looking at.
+
+ability.signalindustries.basic.scan.name=Scan
+ability.signalindustries.basic.scan.desc=Tries to find and highlight ores in the world.
 
 ability.signalindustries.reinforced.devouringField.name=Devouring Field
 ability.signalindustries.reinforced.devouringField.desc=Drains health from nearby enemies and also sets them on fire.

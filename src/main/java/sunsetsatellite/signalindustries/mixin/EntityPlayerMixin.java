@@ -109,7 +109,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
         if(powerSuit != null && powerSuit.active){
             if(powerSuit.hasAttachment((ItemAttachment) SIItems.movementBoosters, Catalyst.listOf("bootBackL","bootBackR"))){
                 if(powerSuit.getAttachment((ItemAttachment) SIItems.movementBoosters) != null && powerSuit.getAttachment((ItemAttachment) SIItems.movementBoosters).getData().getBoolean("active")){
-                    speed += (float) (baseSpeed * 0.3);
+                    speed += (float) (baseSpeed * 1.5);
                 }
             }
         }

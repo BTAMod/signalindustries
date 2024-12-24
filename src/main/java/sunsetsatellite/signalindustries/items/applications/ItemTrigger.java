@@ -26,6 +26,7 @@ public class ItemTrigger extends Item implements ICustomDescription {
         abilities.put("projectile",new ProjectileAbility("Projectlie",50,1));
         abilities.put("boost",new BoostAbility("Boost",150,5));
         abilities.put("shield",new ShieldAbility("Shield",300,15,10,5));
+        abilities.put("scan",new ScanAbility("Scan",150,3,15,1));
     }
 
     @Override
