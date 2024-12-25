@@ -14,6 +14,9 @@ import sunsetsatellite.signalindustries.util.Tier;
 import java.util.List;
 
 public class ItemMovementBoostersAttachment extends ItemTieredAttachment {
+
+    boolean alreadyTookEnergy = false;
+
     public ItemMovementBoostersAttachment(String name, int id, List<AttachmentPoint> attachmentPoints, Tier tier) {
         super(name, id, attachmentPoints, tier);
         setMaxStackSize(2);
@@ -36,7 +39,12 @@ public class ItemMovementBoostersAttachment extends ItemTieredAttachment {
             return;
         }
         if(stack.getData().getBoolean("active")){
-            signalumPowerSuit.decrementEnergy(1);
+            if(!alreadyTookEnergy) {
+                signalumPowerSuit.decrementEnergy(1);
+                alreadyTookEnergy = true;
+            } else {
+                alreadyTookEnergy = false;
+            }
             SignalIndustries.spawnParticle(new EntityColorParticleFX(world,player.x+0.2f,player.y-1.3f,player.z,player.xd,player.yd,player.zd,1,1,0,1));
             SignalIndustries.spawnParticle(new EntityColorParticleFX(world,player.x-0.2f,player.y-1.3f,player.z,player.xd,player.yd,player.zd,1,1,0,1));
         }

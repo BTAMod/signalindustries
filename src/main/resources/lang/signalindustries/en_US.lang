@@ -223,10 +223,10 @@ tile.signalindustries.basic.inserter.desc=Picks up more items from the ground fa
 tile.signalindustries.prototype.filter.name=Prototype Filter
 tile.signalindustries.prototype.filter.desc=Sorts items that pass through it into colored outputs,
 
-item.signalindustries.basic.prototypeHarness.name=Signalum Prototype Harness
+item.signalindustries.basic.prototypeHarness.name=Signalum Power Harness
 item.signalindustries.basic.prototypeHarness.desc=Provides little to no armor, but allows you to start using <Signaling Energy> on the go.
-item.signalindustries.basic.prototypeHarnessGoggles.name=Prototype Goggles
-item.signalindustries.basic.prototypeHarnessGoggles.desc=To be used with the <Signalum Prototype Harness> or other equipment. Provides information about the world and your equipment.
+item.signalindustries.basic.prototypeHarnessGoggles.name=Harness Goggles
+item.signalindustries.basic.prototypeHarnessGoggles.desc=To be used with the <Signalum Power Harness> or other equipment. Provides information about the world and your equipment.
 
 item.signalindustries.reinforced.signalumpowersuit.helmet.name=Signalum Power Suit Helmet
 item.signalindustries.reinforced.signalumpowersuit.helmet.desc=Upgraded and armored version of the <Prototype Goggles>. Equipped with an AR HUD capable of overlaying information about the world and the suits state onto your vision. Functionality can be extended with <Attachments>.

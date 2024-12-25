@@ -34,8 +34,8 @@ public class ItemPulsarAttachment extends ItemTieredAttachment implements IHasOv
 
     @Override
     public void activate(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world) {
-        boolean alt = (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
-        if(!stack.getData().getBoolean("charging") && stack.getData().getByte("charge") < 100 && signalumPowerSuit.getEnergy() > 0 && alt) {
+        boolean shift = (Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54));
+        if(!stack.getData().getBoolean("charging") && stack.getData().getByte("charge") < 100 && signalumPowerSuit.getEnergy() > 0 && shift) {
             stack.getData().putBoolean("charging", true);
         }
         if(stack.getData().getByte("charge") >= 100){
