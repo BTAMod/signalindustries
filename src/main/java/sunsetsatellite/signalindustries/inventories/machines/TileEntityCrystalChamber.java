@@ -43,7 +43,7 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachineSimple impl
         ItemStack c1 = this.itemContents[itemInputs[0]];
         ItemStack c2 = this.itemContents[itemInputs[1]];
         if(c1 != null && c2 != null){
-            if(c1.getData().getInteger("size") + c2.getData().getInteger("size") > 8){
+            if((c1.getData().getInteger("size") + c2.getData().getInteger("size")) > (8 * tier.ordinal())){
                 return false;
             }
         }
