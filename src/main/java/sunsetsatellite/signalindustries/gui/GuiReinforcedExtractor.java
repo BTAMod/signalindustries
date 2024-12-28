@@ -13,11 +13,9 @@ import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContain
 import sunsetsatellite.signalindustries.inventories.machines.multiblocks.reinforced.TileEntityReinforcedExtractor;
 
 public class GuiReinforcedExtractor extends GuiFluid {
-
     public String name = "Extraction Manifold";
     public EntityPlayer entityplayer;
     public TileEntityReinforcedExtractor tile;
-
 
     public GuiReinforcedExtractor(InventoryPlayer inventoryPlayer, TileEntity tile) {
         super(new ContainerReinforcedExtractor(inventoryPlayer, (TileEntityTieredContainer) tile),inventoryPlayer);

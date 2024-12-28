@@ -27,11 +27,10 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
             ChunkCoordinates chunk = null;
             double distance = Double.MAX_VALUE;
             MeteorLocation.Type type = null;
-            Minecraft mc = Minecraft.getMinecraft(this);
             for (MeteorLocation meteorLocation : SignalIndustries.meteorLocations) {
                 ChunkCoordinates location = meteorLocation.location;
-                if(location.getSqDistanceTo((int) mc.thePlayer.x, (int) mc.thePlayer.y, (int) mc.thePlayer.z) < distance){
-                    distance = location.getSqDistanceTo((int) mc.thePlayer.x, (int) mc.thePlayer.y, (int) mc.thePlayer.z);
+                if(location.getSqDistanceTo((int) entityplayer.x, (int) entityplayer.y, (int) entityplayer.z) < distance){
+                    distance = location.getSqDistanceTo((int) entityplayer.x, (int) entityplayer.y, (int) entityplayer.z);
                     chunk = location;
                     type = meteorLocation.type;
                 }

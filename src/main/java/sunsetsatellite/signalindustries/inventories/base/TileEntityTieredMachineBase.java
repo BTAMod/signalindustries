@@ -56,6 +56,7 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
     @Override
     public void tick() {
         super.tick();
+        if (worldObj.isClientSide) return;
         IOPreviewTimer.tick();
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null){

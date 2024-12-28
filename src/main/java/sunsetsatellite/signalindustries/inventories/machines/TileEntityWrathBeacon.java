@@ -72,12 +72,14 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
 
         enemiesLeft.removeIf((E)-> !E.isAlive());
         if(active && worldObj.difficultySetting == Difficulty.PEACEFUL.id()){
-            Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon loses all its strength suddenly..");
+            for (EntityPlayer player : worldObj.players) {
+                player.sendMessage("The wrath beacon loses all its strength suddenly..");
+            }
             worldObj.setBlockWithNotify(x,y,z,0);
         }
         if(active && started && enemiesLeft.isEmpty() && wave < 5){
             for (EntityPlayer player : worldObj.players) {
-                Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Wave "+wave+" complete! Next wave in: "+(intermissionTimer.max/20)+"s.");
+                player.sendMessage("Wave "+wave+" complete! Next wave in: "+(intermissionTimer.max/20)+"s.");
             }
             started = false;
             intermissionTimer.unpause();
@@ -85,7 +87,7 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
             wave++;
         } else if (active && started && enemiesLeft.isEmpty() && wave == 5) {
             for (EntityPlayer player : worldObj.players) {
-                Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Challenge complete!!");
+                player.sendMessage("Challenge complete!!");
                 player.triggerAchievement(SIAchievements.VICTORY);
             }
             active = false;
@@ -118,11 +120,11 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
     public void activate(EntityPlayer activator){
         if(!active){
             if(worldObj.difficultySetting == Difficulty.PEACEFUL.id()){
-                Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("This world is far too peaceful..");
+                activator.sendMessage("This world is far too peaceful..");
                 return;
             }
             if(worldObj.isDaytime()){
-                Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Now is not the time..");
+                activator.sendMessage("Now is not the time..");
                 return;
             }
             /*for (int x1 = x-7; x < x+7; x++) {
@@ -131,14 +133,14 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
                         int id = worldObj.getBlockId(x1,y1,z1);
                         int idUnder = worldObj.getBlockId(x1,y1-1,z1);
                         if (id != 0 && (x1 != x || y1 != y || z1 != z)) {
-                            Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon desires more space..");
+                            activator.sendMessage("The wrath beacon desires more space..");
                             return;
                         }
                     }
                 }
             }*/
-            if(Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem() != null && Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().getItem().id == SIItems.evilEye.id){
-                Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().consumeItem(Minecraft.getMinecraft(Minecraft.class).thePlayer);
+            if(activator.getHeldItem() != null && activator.getHeldItem().itemID == SIItems.evilEye.id){
+                activator.getHeldItem().consumeItem(activator);
                 for (EntityPlayer player : worldObj.players) {
                     player.sendTranslatedChatMessage("event.signalindustries.wrathBeaconActivated");
                     player.triggerAchievement(SIAchievements.CHALLENGE);
@@ -146,7 +148,7 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
                 active = true;
                 startWave();
             } else {
-                Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon needs a catalyst..");
+                activator.sendMessage("The wrath beacon needs a catalyst..");
             }
         }
     }
@@ -154,9 +156,9 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
     public void startWave(){
         if(active){
             for (EntityPlayer player : worldObj.players) {
-                Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("WAVE "+wave);
+                player.sendMessage("WAVE "+wave);
                 if(wave == 5){
-                    Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("FINAL WAVE!");
+                    player.sendMessage("FINAL WAVE!");
                 }
             }
             intermission = false;

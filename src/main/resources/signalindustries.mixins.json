@@ -20,10 +20,7 @@
     "EntityTrackerMixin",
     "GuiInventoryMixin",
     "InventoryPlayerMixin",
-    "ItemModelBlockMixin",
-    "ItemModelStandardMixin",
     "ItemStackMixin",
-    "LivingRendererMixin",
     "NBTTagCompoundMixin",
     "PlayerControllerMixin",
     "SaveHandlerBaseMixin",
@@ -33,8 +30,7 @@
     "WorldGenLabyrinthMixin",
     "WorldMixin",
     "WorldTypeOverworldMixin",
-    "experimental.MinecraftMixin",
-    "experimental.WorldRendererMixin"
+    "experimental.MinecraftMixin"
   ],
   "client": [
     "GameSettingsMixin",
@@ -46,7 +42,11 @@
     "RenderGlobalMixin",
     "RenderPlayerMixin",
     "RichPresenceHandlerThreadMixin",
-    "invokers.GuiInvoker"
+    "invokers.GuiInvoker",
+    "LivingRendererMixin",
+    "ItemModelBlockMixin",
+    "ItemModelStandardMixin",
+    "experimental.WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

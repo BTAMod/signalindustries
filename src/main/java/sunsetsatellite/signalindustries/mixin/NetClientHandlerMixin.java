@@ -133,6 +133,9 @@ public abstract class NetClientHandlerMixin extends NetHandler implements INetCl
     @Override
     public void handleOpenMachineGUI(PacketOpenMachineGUI p) {
         TileEntity tile = worldClient.getBlockTileEntity(p.blockX,p.blockY,p.blockZ);
+        System.out.println(SignalIndustries.nameToGuiMap);
+        System.out.println(p.windowTitle);
+        System.out.println(p);
         if(tile != null){
             try {
                 this.mc.displayGuiScreen((GuiScreen) SignalIndustries.nameToGuiMap.get(p.windowTitle).get(0).getDeclaredConstructors()[0].newInstance(this.mc.thePlayer.inventory,tile));
