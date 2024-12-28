@@ -48,11 +48,11 @@ public class BlockConduit extends BlockConduitBase {
         if (entityplayer.isSneaking() && !world.isClientSide) {
             TileEntityFluidPipe tile = (TileEntityFluidPipe) world.getBlockTileEntity(i, j, k);
             if (tile.getFluidInSlot(0) != null && tile.getFluidInSlot(0).getLiquid() != null) {
-                Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Liquid: " + tile.getFluidInSlot(0).toString());
+                entityplayer.sendMessage("Liquid: " + tile.getFluidInSlot(0).toString());
             } else {
-                Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Liquid: Empty");
+                entityplayer.sendMessage("Liquid: Empty");
             }
-            Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Capacity: " + tile.fluidCapacity[0]);
+            entityplayer.sendMessage("Capacity: " + tile.fluidCapacity[0]);
             return false;
         }
         return false;

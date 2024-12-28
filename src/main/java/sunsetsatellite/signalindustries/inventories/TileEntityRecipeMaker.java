@@ -154,7 +154,7 @@ public class TileEntityRecipeMaker extends TileEntity
 
     private ItemStack[] contents;
 
-    public void makeRecipe() {
+    public void makeRecipe(EntityPlayer player) {
         if(shaped){
             int j = 0;
             List<String> strings = new ArrayList<>();
@@ -182,10 +182,10 @@ public class TileEntityRecipeMaker extends TileEntity
                 RecipeEntryCraftingShaped recipe = parseRecipe(getStackInSlot(9),useContainers,list.toArray());
                 try {
                     Registries.RECIPES.addCustomRecipe(currentRecipeName,recipe);
-                    Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Recipe created!");
+                    player.sendMessage("Recipe created!");
                     SignalIndustries.LOGGER.info(DataLoader.serializeRecipe(recipe));
                 } catch (IllegalArgumentException e) {
-                    Minecraft.getMinecraft(this).ingameGUI.addChatMessage(TextFormatting.RED+e.getMessage());
+                    player.sendMessage(TextFormatting.RED+e.getMessage());
                 }
             }
         }

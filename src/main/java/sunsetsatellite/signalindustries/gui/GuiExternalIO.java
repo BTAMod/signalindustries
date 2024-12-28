@@ -116,7 +116,7 @@ public class GuiExternalIO extends GuiContainer {
                 SignalIndustries.displayGui(entityplayer, () -> new GuiItemIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.x,tile.y,tile.z);
                 break;
             case 2:
-                Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Link removed!");
+                entityplayer.sendMessage("Link removed!");
                 tile.externalTile = null;
                 tile.externalTileSide = null;
                 tile.externalTilePos = null;

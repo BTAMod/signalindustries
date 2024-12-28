@@ -87,7 +87,7 @@ public class ItemPulsarAttachment extends ItemTieredAttachment implements IHasOv
             if(charge < 100){
                 if(energy <= 0){
                     stack.getData().putBoolean("charging",false);
-                    Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage(TextFormatting.WHITE+"The Pulsar> "+TextFormatting.RED+" ERROR: "+TextFormatting.WHITE+"Ran out of energy while charging!");
+                    player.sendMessage(TextFormatting.WHITE+"The Pulsar> "+TextFormatting.RED+" ERROR: "+TextFormatting.WHITE+"Ran out of energy while charging!");
                     return;
                 }
                 if(getItemIdFromSlot(0,stack) == SIItems.warpOrb.id){

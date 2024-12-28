@@ -51,7 +51,7 @@ public class GuiRecipeMaker extends GuiContainer {
         }
         switch (guibutton.id){
             case 0:
-                tile.makeRecipe();
+                tile.makeRecipe(entityplayer);
                 break;
             case 1:
                 tile.deleteContents();

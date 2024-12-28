@@ -55,7 +55,7 @@ public class BlockItemConduit extends BlockConduitBase {
         if (entityplayer.isSneaking() && type == PipeType.NORMAL && !world.isClientSide) {
             TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(i, j, k);
             tile.mode = PipeMode.values()[tile.mode.ordinal() + 1 <= PipeMode.values().length - 1 ? tile.mode.ordinal() + 1 : 0];
-            Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Pipe mode changed to: " + tile.mode);
+            entityplayer.sendMessage("Pipe mode changed to: " + tile.mode);
             return true;
         }
         if (!world.isClientSide && type == PipeType.RESTRICT) {

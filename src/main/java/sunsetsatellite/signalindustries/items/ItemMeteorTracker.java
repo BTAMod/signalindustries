@@ -36,25 +36,24 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
             ChunkCoordinates chunk = null;
             double distance = Double.MAX_VALUE;
             MeteorLocation.Type type = null;
-            Minecraft mc = Minecraft.getMinecraft(this);
             for (MeteorLocation meteorLocation : SignalIndustries.meteorLocations) {
                 ChunkCoordinates location = meteorLocation.location;
-                if(location.getSqDistanceTo((int) mc.thePlayer.x, (int) mc.thePlayer.y, (int) mc.thePlayer.z) < distance){
-                    distance = location.getSqDistanceTo((int) mc.thePlayer.x, (int) mc.thePlayer.y, (int) mc.thePlayer.z);
+                if(location.getSqDistanceTo((int) entityplayer.x, (int) entityplayer.y, (int) entityplayer.z) < distance){
+                    distance = location.getSqDistanceTo((int) entityplayer.x, (int) entityplayer.y, (int) entityplayer.z);
                     chunk = location;
                     type = meteorLocation.type;
                 }
             }
             if(chunk != null){
                 if(entityplayer.isSneaking() && distance < 5){
-                    mc.ingameGUI.addChatMessage("This meteor will no longer be tracked.");
+                    entityplayer.sendMessage("This meteor will no longer be tracked.");
                     final ChunkCoordinates finalChunk = chunk;
                     SignalIndustries.meteorLocations.removeIf((L)->L.location == finalChunk);
                 } else {
-                    mc.ingameGUI.addChatMessage(String.format("Distance: %.0f blocks | Type: %s", distance,type));
+                    entityplayer.sendMessage(String.format("Distance: %.0f blocks | Type: %s", distance,type));
                 }
             } else {
-                mc.ingameGUI.addChatMessage("No meteors detected nearby.");
+                entityplayer.sendMessage("No meteors detected nearby.");
             }
         }
         return super.onUseItem(itemstack, world, entityplayer);

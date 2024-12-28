@@ -103,7 +103,7 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
                 if(energy <= 0){
                     getFluidStack(0,itemstack).putInt("amount",0);
                     itemstack.getData().putBoolean("charging",false);
-                    Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage(TextFormatting.WHITE+"The Pulsar> "+TextFormatting.RED+" ERROR: "+TextFormatting.WHITE+"Ran out of energy while charging!");
+                    ((EntityPlayer) entity).sendMessage(TextFormatting.WHITE+"The Pulsar> "+TextFormatting.RED+" ERROR: "+TextFormatting.WHITE+"Ran out of energy while charging!");
                     return;
                 }
                 if(getItemIdFromSlot(0,itemstack) == SIItems.warpOrb.id){

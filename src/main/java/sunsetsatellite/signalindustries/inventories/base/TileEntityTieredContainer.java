@@ -15,7 +15,7 @@ public class TileEntityTieredContainer extends TileEntityCoverable {
     @Override
     public void tick() {
         super.tick();
-        if(worldObj != null && getBlockType() != null){
+        if(worldObj != null && getBlockType() != null && !worldObj.isClientSide){
             tier = ((BlockContainerTiered)getBlockType()).tier;
         }
     }

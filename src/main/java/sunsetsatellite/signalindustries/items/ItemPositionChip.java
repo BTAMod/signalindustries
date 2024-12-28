@@ -22,7 +22,7 @@ public class ItemPositionChip extends Item implements ICustomDescription {
     public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if(entityplayer.isSneaking()){
             ((INBTCompound)itemstack.getData()).removeTag("position");
-            Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Position cleared!");
+            entityplayer.sendMessage("Position cleared!");
         }
         return super.onUseItem(itemstack, world, entityplayer);
     }
@@ -46,7 +46,7 @@ public class ItemPositionChip extends Item implements ICustomDescription {
         position.putInt("dim",world.dimension.id);
         position.putInt("side", side.getId());
         itemStack.getData().put("position",position);
-        Minecraft.getMinecraft(this).ingameGUI.addChatMessage(String.format("Position set to XYZ: %d, %d, %d!",blockX,blockY,blockZ));
+        entityplayer.sendMessage(String.format("Position set to XYZ: %d, %d, %d!",blockX,blockY,blockZ));
         return true;
     }
 

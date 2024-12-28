@@ -297,6 +297,19 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
         }
     }
 
+    public EntityPlayer getNearestPlayer() {
+        int dist = -1;
+        EntityPlayer ret = null;
+        for (EntityPlayer p : worldObj.players) {
+            int nd = (int) (Math.pow((int) p.x - x, 2) + Math.pow((int) p.y - y, 2) + Math.pow((int) p.z - z, 2));
+            if (dist == -1 || nd < dist) {
+                ret = p;
+                dist = nd;
+            }
+        }
+        return ret;
+    }
+
     @Override
     public void receivePosition(int x, int y, int z, Side side, int dim) {
         if(tier == Tier.REINFORCED){
@@ -316,16 +329,16 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
                         if (!(tile instanceof TileEntityExternalIO)) {
                             externalTile = tile;
                             externalTileSide = Direction.getDirectionFromSide(side.getId());
-                            Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Link established!");
+                            getNearestPlayer().sendMessage("Link established!");
                         }
                     } else {
-                        Minecraft.getMinecraft(this).ingameGUI.addChatMessage("invalid block at position!");
+                        getNearestPlayer().sendMessage("invalid block at position!");
                     }
                 } else {
-                    Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Position outside this world!");
+                    getNearestPlayer().sendMessage("Position outside this world!");
                 }
             } else {
-                Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Position out of reach!");
+                getNearestPlayer().sendMessage("Position out of reach!");
             }
         }
     }
