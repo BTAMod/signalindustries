@@ -7,7 +7,6 @@ import net.minecraft.core.entity.vehicle.EntityMinecart;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.World;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -62,7 +61,7 @@ public abstract class EntityMinecartMixin extends Entity implements IInventory {
         if(l == SIBlocks.dilithiumRail.id){
             double d31 = Math.sqrt(this.xd * this.xd + this.zd * this.zd);
             if (d31 > 0.01D) {
-                double d32 = 0.12D;
+                double d32 = 0.18D;
                 this.xd += this.xd / d31 * d32;
                 this.zd += this.zd / d31 * d32;
             } else if (i1 == 1) {

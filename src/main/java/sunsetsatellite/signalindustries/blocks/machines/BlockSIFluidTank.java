@@ -62,7 +62,15 @@ public class BlockSIFluidTank extends BlockMachineBase {
                                     if (tile.getAllowedFluidsForSlot(0).contains(fluid)) {
                                         tile.insertFluid(0, stack);
                                         Item emptyContainer = CatalystFluids.CONTAINERS.findEmptyContainersWithContainer(fluid, equippedItem).get(0);
-                                        entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem] = new ItemStack(emptyContainer);
+                                        ItemStack heldStack = entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem];
+                                        ItemStack resultStack = new ItemStack(emptyContainer);
+                                        if(heldStack != null && heldStack.stackSize == 1){
+                                            entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem] = resultStack;
+                                        } else if(heldStack != null && heldStack.stackSize > 1) {
+                                            heldStack.stackSize -= 1;
+                                            entityplayer.inventory.insertItem(resultStack,false);
+                                            if(resultStack.stackSize > 0) entityplayer.dropPlayerItem(resultStack);
+                                        }
                                         return true;
                                     }
                                 }
@@ -77,7 +85,15 @@ public class BlockSIFluidTank extends BlockMachineBase {
                                     if (tile.getFluidInSlot(0).amount >= 1000) {
                                         tile.getFluidInSlot(0).amount -= 1000;
                                         Item filledContainer = CatalystFluids.CONTAINERS.findFilledContainersWithContainer(fluid, equippedItem).get(0);
-                                        entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem] = new ItemStack(filledContainer);
+                                        ItemStack heldStack = entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem];
+                                        ItemStack resultStack = new ItemStack(filledContainer);
+                                        if(heldStack != null && heldStack.stackSize == 1){
+                                            entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem] = resultStack;
+                                        } else if(heldStack != null && heldStack.stackSize > 1) {
+                                            heldStack.stackSize -= 1;
+                                            entityplayer.inventory.insertItem(resultStack,false);
+                                            if(resultStack.stackSize > 0) entityplayer.dropPlayerItem(resultStack);
+                                        }
                                         return true;
                                     }
                                 }

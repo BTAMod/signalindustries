@@ -60,6 +60,7 @@ public class RecipeReloadCommand extends Command {
             siRecipes.registerNamespaces();
             siRecipes.load();
             DataLoader.loadDataPacks(Minecraft.getMinecraft(this));
+            SIRecipes.loadSpecial();
             RECIPES_LOCAL_COPY = RECIPES;
             int recipes = RECIPES.getAllRecipes().size();
             int groups = RECIPES.getAllGroups().size();

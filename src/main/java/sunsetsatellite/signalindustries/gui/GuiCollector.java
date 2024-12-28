@@ -15,7 +15,7 @@ import sunsetsatellite.signalindustries.inventories.machines.TileEntityCollector
 
 public class GuiCollector extends GuiFluid {
 
-    public String name = "Signalum Collector";
+    public String name = "Signalite Collector";
     public EntityPlayer entityplayer;
     public TileEntityCollector tile;
 
@@ -36,6 +36,8 @@ public class GuiCollector extends GuiFluid {
                 i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/basic_energy_collector.png");
                 break;
             case REINFORCED:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/reinforced_energy_collector.png");
+                break;
             case AWAKENED:
                 break;
         }

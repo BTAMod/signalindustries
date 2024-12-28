@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.inventories;
 
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
@@ -155,6 +156,7 @@ public class TileEntityRecipeMaker extends TileEntity
     private ItemStack[] contents;
 
     public void makeRecipe(EntityPlayer player) {
+        if(!FabricLoader.getInstance().isDevelopmentEnvironment()) return;
         if(shaped){
             int j = 0;
             List<String> strings = new ArrayList<>();
@@ -163,7 +165,7 @@ public class TileEntityRecipeMaker extends TileEntity
                 ItemStack stack = getStackInSlot(i);
                 if(stack != null){
                     s.append(i);
-                }
+                } else s.append(' ');
                 j++;
                 if(j % 3 == 0 && s.length() > 0){
                     strings.add(s.toString());

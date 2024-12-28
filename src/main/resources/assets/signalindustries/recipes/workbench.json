@@ -836,9 +836,9 @@
     "name": "signalindustries:workbench/dilithium_rail",
     "type": "minecraft:crafting/shaped",
     "pattern": [
-      "PDP",
-      "STS",
-      "PDP"
+      "PTP",
+      "DTD",
+      "PTP"
     ],
     "symbols": [
       {
@@ -1320,6 +1320,47 @@
     "consumeContainers": false
   },
   {
+    "name": "signalindustries:workbench/reinforced_meteor_tracker",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " R ",
+      "CDC",
+      " R "
+    ],
+    "symbols": [
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.dilithiumShard",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.reinforced.meteorTracker",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
     "name": "signalindustries:workbench/configuration_tablet",
     "type": "minecraft:crafting/shaped",
     "pattern": [
@@ -1496,7 +1537,7 @@
         "stack": {
           "key": "item.armor.helmet.steel",
           "amount": 1,
-          "meta": 0
+          "meta": -1
         }
       },
       {
@@ -1504,7 +1545,7 @@
         "stack": {
           "key": "item.signalindustries.basic.prototypeHarnessGoggles",
           "amount": 1,
-          "meta": 0
+          "meta": -1
         }
       }
     ],
@@ -1561,7 +1602,7 @@
         "stack": {
           "key": "item.armor.chestplate.steel",
           "amount": 1,
-          "meta": 0
+          "meta": -1
         }
       },
       {
@@ -1569,7 +1610,7 @@
         "stack": {
           "key": "item.signalindustries.basic.prototypeHarness",
           "amount": 1,
-          "meta": 0
+          "meta": -1
         }
       }
     ],
@@ -1626,7 +1667,7 @@
         "stack": {
           "key": "item.armor.leggings.steel",
           "amount": 1,
-          "meta": 0
+          "meta": -1
         }
       }
     ],
@@ -1683,7 +1724,7 @@
         "stack": {
           "key": "item.armor.boots.steel",
           "amount": 1,
-          "meta": 0
+          "meta": -1
         }
       }
     ],

@@ -33,6 +33,7 @@ public class BlockWakingInfuser extends BlockMachineBase {
             TileEntityWakingInfuser tile = (TileEntityWakingInfuser) world.getBlockTileEntity(i, j, k);
             if (tile.getMultiblock() != null && tile.getMultiblock().isValid()) {
                 entityplayer.triggerAchievement(SIAchievements.HORIZONS);
+                entityplayer.triggerAchievement(SIAchievements.WAKING3);
             } else {
                 entityplayer.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");
             }

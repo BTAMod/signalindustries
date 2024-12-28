@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.entities.mob;
 
+import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.util.collection.NamespaceID;
@@ -20,6 +21,7 @@ public class EntityInfernal extends EntityMonster {
         this.scoreValue = 1000;
         this.fireImmune = true;
         this.setHealthRaw(40);
+        mobDrops.add(new WeightedRandomLootObject(SIItems.infernalFragment.getDefaultStack(),1,2));
     }
     private int beamsLaunched = 0;
     private int beamCooldown = 0;
@@ -132,7 +134,7 @@ public class EntityInfernal extends EntityMonster {
         dead = true;
         if(!world.isClientSide)
         {
-            if(!lastDamageType.equals(DamageType.DROWN) && !eclipseImmune){
+            if((lastDamageType == null || !lastDamageType.equals(DamageType.DROWN)) && !eclipseImmune){
                 dropFewItems();
             }
         }
@@ -160,9 +162,5 @@ public class EntityInfernal extends EntityMonster {
 
     protected String getDeathSound() {
         return "random.fizz";
-    }
-
-    protected int getDropItemId() {
-        return SIItems.infernalFragment.id;
     }
 }

@@ -6,7 +6,7 @@ import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 
-public class ContainerEnergyInjector extends ContainerTiered {
+public class ContainerEnergyInjector extends ContainerMachine {
 
     public ContainerEnergyInjector(IInventory iInventory, TileEntityTieredMachineBase tileEntity){
         super(iInventory, tileEntity);
@@ -28,5 +28,7 @@ public class ContainerEnergyInjector extends ContainerTiered {
             addSlot(new Slot(iInventory, k, 8 + k * 18, 142));
         }
     }
+
+
 
 }

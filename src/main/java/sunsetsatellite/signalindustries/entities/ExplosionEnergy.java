@@ -179,7 +179,7 @@ public class ExplosionEnergy {
                 d10 /= d11;
                 double d12 = this.world.func_675_a(vec3d, entity.bb);
                 double d13 = (1.0D - d4) * d12;
-                entity.hurt(this.exploder, (int) ((d13 * d13 + d13) / 2.0D * 8.0D * explosionSize2 + 1.0D), DamageType.BLAST);
+                entity.hurt(this.exploder, (int) ((d13 * d13 + d13) / 2.0D * 8.0D * explosionSize2 + 1.0D), DamageType.GENERIC);
                 entity.xd += d6 * d13;
                 entity.yd += d8 * d13;
                 entity.zd += d10 * d13;

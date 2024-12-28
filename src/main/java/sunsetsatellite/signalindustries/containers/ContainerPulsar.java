@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.containers;
 
 
+import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryPlayer;
@@ -11,6 +12,8 @@ import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.inventories.item.InventoryPulsar;
 import sunsetsatellite.signalindustries.items.ItemPulsar;
 import sunsetsatellite.catalyst.fluids.util.NBTHelper;
+
+import java.util.List;
 
 public class ContainerPulsar extends ContainerItemFluid {
 
@@ -46,6 +49,15 @@ public class ContainerPulsar extends ContainerItemFluid {
     @Override
     public FluidStack clickFluidSlot(int slotID, int button, boolean shift, boolean control, EntityPlayer entityplayer) {
         return super.clickFluidSlot(slotID, button, shift, control, entityplayer);
+    }
+
+    @Override
+    public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, EntityPlayer entityPlayer) {
+        int lastDeviceSlot = inv.getSizeInventory() - 1;
+        if (slot.id <= lastDeviceSlot) {
+            return getSlots(lastDeviceSlot+1, 36, true);
+        }
+        return getSlots(0, Math.max(lastDeviceSlot+1,1), false);
     }
 
     @Override

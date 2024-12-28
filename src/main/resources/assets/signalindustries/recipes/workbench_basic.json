@@ -1071,7 +1071,7 @@
         }
       },
       {
-        "symbol": "C",
+        "symbol": "S",
         "stack": {
           "key": "item.signalindustries.signalumCrystal",
           "amount": 1,
@@ -1895,6 +1895,63 @@
     ],
     "result": {
       "key": "tile.signalindustries.basic.collector",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_stoneworks",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CLC",
+      "BXB",
+      "CWC"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "tile.cobble.stone",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "W",
+        "stack": {
+          "key": "item.bucket.water",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "X",
+        "stack": {
+          "key": "tile.signalindustries.basic.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "L",
+        "stack": {
+          "key": "item.bucket.lava",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.stoneworks",
       "amount": 1,
       "meta": 0
     },

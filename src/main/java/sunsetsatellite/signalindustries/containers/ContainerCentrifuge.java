@@ -2,12 +2,11 @@ package sunsetsatellite.signalindustries.containers;
 
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
-import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityCentrifuge;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityCentrifuge;
 
-public class ContainerCentrifuge extends ContainerFluid {
+public class ContainerCentrifuge extends ContainerMachine {
 
     private final TileEntityCentrifuge machine = ((TileEntityCentrifuge) tile);
     public ContainerCentrifuge(IInventory iInventory, TileEntityTieredContainer tileEntityTieredMachine) {

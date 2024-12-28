@@ -18,15 +18,6 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
         super(name, id);
     }
 
-    /*@Override
-    public int getIconFromDamage(int id) {
-        if(id == 1){
-            int[] a = TextureHelper.getOrCreateItemTexture(SignalIndustries.MOD_ID,"meteor_tracker.png");
-            return Item.iconCoordToIndex(a[0],a[1]);
-        }
-        return iconIndex;
-    }*/
-
     @Override
     public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if(itemstack.getMetadata() == 0){
@@ -46,14 +37,14 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
             }
             if(chunk != null){
                 if(entityplayer.isSneaking() && distance < 5){
-                    entityplayer.sendMessage("This meteor will no longer be tracked.");
+                    entityplayer.sendStatusMessage("This meteor will no longer be tracked.");
                     final ChunkCoordinates finalChunk = chunk;
                     SignalIndustries.meteorLocations.removeIf((L)->L.location == finalChunk);
                 } else {
-                    entityplayer.sendMessage(String.format("Distance: %.0f blocks | Type: %s", distance,type));
+                    entityplayer.sendStatusMessage(String.format("Distance: %.0f blocks | Type: %s", distance,type));
                 }
             } else {
-                entityplayer.sendMessage("No meteors detected nearby.");
+                entityplayer.sendStatusMessage("No meteors detected nearby.");
             }
         }
         return super.onUseItem(itemstack, world, entityplayer);

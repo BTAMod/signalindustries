@@ -31,7 +31,7 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
                             I18n.getInstance().translateKey(stack.getFluidName()+".name")
                                     .replace("Flowing ","")
                                     .replace("Still ","")
-                                    .replace("Signalum Energy","sE")
+                                    .replace("Signaling Energy","sE")
                                     +": "+ NumberUtil.format(stack.amount)+"/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ",
                             false,
                             true,
@@ -57,7 +57,7 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
                             I18n.getInstance().translateKey(stack.getFluidName()+".name")
                                     .replace("Flowing ","")
                                     .replace("Still ","")
-                                    .replace("Signalum Energy","sE")
+                                    .replace("Signaling Energy","sE")
                                     +": "+ NumberUtil.format(stack.amount)+"/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ",
                             false,
                             true,

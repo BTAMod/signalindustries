@@ -7,13 +7,14 @@ import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
-import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class TileEntityIgnitor extends TileEntityFluidItemContainer implements IMultiblockPart {
     public boolean isActivated = false;
@@ -86,57 +87,6 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
 
     public boolean isReady(){
         return fluidContents[0] != null && fluidContents[0].liquid == SIBlocks.energyFlowing && fluidContents[0].amount >= fluidCapacity[0];
-    }
-
-    public void extractFluids(){
-        for (Map.Entry<Direction, Connection> e : fluidConnections.entrySet()) {
-            Direction dir = e.getKey();
-            Connection connection = e.getValue();
-            TileEntity tile = dir.getTileEntity(worldObj,this);
-            if (tile instanceof TileEntityFluidPipe) {
-                pressurizePipes((TileEntityFluidPipe) tile, new ArrayList<>());
-                moveFluids(dir, (TileEntityFluidPipe) tile);
-                ((TileEntityFluidPipe) tile).rememberTicks = 100;
-            }
-        }
-    }
-
-    public void pressurizePipes(TileEntityFluidPipe pipe, ArrayList<HashMap<String,Integer>> already){
-        for (Direction dir : Direction.values()) {
-            TileEntity tile = dir.getTileEntity(worldObj,pipe);
-            if (tile instanceof TileEntityFluidPipe) {
-                for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.x && V2.get("y") == tile.y && V2.get("z") == tile.z) {
-                        return;
-                    }
-                }
-                HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.x);
-                list.put("y",tile.y);
-                list.put("z",tile.z);
-                already.add(list);
-                pressurizePipes((TileEntityFluidPipe) tile,already);
-            }
-        }
-    }
-
-    public void unpressurizePipes(TileEntityFluidPipe pipe,ArrayList<HashMap<String,Integer>> already){
-        for (Direction dir : Direction.values()) {
-            TileEntity tile = dir.getTileEntity(worldObj,pipe);
-            if (tile instanceof TileEntityFluidPipe) {
-                for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.x && V2.get("y") == tile.y && V2.get("z") == tile.z) {
-                        return;
-                    }
-                }
-                HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.x);
-                list.put("y",tile.y);
-                list.put("z",tile.z);
-                already.add(list);
-                unpressurizePipes((TileEntityFluidPipe) tile,already);
-            }
-        }
     }
 
     @Override

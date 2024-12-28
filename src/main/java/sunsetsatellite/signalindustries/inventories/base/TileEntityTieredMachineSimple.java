@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.inventories.base;
 
+import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -83,7 +84,7 @@ public class TileEntityTieredMachineSimple extends TileEntityTieredMachineBase i
 
     public boolean fuel(){
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[energySlot]);
-        if(burn > 0 && canProcess() && currentRecipe != null){
+        if(burn > 0 && canProcess() && currentRecipe != null && fuelBurnTicks <= 0){
             if(fluidContents[energySlot].amount >= currentRecipe.getData().cost){
                 progressMaxTicks = (int) (currentRecipe.getData().ticks / speedMultiplier);
                 fuelMaxBurnTicks = fuelBurnTicks = burn;
@@ -299,6 +300,18 @@ public class TileEntityTieredMachineSimple extends TileEntityTieredMachineBase i
             }
         });
         currentRecipe = recipeGroup.findRecipe(symbols.toArray(new RecipeExtendedSymbol[0]),tier,recipeId);
+    }
+
+    @Override
+    public void writeToNBT(CompoundTag tag) {
+        super.writeToNBT(tag);
+        tag.putInt("RecipeId",recipeId);
+    }
+
+    @Override
+    public void readFromNBT(CompoundTag tag) {
+        super.readFromNBT(tag);
+        recipeId = tag.getInteger("RecipeId");
     }
 
     @Override

@@ -7,7 +7,6 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 
 public class BoostAbility extends TriggerBaseAbility {
-    public int effectTime;
 
     public BoostAbility(String name, int cost, int cooldown) {
         super(name, cost, cooldown);

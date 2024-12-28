@@ -33,6 +33,7 @@ public class BlockWakingCrusher extends BlockMachineBase {
             TileEntityWakingCrusher tile = (TileEntityWakingCrusher) world.getBlockTileEntity(i, j, k);
             if (tile.getMultiblock() != null && tile.getMultiblock().isValid()) {
                 entityplayer.triggerAchievement(SIAchievements.HORIZONS);
+                entityplayer.triggerAchievement(SIAchievements.WAKING1);
             } else {
                 entityplayer.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");
             }

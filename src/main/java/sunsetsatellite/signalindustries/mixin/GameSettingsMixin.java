@@ -25,6 +25,9 @@ public class GameSettingsMixin
     public KeyBinding keySwitchMode = new KeyBinding("key.signalindustries.switchMode").bind(InputDevice.keyboard,50);
 
     @Unique
+    public KeyBinding keyRazielIndex = new KeyBinding("key.signalindustries.razielIndex").bind(InputDevice.keyboard, 23);
+
+    @Unique
     public KeyBinding keyActivateHeadTopAttachment = new KeyBinding("key.signalindustries.headTopActivate");
 
     @Unique
@@ -136,6 +139,11 @@ public class GameSettingsMixin
     @Override
     public KeyBinding signalIndustries$getKeySwitchMode() {
         return keySwitchMode;
+    }
+
+    @Override
+    public KeyBinding signalindustries$getKeyShowIndex() {
+        return keyRazielIndex;
     }
 
     @Override

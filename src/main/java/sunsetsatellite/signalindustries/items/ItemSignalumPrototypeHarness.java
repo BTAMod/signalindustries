@@ -42,6 +42,7 @@ public class ItemSignalumPrototypeHarness extends ItemArmorTiered implements IHa
 
     @Override
     public boolean onUseItemOnBlock(ItemStack itemstack, EntityPlayer entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
+        if(itemstack.getItem() != SIItems.signalumPrototypeHarness) return false;
         if(entityplayer.isSneaking()){
             SignalIndustries.displayGui(entityplayer,() -> new GuiHarness(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new ContainerHarness(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new InventoryHarness(entityplayer.inventory.getCurrentItem()),itemstack);
             return true;
@@ -103,6 +104,7 @@ public class ItemSignalumPrototypeHarness extends ItemArmorTiered implements IHa
     @Override
     public void inventoryTick(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
         super.inventoryTick(itemstack, world, entity, i, flag);
+        if(itemstack.getItem() != SIItems.signalumPrototypeHarness) return;
         cooldownTicks++;
         if(cooldownTicks >= 20){
             cooldownTicks = 0;
@@ -125,6 +127,7 @@ public class ItemSignalumPrototypeHarness extends ItemArmorTiered implements IHa
 
     @Override
     public void fill(FluidStack fluidStack, ItemStack stack, TileEntityFluidContainer tile, int maxAmount) {
+        if(stack.getItem() != SIItems.signalumPrototypeHarness) return;
         InventoryHarness inv = new InventoryHarness(stack);
         NBTHelper.loadInvFromNBT(stack,inv,0,1);
         inv.insertFluid(0,fluidStack.splitStack(Math.min(maxAmount,fluidStack.amount)));

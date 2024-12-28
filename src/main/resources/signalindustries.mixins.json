@@ -26,6 +26,7 @@
     "SaveHandlerBaseMixin",
     "SlotCraftingMixin",
     "SlotMixin",
+    "WorldGenDungeonMixin",
     "WorldGenLabyrinthMixin",
     "WorldMixin",
     "WorldTypeOverworldMixin",

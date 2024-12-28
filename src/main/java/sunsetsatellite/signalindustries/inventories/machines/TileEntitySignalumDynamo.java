@@ -14,7 +14,7 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyConductor {
     public int cost;
 
     public TileEntitySignalumDynamo(){
-        cost = 40;
+        cost = 20;
         itemContents = new ItemStack[2];
         fluidContents = new FluidStack[1];
         fluidCapacity[0] = 4000;

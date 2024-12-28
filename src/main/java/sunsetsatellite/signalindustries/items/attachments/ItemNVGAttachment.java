@@ -50,14 +50,15 @@ public class ItemNVGAttachment extends ItemTieredAttachment {
         if (Global.isServer) return;
         Minecraft mc = Minecraft.getMinecraft(this);
         if(mc.renderer instanceof ShadersRendererSI){
-            if(signalumPowerSuit.getEnergy() < 1 ){
+            if(signalumPowerSuit.getEnergy() < 1 ) {
                 mc.setRenderer(new ShadersRenderer(mc));
                 mc.renderer.reload();
                 mc.fullbright = false;
                 mc.renderGlobal.loadRenderers();
-            } else {
-                signalumPowerSuit.decrementEnergy(1);
             }
+//            } else {
+//                signalumPowerSuit.decrementEnergy(1);
+//            }
         }
     }
 

@@ -34,6 +34,7 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
 
     public TileEntityPump(){
         fluidContents = new FluidStack[2];
+        itemContents = new ItemStack[0];
         fluidCapacity = new int[2];
         fluidCapacity[0] = 2000;
         fluidCapacity[1] = 2000;

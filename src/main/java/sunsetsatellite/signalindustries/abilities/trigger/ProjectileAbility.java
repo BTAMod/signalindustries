@@ -7,7 +7,6 @@ import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.entities.EntityEnergyOrb;
 
 public class ProjectileAbility extends TriggerBaseAbility {
-    public int effectTime;
 
     public ProjectileAbility(String name, int cost, int cooldown) {
         super(name, cost, cooldown);

@@ -2,12 +2,11 @@ package sunsetsatellite.signalindustries.containers;
 
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
-import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.inventories.TileEntityEnergyConnector;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 
-public class ContainerEnergyConnector extends ContainerFluid {
+public class ContainerEnergyConnector extends ContainerMachine {
 
     private final TileEntityEnergyConnector machine = ((TileEntityEnergyConnector) tile);
 

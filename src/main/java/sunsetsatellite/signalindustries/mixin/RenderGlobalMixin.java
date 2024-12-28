@@ -4,27 +4,34 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.fx.EntitySlimeChunkFX;
-import net.minecraft.client.render.Lighting;
-import net.minecraft.client.render.RenderEngine;
-import net.minecraft.client.render.RenderGlobal;
-
+import net.minecraft.client.render.*;
+import net.minecraft.client.render.block.model.BlockModel;
+import net.minecraft.client.render.block.model.BlockModelDispatcher;
+import net.minecraft.client.render.camera.ICamera;
+import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+import sunsetsatellite.catalyst.core.util.BlockInstance;
+import sunsetsatellite.catalyst.core.util.IFullbright;
+import sunsetsatellite.catalyst.multiblocks.HologramWorld;
 import sunsetsatellite.signalindustries.SIDimensions;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SIWeather;
+import sunsetsatellite.signalindustries.abilities.trigger.ScanAbility;
 import sunsetsatellite.signalindustries.entities.fx.EntityDustCloudFX;
 import sunsetsatellite.signalindustries.entities.fx.EntityShockwaveFX;
+
+import java.util.ArrayList;
 
 
 @Mixin(
@@ -248,4 +255,55 @@ public class RenderGlobalMixin {
             ci.cancel();
         }
     }
+
+    @Inject(method = "renderEntities", at = @At("TAIL"))
+    public void renderWorld(ICamera camera, float partialTick, CallbackInfo ci){
+        double x = camera.getX(partialTick);
+        double y = camera.getY(partialTick);
+        double z = camera.getZ(partialTick);
+        if(!ScanAbility.oreMap.isEmpty()){
+            ArrayList<BlockInstance> list = new ArrayList<>();
+            ScanAbility.oreMap.forEach((block, oreInfo)->{
+                oreInfo.positions.forEach(position->{
+                    list.add(new BlockInstance(block,position,null));
+                });
+            });
+            blockRenderer = new RenderBlocks(new HologramWorld(list));
+            ScanAbility.oreMap.forEach((block, oreInfo)->{
+                oreInfo.positions.forEach(position->{
+                    GL11.glPushMatrix();
+                    GL11.glDisable(GL11.GL_LIGHTING);
+                    GL11.glDisable(GL11.GL_DEPTH_TEST);
+                    BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(block);
+                    GL11.glTranslated(position.x - x + 0.5f , position.y - y + 0.5f, position.z - z + 0.5f);
+                    ((IFullbright)model).enableFullbright();
+                    drawBlock(Tessellator.instance,
+                            model
+                    );
+                    ((IFullbright)model).disableFullbright();
+                    GL11.glEnable(GL11.GL_LIGHTING);
+                    GL11.glEnable(GL11.GL_DEPTH_TEST);
+                    GL11.glPopMatrix();
+                });
+            });
+        }
+    }
+
+    @Unique
+    private void drawBlock(Tessellator tessellator, BlockModel<?> model) {
+        TextureRegistry.blockAtlas.bindTexture();
+        GL11.glPushMatrix();
+        RenderBlocks renderBlocks = BlockModel.renderBlocks;
+        BlockModel.setRenderBlocks(blockRenderer);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        model.renderBlockOnInventory(tessellator, 0,1,null);
+        BlockModel.setRenderBlocks(renderBlocks);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glPopMatrix();
+        GL11.glEnable(GL11.GL_CULL_FACE);
+    }
+
+    @Unique
+    private RenderBlocks blockRenderer;
 }

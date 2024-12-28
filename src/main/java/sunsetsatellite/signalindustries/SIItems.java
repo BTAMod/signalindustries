@@ -74,6 +74,7 @@ public class SIItems extends DataInitializer {
     public static Item romChipProjectile;
     public static Item romChipBoost;
     public static Item romChipShield;
+    public static Item romChipScan;
     public static Item clearKey;
     public static Item saturatedKey;
     public static Item signalumSaber;
@@ -114,6 +115,7 @@ public class SIItems extends DataInitializer {
     public static Item attachmentPoint;
     public static Item crystalWingPart;
     public static Item meteorTracker;
+    public static Item reinforcedMeteorTracker;
     public static Item configurationTablet;
     public static Item blankAbilityModule;
     public static Item abilityContainerCasing;
@@ -263,6 +265,9 @@ public class SIItems extends DataInitializer {
         romChipShield = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/chip3")
                 .build(new ItemRomChip("romChip.shield", config.getInt("ItemIDs.romChipShield")));
+        romChipScan = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/chip4")
+                .build(new ItemRomChip("romChip.scan", config.getInt("ItemIDs.romChipScan")));
         clearKey = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/clear_key")
                 .build(new Item("clearKey", config.getInt("ItemIDs.clearKey")));
@@ -330,8 +335,12 @@ public class SIItems extends DataInitializer {
                 .build(new ItemAbilityModule("awakenedAbilityModule", config.getInt("ItemIDs.awakenedAbilityModule"), Tier.AWAKENED));
         meteorTracker = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/meteor_tracker_uncalibrated")
-                .setItemModel((item -> new ItemModelMeteorTracker(item,MOD_ID)))
+                .setItemModel((item -> new ItemModelMeteorTracker(item,MOD_ID,Tier.BASIC)))
                 .build(new ItemMeteorTracker("meteorTracker", config.getInt("ItemIDs.meteorTracker")));
+        reinforcedMeteorTracker = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/reinforced_meteor_tracker_uncalibrated")
+                .setItemModel((item -> new ItemModelMeteorTracker(item,MOD_ID,Tier.REINFORCED)))
+                .build(new ItemReinforcedMeteorTracker("reinforced.meteorTracker", config.getInt("ItemIDs.reinforcedMeteorTracker")));
         configurationTablet = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/configuration_tablet_rotation")
                 .setItemModel((item)->new ItemModelConfigurationTablet(item,MOD_ID))

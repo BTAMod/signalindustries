@@ -1,9 +1,13 @@
 package sunsetsatellite.signalindustries.inventories.machines;
 
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.Global;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.SIRecipes;
@@ -37,6 +41,14 @@ public class TileEntityCentrifuge extends TileEntityTieredMachineSimple implemen
     @Override
     public String getInvName() {
         return "Separation Centrifuge";
+    }
+
+    @Override
+    public void processItem() {
+        super.processItem();
+        if(itemContents[itemOutputs[0]] != null && itemContents[itemOutputs[0]].itemID == SIItems.awakenedSignalumFragment.id && !Global.isServer){
+            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.RISING_ABOVE);
+        }
     }
 
     /*@Override

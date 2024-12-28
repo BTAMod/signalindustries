@@ -120,6 +120,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         defaultConfig.addEntry("Other.eternityDimId", 3);
         defaultConfig.addEntry("Other.GuiId", 10);
         defaultConfig.addEntry("Other.machinePacketId", 113);
+        defaultConfig.addEntry("Other.dilithiumMiningLevel", 4);
+        defaultConfig.addEntry("Other.awakenedMiningLevel", 5);
         defaultConfig.addEntry("EntityIDs.infernalId", 100);
 
         int blockId = blockIdStart;
@@ -199,6 +201,16 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
                 changed = true;
             }
 
+            if(!rawConfig.contains("Other.dilithiumMiningLevel")){
+                rawConfig.addEntry("Other.dilithiumMiningLevel", 4);
+                changed = true;
+            }
+
+            if(!rawConfig.contains("Other.awakenedMiningLevel")){
+                rawConfig.addEntry("Other.awakenedMiningLevel", 5);
+                changed = true;
+            }
+
             if (changed) {
                 config.setDefaults(rawConfig);
                 config.writeConfig();
@@ -256,8 +268,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
     public static final ArmorMaterial armorSignalumPowerSuit = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID,"signalumpowersuit",9999,50,50,50,50);
 
     public static final ToolMaterial toolMaterialBasic = new ToolMaterial().setDurability(9999).setMiningLevel(3).setEfficiency(25,50);
-    public static final ToolMaterial toolMaterialReinforced = new ToolMaterial().setDurability(9999).setMiningLevel(4).setEfficiency(45,80);
-    public static final ToolMaterial toolMaterialAwakened = new ToolMaterial().setDurability(9999).setMiningLevel(5).setEfficiency(60,100);
+    public static final ToolMaterial toolMaterialReinforced = new ToolMaterial().setDurability(9999).setMiningLevel(config.getInt("Other.dilithiumMiningLevel")).setEfficiency(45,80);
+    public static final ToolMaterial toolMaterialAwakened = new ToolMaterial().setDurability(9999).setMiningLevel(config.getInt("Other.awakenedMiningLevel")).setEfficiency(60,100);
 
     //TODO: WIP
     //public static final Item sunriseDawn = ItemHelper.createItem(MOD_ID,new ItemSunriseDawn("awakened.sunriseDawn",config.getInt("ItemIDs.sunriseDawn"), ToolMaterial.steel, Tier.AWAKENED),"sunrise_dawn").setMaxStackSize(1);
@@ -300,15 +312,15 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         ItemToolPickaxe.miningLevels.put(SIBlocks.reinforcedMachineCore,3);
         ItemToolPickaxe.miningLevels.put(SIBlocks.awakenedMachineCore,3);
         ItemToolPickaxe.miningLevels.put(SIBlocks.signalumOre,3);
-        ItemToolPickaxe.miningLevels.put(SIBlocks.dilithiumBlock,4);
-        ItemToolPickaxe.miningLevels.put(SIBlocks.dilithiumCrystalBlock,4);
+        ItemToolPickaxe.miningLevels.put(SIBlocks.dilithiumBlock,config.getInt("Other.dilithiumMiningLevel"));
+        ItemToolPickaxe.miningLevels.put(SIBlocks.dilithiumCrystalBlock,config.getInt("Other.dilithiumMiningLevel"));
         ItemToolPickaxe.miningLevels.put(SIBlocks.emptyCrystalBlock,3);
         ItemToolPickaxe.miningLevels.put(SIBlocks.rawCrystalBlock,3);
-        ItemToolPickaxe.miningLevels.put(SIBlocks.awakenedSignalumCrystalBlock,4);
-        ItemToolPickaxe.miningLevels.put(SIBlocks.rootedFabric,4);
-        ItemToolPickaxe.miningLevels.put(SIBlocks.dimensionalShardOre,4);
-        ItemToolPickaxe.miningLevels.put(SIBlocks.dilithiumOre,4);
-        ItemToolPickaxe.miningLevels.put(SIBlocks.realityFabric,5);
+        ItemToolPickaxe.miningLevels.put(SIBlocks.awakenedSignalumCrystalBlock,config.getInt("Other.dilithiumMiningLevel"));
+        ItemToolPickaxe.miningLevels.put(SIBlocks.rootedFabric,config.getInt("Other.dilithiumMiningLevel"));
+        ItemToolPickaxe.miningLevels.put(SIBlocks.dimensionalShardOre,config.getInt("Other.dilithiumMiningLevel"));
+        ItemToolPickaxe.miningLevels.put(SIBlocks.dilithiumOre,config.getInt("Other.dilithiumMiningLevel"));
+        ItemToolPickaxe.miningLevels.put(SIBlocks.realityFabric,config.getInt("Other.awakenedMiningLevel"));
         ItemToolPickaxe.miningLevels.put(SIBlocks.reinforcedGlass,3);
         ItemToolPickaxe.miningLevels.put(SIBlocks.reinforcedCasing,3);
         ItemToolPickaxe.miningLevels.put(SIBlocks.basicCasing,3);
@@ -362,6 +374,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         EntityHelper.createSpecialTileEntity(TileEntityWakingAlloySmelter.class,"Waking Alloy Smelter", RenderMultiblock::new);
         EntityHelper.createSpecialTileEntity(TileEntityWakingPlateFormer.class,"Waking Plate Former", RenderMultiblock::new);
         EntityHelper.createSpecialTileEntity(TileEntityWakingInfuser.class,"Waking Infuser", RenderMultiblock::new);
+        EntityHelper.createSpecialTileEntity(TileEntityStoneworks.class,"Stoneworks", RenderStoneworks::new);
 
         EntityHelper.createTileEntity(TileEntityInserter.class, "Inserter");
         EntityHelper.createTileEntity(TileEntityExtractor.class,"Extractor");
@@ -401,7 +414,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         addToNameGuiMap("Dilithium Booster", GuiBooster.class, TileEntityBooster.class);
         addToNameGuiMap("Dilithium Stabilizer", GuiStabilizer.class, TileEntityStabilizer.class);
         addToNameGuiMap("Crystal Chamber", GuiCrystalChamber.class, TileEntityCrystalChamber.class);
-        addToNameGuiMap("Pump", GuiPump.class, TileEntityCrystalChamber.class);
+        addToNameGuiMap("Pump", GuiPump.class, TileEntityPump.class);
+        addToNameGuiMap("Stoneworks", GuiStoneworks.class, TileEntityStoneworks.class);
         addToNameGuiMap("SI Assembler", GuiAssembler.class, TileEntityAssembler.class);
         addToNameGuiMap("Dimensional Anchor", GuiDimAnchor.class, TileEntityDimensionalAnchor.class);
         addToNameGuiMap("Automatic Miner", GuiAutoMiner.class, TileEntityAutoMiner.class);
@@ -744,6 +758,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
                 .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyOpenSuit()))
                 .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateAbility()))
                 .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeySwitchMode()))
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalindustries$getKeyShowIndex()))
                 .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateHeadTopAttachment()))
                 .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateHeadLensAttachment()))
                 .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateArmBackLAttachment()))
@@ -765,6 +780,9 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         CatalystFluids.CONTAINERS.register(SignalIndustries.key("prototypeFluidTank"),entry);
         entry = new FluidContainerRegistryEntry(SignalIndustries.MOD_ID, Item.itemsList[SIBlocks.basicFluidTank.id], Item.itemsList[SIBlocks.basicFluidTank.id], fluidsWithoutSE);
         CatalystFluids.CONTAINERS.register(SignalIndustries.key("basicFluidTank"),entry);
+
+        //here to load after every other mods recipes
+        SIRecipes.loadSpecial();
 
         //BlockDataExporter.export(SIBlocks.class);
     }

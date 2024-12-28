@@ -1,15 +1,16 @@
 package sunsetsatellite.signalindustries.containers;
 
 
-import net.minecraft.core.crafting.ICrafting;
+import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityAlloySmelter;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityAssembler;
+
+import java.util.List;
 
 public class ContainerAssembler extends ContainerFluid {
 
@@ -56,5 +57,14 @@ public class ContainerAssembler extends ContainerFluid {
         {
             addSlot(new Slot(iInventory, k, 8 + k * 18, 191));
         }
+    }
+
+    @Override
+    public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, EntityPlayer entityPlayer) {
+        int lastDeviceSlot = tile.getSizeInventory() - 1;
+        if (slot.id <= lastDeviceSlot) {
+            return getSlots(lastDeviceSlot+1, 36, true);
+        }
+        return getSlots(10, Math.max(lastDeviceSlot+1,1), false);
     }
 }
