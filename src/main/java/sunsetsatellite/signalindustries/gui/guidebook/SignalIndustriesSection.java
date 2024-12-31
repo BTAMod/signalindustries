@@ -80,9 +80,11 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
         subsections.add(multiblocks);
     }
 
+    boolean filtered = false;
     public void reloadSection(){
         pages.clear();
-        pages.add(new IntroPage(this,"guidebook.section.signalindustries.intro"));
+        if (!filtered) pages.add(new IntroPage(this,"guidebook.section.signalindustries.intro"));
+        filtered = false;
     }
 
     @Override
@@ -109,6 +111,8 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
 
     @Override
     public List<GuidebookPage> searchPages(SearchQuery query) {
+        filtered = true;
+        reloadSection();
         ArrayList<GuidebookPage> list = new ArrayList<>(pages);
         for (SearchableGuidebookSubsection subsection : subsections) {
             List<GuidebookPage> searchList = subsection.searchPages(query);

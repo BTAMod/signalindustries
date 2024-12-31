@@ -33,6 +33,7 @@ public class MultiblockSection extends SearchableGuidebookSubsection {
         List<Field> multiblockFields = Arrays.stream(SIMultiblocks.class.getDeclaredFields()).filter((F) -> SIMultiblock.class.isAssignableFrom(F.getType())).collect(Collectors.toList());
         try {
             for (Field field : multiblockFields) {
+                field.setAccessible(true);
                 pages.add(new MultiblockPage(parent, (Multiblock) field.get(null)));
                 pages.add(new MultiblockMaterialsPage(parent, (Multiblock) field.get(null)));
             }

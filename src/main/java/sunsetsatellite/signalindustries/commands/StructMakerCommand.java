@@ -25,10 +25,10 @@ import java.nio.file.Files;
 import java.util.*;
 
 public class StructMakerCommand extends Command {
-
 	public static Structure currentStructure;
 	public static BlockInstance origin;
 	public static Set<BlockInstance> structBlocks = new HashSet<>();
+	public static List<Class<?>> classes = new ArrayList<>(Arrays.asList(Block.class, SIBlocks.class));
 	public static boolean autoAddRemove = false;
 	public static boolean ignoreRotation = false;
 
@@ -77,12 +77,13 @@ public class StructMakerCommand extends Command {
 		World world = mc.theWorld;
 		if (mc.objectMouseOver.hitType == HitResult.HitType.TILE) {
 			Vec3i posVec = new Vec3i(mc.objectMouseOver.x, mc.objectMouseOver.y, mc.objectMouseOver.z);
-			origin = new BlockInstance(posVec.getBlock(world),posVec, ignoreRotation ? -1 : posVec.getBlockMetadata(world), posVec.getTileEntity(world));
+			internalRemoveBlock(null, world, posVec);
+            origin = new BlockInstance(posVec.getBlock(world),posVec, ignoreRotation ? -1 : posVec.getBlockMetadata(world), posVec.getTileEntity(world));
 			for (BlockInstance structBlock : structBlocks) {
 				structBlock.offset = distanceFromOrigin(structBlock.pos);
 			}
 			if(origin.meta != -1 && origin.meta != 5){
-				commandSender.sendMessage("Warning! The origin should be pointing east (meta 5)!");
+				commandSender.sendMessage("Warning! The origin should be facing east (meta 5)!");
 			}
 			commandSender.sendMessage("Origin set at " + posVec + " with meta "+ origin.meta + " as " + origin.block.getKey() + "!");
 		}
@@ -111,22 +112,20 @@ public class StructMakerCommand extends Command {
 		Minecraft mc = commandHandler.asClient().minecraft;
 		if (mc.objectMouseOver.hitType == HitResult.HitType.TILE) {
 			Vec3i posVec = new Vec3i(mc.objectMouseOver.x, mc.objectMouseOver.y, mc.objectMouseOver.z);
-			internalRemoveBlock(mc,posVec);
+			internalRemoveBlock(mc, mc.theWorld, posVec);
 		}
 		return true;
 	}
 
-	public static void internalRemoveBlock(Minecraft mc, Vec3i posVec){
+	public static void internalRemoveBlock(Minecraft mc, World world, Vec3i posVec){
 		if(currentStructure == null){
 			return;
 		}
-		World world = mc.theWorld;
 		BlockInstance block = new BlockInstance(posVec.getBlock(world), posVec, ignoreRotation ? -1 : posVec.getBlockMetadata(world), posVec.getTileEntity(world));
-		if(structBlocks.remove(block)){
+		if(structBlocks.remove(block) && mc != null){
 			mc.thePlayer.sendMessage("Removed block at " + posVec + " with meta "+ block.meta + " from structure (" + block.block.getKey() + ")!");
 		}
 	}
-
 
 	public static void internalAddBlock(Minecraft mc, Vec3i posVec){
 		if(currentStructure == null){
@@ -138,6 +137,32 @@ public class StructMakerCommand extends Command {
 		structBlocks.add(block);
 		mc.thePlayer.sendMessage("Added block at " + posVec + " with meta "+ block.meta + " to structure as " + block.block.getKey() + "!");
 	}
+
+    private static String getIdFromClass(Block b, Class<?> clazz) {
+		List<Field> fields = new ArrayList<>(Arrays.asList(clazz.getDeclaredFields()));
+		fields.removeIf((F) -> F.getType() != Block.class);
+		for (Field field : fields) {
+			Block fieldBlock;
+			try {
+			    field.setAccessible(true);
+				fieldBlock = (Block) field.get(null);
+			} catch (IllegalAccessException e) {
+				throw new RuntimeException(e);
+			}
+			if (b == fieldBlock){
+			    return clazz.getName() + ":" + field.getName();
+			}
+		}
+		return "";
+    }
+
+    private static String getId(Block b) {
+        for (Class<?> clazz : classes) {
+            String id = getIdFromClass(b, clazz);
+            if (!id.equals("")) return id;
+        }
+        return "";
+    }
 
 	private static Boolean toggleAutoAddRemove(CommandHandler commandHandler, CommandSender commandSender, String... args){
 		if(autoAddRemove){
@@ -181,25 +206,17 @@ public class StructMakerCommand extends Command {
 		return true;
 	}
 
-	private static void serializeOrigin(){
+	private static void serializeOrigin(CommandSender commandSender) {
 		CompoundTag blockNbt = new CompoundTag();
 		CompoundTag posNbt = new CompoundTag();
 		new Vec3i().writeToNBT(posNbt);
 		blockNbt.putCompound("pos", posNbt);
 
-		List<Field> fields = new ArrayList<>(Arrays.asList(SIBlocks.class.getDeclaredFields()));
-		fields.removeIf((F)->F.getType() != Block.class);
-		for (Field field : fields) {
-			Block fieldBlock;
-			try {
-				fieldBlock = (Block) field.get(null);
-			} catch (IllegalAccessException e) {
-				throw new RuntimeException(e);
-			}
-			if(origin.block == fieldBlock){
-				blockNbt.putString("id", SIBlocks.class.getName()+":"+field.getName());
-			}
-		}
+        String id = getId(origin.block);
+        blockNbt.putString("id", id);
+        if (id.equals("")) {
+            commandSender.sendMessage("Warning! The id is empty for this block, did you forget to add it's storage class with '/s addblockclass <class>'?");
+        }
 
 		blockNbt.putBoolean("tile",origin.tile != null);
 		blockNbt.putInt("meta",origin.meta);
@@ -219,37 +236,28 @@ public class StructMakerCommand extends Command {
 		currentStructure.data.putCompound("Origin",new CompoundTag());
 		currentStructure.data.putCompound("Blocks",new CompoundTag());
 		currentStructure.data.putCompound("TileEntities",new CompoundTag());
-		serializeOrigin();
+		serializeOrigin(commandSender);
 		for (BlockInstance block : structBlocks) {
 			CompoundTag blockNbt = new CompoundTag();
 			CompoundTag posNbt = new CompoundTag();
 			block.offset.writeToNBT(posNbt);
 			blockNbt.putCompound("pos", posNbt);
 
-			List<Field> fields = new ArrayList<>(Arrays.asList(SIBlocks.class.getDeclaredFields()));
-			fields.removeIf((F)->F.getType() != Block.class);
-			for (Field field : fields) {
-				Block fieldBlock;
-				try {
-					fieldBlock = (Block) field.get(null);
-				} catch (IllegalAccessException e) {
-					throw new RuntimeException(e);
-				}
-				if(block.block == fieldBlock){
-					blockNbt.putString("id", SIBlocks.class.getName()+":"+field.getName());
-				}
-			}
+            String id = getId(block.block);
+            blockNbt.putString("id", id);
+            if (id.equals("")) {
+                commandSender.sendMessage("Warning! The id is empty for this block, did you forget to add it's storage class with '/s addblockclass <class>'?");
+            }
 
-			blockNbt.putBoolean("tile",block.tile != null);
-			blockNbt.putInt("meta",block.meta);
+			blockNbt.putBoolean("tile", block.tile != null);
+			blockNbt.putInt("meta", block.meta);
 			int i = currentStructure.data.getCompound("Blocks").getValues().size();
-			currentStructure.data.getCompound("Blocks").putCompound(String.valueOf(i),blockNbt);
+			currentStructure.data.getCompound("Blocks").putCompound(String.valueOf(i), blockNbt);
 			if(block.tile != null){
-				currentStructure.data.getCompound("TileEntities").putCompound(String.valueOf(i),blockNbt);
+				currentStructure.data.getCompound("TileEntities").putCompound(String.valueOf(i), blockNbt);
 			}
 		}
-		String s = String.format("%s\\%s.nbt", Minecraft.getMinecraft(Minecraft.class).getMinecraftDir(), args[0]);
-		File file = new File(s);
+		File file = new File(Minecraft.getMinecraft(Minecraft.class).getMinecraftDir(), args[0] + ".nbt");
 		try {
 			try (DataOutputStream output = new DataOutputStream(Files.newOutputStream(file.toPath()))) {
 				NbtIo.writeCompressed(currentStructure.data, output);
@@ -259,6 +267,28 @@ public class StructMakerCommand extends Command {
 		}
 		return true;
 	}
+
+    private static Boolean addBlockClass(CommandHandler commandHandler, CommandSender commandSender, String... args) {
+        if (Objects.equals(args[0], "")) {
+            commandSender.sendMessage("Please specify a class! (Such as jiatan.myreallycoolmod.MyBlocks)");
+            return true;
+        } else if(Objects.equals(args[0], "list")) {
+            commandSender.sendMessage("Added block classes: ");
+            for (Class<?> clazz : classes) {
+                commandSender.sendMessage("- " + clazz.getName());
+            }
+            return true;
+        }
+
+        try {
+            Class<?> clazz = Class.forName(args[0]);
+            classes.add(clazz);
+        } catch (Exception e) {
+            e.printStackTrace();
+            commandSender.sendMessage("Failed to add class");
+        }
+        return true;
+    }
 
 	private static Vec3i distanceFromOrigin(Vec3i vec){
 		if(origin == null) return new Vec3i();
@@ -274,7 +304,8 @@ public class StructMakerCommand extends Command {
 		AUTO("auto",StructMakerCommand::toggleAutoAddRemove),
 		IGNORE_ROT("ignore-rot",StructMakerCommand::toggleIgnoreRotation),
 		LIST("list",StructMakerCommand::listContents),
-		SAVE("save",StructMakerCommand::saveStructure);
+		SAVE("save",StructMakerCommand::saveStructure),
+		ADDCLASS("addblockclass",StructMakerCommand::addBlockClass);
 
 		Cmd(String name, VarargsFunction3<CommandHandler,CommandSender,String,Boolean> method) {
 			this.name = name;
@@ -293,15 +324,16 @@ public class StructMakerCommand extends Command {
 	@Override
 	public void sendCommandSyntax(CommandHandler commandHandler, CommandSender commandSender) {
 		if (commandSender instanceof PlayerCommandSender) {
-			commandSender.sendMessage("/s create <name>");
-			commandSender.sendMessage("/s add");
-			commandSender.sendMessage("/s remove");
-			commandSender.sendMessage("/s clear");
-			commandSender.sendMessage("/s origin");
-			commandSender.sendMessage("/s auto");
-			commandSender.sendMessage("/s ignore-rot");
-			commandSender.sendMessage("/s list");
-			commandSender.sendMessage("/s save <name>");
+			commandSender.sendMessage("/s create <name> - Starts building the structure");
+			commandSender.sendMessage("/s add           - Adds the block you are looking at to the structure");
+			commandSender.sendMessage("/s remove        - Removes the block you are looking at to the structure");
+			commandSender.sendMessage("/s clear         - Clears all structure data");
+			commandSender.sendMessage("/s origin        - Adds the origin of the structure (required)");
+			commandSender.sendMessage("/s auto          - Allows for adding/removing blocks as you place/break the blocks");
+			commandSender.sendMessage("/s ignore-rot    - Toggles allowing any meta for blocks");
+			commandSender.sendMessage("/s list          - List the contents of the structure");
+			commandSender.sendMessage("/s save <name>   - Saves the structure to .minecraft/<name>.nbt");
+			commandSender.sendMessage("/s addblockclass <class> - Adds a class that blocks can come from (uses SI and MC by default)");
 		}
 	}
 }
