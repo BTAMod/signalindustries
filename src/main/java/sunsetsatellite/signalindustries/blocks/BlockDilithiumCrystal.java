@@ -13,8 +13,6 @@ import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIDimensions;
 import sunsetsatellite.signalindustries.SIItems;
 
-import java.util.Random;
-
 public class BlockDilithiumCrystal extends BlockTransparent {
 
     public BlockDilithiumCrystal(String key, int id, Material material, boolean renderInside) {
@@ -33,13 +31,9 @@ public class BlockDilithiumCrystal extends BlockTransparent {
             case SILK_TOUCH: {
                 return new ItemStack[]{new ItemStack(this)};
             }
-            case PROPER_TOOL:
-                Random random = new Random();
-                if (random.nextFloat() < 0.5f) {
-                    return new ItemStack[]{new ItemStack(SIItems.dilithiumShard, 1)};
-                } else {
-                    return null;
-                }
+            case PROPER_TOOL: {
+                return new ItemStack[]{new ItemStack(SIItems.dilithiumShard, 1)};
+            }
         }
         return null;
     }
