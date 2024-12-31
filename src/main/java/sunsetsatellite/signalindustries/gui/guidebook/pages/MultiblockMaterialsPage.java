@@ -57,7 +57,20 @@ public class MultiblockMaterialsPage extends GuidebookPage {
                 .map((B) -> new ItemStack(B.block, 1, B.meta == -1 ? 0 : B.meta))
                 .collect(Collectors.toList());
         List<ItemStack> blocks = SignalIndustries.condenseList(blocksUncondensed);
-        blocks.add(new ItemStack(multiblock.getOrigin().block,1, multiblock.getOrigin().meta == -1 ? 0 : multiblock.getOrigin().meta));
+        ItemStack origin = new ItemStack(multiblock.getOrigin().block,1, multiblock.getOrigin().meta == -1 ? 0 : multiblock.getOrigin().meta);
+
+        // Annoying special case for when the origin isn't that special
+        boolean matched = false;
+        for (ItemStack is : blocks) {
+            if (origin.isItemEqual(is)) {
+                is.stackSize += 1;
+                matched = true;
+                break;
+            }
+        }
+        if (!matched) {
+            blocks.add(origin);
+        }
 
         int i = 0;
         int maxSlotsInRow = 7;
