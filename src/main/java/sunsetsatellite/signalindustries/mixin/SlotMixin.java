@@ -20,7 +20,7 @@ public class SlotMixin {
         //TODO: check for item group instead
         if(item.id == SIItems.romChipProjectile.id ||
                 item.id == SIItems.romChipBoost.id ||
-                item.id == SIItems.romChipScan.id ||
+                //item.id == SIItems.romChipScan.id ||
                 item.id == SIItems.romChipShield.id
         ){
             Minecraft.getMinecraft(Minecraft.class).thePlayer.triggerAchievement(SIAchievements.ROM_CHIP);

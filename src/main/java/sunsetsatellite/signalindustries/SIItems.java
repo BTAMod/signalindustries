@@ -74,7 +74,7 @@ public class SIItems extends DataInitializer {
     public static Item romChipProjectile;
     public static Item romChipBoost;
     public static Item romChipShield;
-    public static Item romChipScan;
+    //public static Item romChipScan;
     public static Item clearKey;
     public static Item saturatedKey;
     public static Item signalumSaber;
@@ -265,9 +265,9 @@ public class SIItems extends DataInitializer {
         romChipShield = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/chip3")
                 .build(new ItemRomChip("romChip.shield", config.getInt("ItemIDs.romChipShield")));
-        romChipScan = new ItemBuilder(MOD_ID)
+        /*romChipScan = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/chip4")
-                .build(new ItemRomChip("romChip.scan", config.getInt("ItemIDs.romChipScan")));
+                .build(new ItemRomChip("romChip.scan", config.getInt("ItemIDs.romChipScan")));*/
         clearKey = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/clear_key")
                 .build(new Item("clearKey", config.getInt("ItemIDs.clearKey")));

@@ -27,7 +27,7 @@ public class WorldGenLabyrinthMixin {
         this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipBoost.getDefaultStack()), 30);
         this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipProjectile.getDefaultStack()), 30);
         this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipShield.getDefaultStack()), 30);
-        this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipScan.getDefaultStack()), 30);
+        //this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipScan.getDefaultStack()), 30);
     }
 
 }
