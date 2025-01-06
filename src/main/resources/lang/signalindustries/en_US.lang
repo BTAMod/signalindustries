@@ -606,7 +606,7 @@ tile.signalindustries.awakened.chunkLoader.name=Awakened Causality Sustainer Con
 tile.signalindustries.awakened.chunkLoader.desc=Keeps several chunks loaded around it.
 
 tile.signalindustries.awakened.warpGate.name=Awakened Quantum Warp Gate Controller
-tile.signalindustries.awakened.warpGate.desc=Permanently links 2 locations together even across dimensions, allows same-dimension teleportation of fluids and items.
+tile.signalindustries.awakened.warpGate.desc=Permanently links 2 locations together even across dimensions.
 
 tile.signalindustries.reinforced.parallelProcessor.name=Reinforced 2x Parallel Processor
 tile.signalindustries.reinforced.parallelProcessor.desc=Allows a machine to carry out 2 recipes at once!

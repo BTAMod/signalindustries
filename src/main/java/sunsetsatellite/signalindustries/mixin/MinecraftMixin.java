@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.EntityPlayerSP;
 import net.minecraft.client.gui.GuiIngame;
@@ -8,6 +9,7 @@ import net.minecraft.client.option.GameSettings;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.core.HitResult;
 import org.lwjgl.input.Keyboard;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -17,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
+import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumDrill;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
@@ -43,6 +46,7 @@ public class MinecraftMixin {
 
     @Shadow public GuiIngame ingameGUI;
 
+    @Shadow protected boolean toggleFlyPressed;
     @Unique
     private static int debounce = 0;
 
@@ -142,5 +146,24 @@ public class MinecraftMixin {
 
         /*SignalIndustries.LOGGER.info(Keyboard.getKeyName(key));
         SignalIndustries.LOGGER.info(String.valueOf(key));*/
+    }
+
+    @ModifyExpressionValue(method = "runTick", at = @At(value = "FIELD", opcode = Opcodes.GETFIELD, target = "Lnet/minecraft/client/entity/player/EntityPlayerSP;noPhysics:Z"))
+    public boolean modifyWingsFlightSpeed(boolean original){
+        SignalumPowerSuit ps = ((IPlayerPowerSuit)thePlayer).getPowerSuit();
+        if(ps != null && ps.active && ps.hasAttachment((ItemAttachment) SIItems.crystalWings)) {
+            return original || ps.getAttachment((ItemAttachment) SIItems.crystalWings).getData().getBoolean("active");
+        }
+        return original;
+    }
+
+    @ModifyExpressionValue(method = "runTick", at = @At(value = "FIELD", opcode = Opcodes.GETFIELD, target = "Lnet/minecraft/client/Minecraft;toggleFlyPressed:Z"))
+    public boolean modifyWingsFlightSpeed2(boolean original){
+        boolean control = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL);
+        SignalumPowerSuit ps = ((IPlayerPowerSuit)thePlayer).getPowerSuit();
+        if(ps != null && ps.active && ps.hasAttachment((ItemAttachment) SIItems.crystalWings)) {
+            return original || (ps.getAttachment((ItemAttachment) SIItems.crystalWings).getData().getBoolean("active") && control);
+        }
+        return original;
     }
 }

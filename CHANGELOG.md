@@ -1,3 +1,9 @@
-- Fixed a bug with the induction smelter where it consumed more items in processing than it was supposed to.
-- Added missing recipes for reinforced-tier machines.
-- Fixed a bug where storage containers reset when they had more than 256 items stored in them.
+- ROM chips can now spawn in dungeons and are more common in general.
+- Movement boosters got a speed increase.
+- Fix movement booster energy usage bug.
+- Reduced dynamo energy cost from 40 to 20.
+- Fixed reinforced chamber not being capable of combining larger crystals.
+- Removed energy cost from night vision attachment (you still need to have some amount of it though).
+- Dilithium crystal blocks no longer have a random chance to drop nothing.
+- Several fixes by bigjango13, thanks!
+- Other fixes.
