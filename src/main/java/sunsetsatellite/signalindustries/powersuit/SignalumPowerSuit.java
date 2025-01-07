@@ -560,6 +560,20 @@ public class SignalumPowerSuit {
         return false;
     }
 
+    public boolean hasAttachmentClass(Class<? extends ItemAttachment> attachment){
+        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet,chestplate,leggings,boots};
+        for (InventoryPowerSuit piece : pieces) {
+            for (ItemStack content : piece.contents) {
+                if(content != null){
+                    if(attachment.isInstance(content.getItem())){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     //TODO: replace with enum
     public boolean hasAttachment(ItemAttachment attachment, List<String> locations){
         for (String location : locations) {
@@ -578,6 +592,20 @@ public class SignalumPowerSuit {
             for (ItemStack content : piece.contents) {
                 if(content != null){
                     if(content.getItem() == attachment){
+                        return content;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public ItemStack getAttachmentClass(Class<? extends ItemAttachment> attachment){
+        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet,chestplate,leggings,boots};
+        for (InventoryPowerSuit piece : pieces) {
+            for (ItemStack content : piece.contents) {
+                if(content != null){
+                    if(attachment.isInstance(content.getItem())){
                         return content;
                     }
                 }

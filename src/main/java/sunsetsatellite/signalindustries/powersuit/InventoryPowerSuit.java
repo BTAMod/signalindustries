@@ -23,7 +23,7 @@ public class InventoryPowerSuit extends ItemInventoryFluid {
                     fluidContents = new FluidStack[1];
                     fluidCapacity = new int[1];
                     fluidCapacity[0] = 32000;
-                    contents = new ItemStack[8];
+                    contents = new ItemStack[9];
                     break;
                 case 0:
                 case 2:

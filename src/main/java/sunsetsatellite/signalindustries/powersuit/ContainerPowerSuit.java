@@ -38,6 +38,7 @@ public class ContainerPowerSuit extends ContainerItemFluid {
                 addSlot(new SlotAttachment(inv,5,xSize-27, ySize/3-20, AttachmentPoint.ARM_SIDE, Tier.REINFORCED));
                 addSlot(new SlotAttachment(inv,6,xSize-20-27, ySize/3-20, AttachmentPoint.ARM_BACK, Tier.REINFORCED));
                 addSlot(new SlotAttachment(inv,7,xSize-40-27, ySize/3-20, AttachmentPoint.ARM_FRONT, Tier.REINFORCED));
+                addSlot(new SlotAttachment(inv,8,xSize-20-27, ySize/3-44, AttachmentPoint.COLORIZER, Tier.REINFORCED));
                 break;
             case 2:
                 addSlot(new SlotAttachment(inv,0,xSize/3-8, ySize/3-20,AttachmentPoint.LEG_SIDE, Tier.REINFORCED));

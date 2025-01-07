@@ -10,5 +10,6 @@ public enum AttachmentPoint {
     ARM_BACK,
     LEG_SIDE,
     BOOT_BACK,
+    COLORIZER,
     ANY
 }

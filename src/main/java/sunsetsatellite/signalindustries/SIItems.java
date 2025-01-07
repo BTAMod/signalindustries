@@ -138,6 +138,12 @@ public class SIItems extends DataInitializer {
 
     public static Item raziel;
 
+    public static ItemSuitColorizer suitColorizerWhite;
+    public static ItemSuitColorizer suitColorizerBlue;
+    public static ItemSuitColorizer suitColorizerPurple;
+    public static ItemSuitColorizer suitColorizerTransparent;
+    public static ItemSuitColorizer suitColorizerInverted;
+
     public void init() {
         if (initialized) return;
         LOGGER.info("Initializing items...");
@@ -381,6 +387,46 @@ public class SIItems extends DataInitializer {
                 .build(new ItemBlueprint("blueprint", config.getInt("ItemIDs.blueprint")));
 
         ironPlateHammer.setContainerItem(ironPlateHammer);
+
+        suitColorizerWhite = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/colorizer_white")
+                .build(new ItemSuitColorizer(
+                        "reinforced.attachment.colorizer.white",
+                        config.getInt("ItemIDs.suitColorizerWhite"),
+                        listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
+                        "assets/signalindustries/armor/signalumpowersuit_white"));
+
+        suitColorizerBlue = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/colorizer_blue")
+                .build(new ItemSuitColorizer(
+                        "reinforced.attachment.colorizer.blue",
+                        config.getInt("ItemIDs.suitColorizerBlue"),
+                        listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
+                        "assets/signalindustries/armor/signalumpowersuit_blue"));
+
+        suitColorizerPurple = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/colorizer_purple")
+                .build(new ItemSuitColorizer(
+                        "reinforced.attachment.colorizer.purple",
+                        config.getInt("ItemIDs.suitColorizerPurple"),
+                        listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
+                        "assets/signalindustries/armor/signalumpowersuit_purple"));
+
+        suitColorizerTransparent = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/colorizer_transparent")
+                .build(new ItemSuitColorizer(
+                        "reinforced.attachment.colorizer.transparent",
+                        config.getInt("ItemIDs.suitColorizerTransparent"),
+                        listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
+                        "assets/signalindustries/armor/signalumpowersuit_transparent"));
+
+        suitColorizerInverted = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/colorizer_inverted")
+                .build(new ItemSuitColorizer(
+                        "reinforced.attachment.colorizer.inverted",
+                        config.getInt("ItemIDs.suitColorizerInverted"),
+                        listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
+                        "assets/signalindustries/armor/signalumpowersuit_inverted"));
 
         setInitialized(true);
     }

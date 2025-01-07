@@ -18,10 +18,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemArmorTiered;
 import sunsetsatellite.signalindustries.items.ItemSignalumPrototypeHarness;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
+import sunsetsatellite.signalindustries.items.attachments.ItemSuitColorizer;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
 
@@ -70,7 +72,22 @@ public class RenderPlayerMixin extends LivingRenderer<EntityPlayer> {
                 this.setRenderPassModel(modelbiped);
                 cir.setReturnValue(true);
             } else {
-                this.loadTexture("/assets/signalindustries/armor/" + itemarmor.material.identifier.value + "_" + (i != 2 ? 1 : 2) + ".png");
+                String path = "/assets/signalindustries/armor/" + itemarmor.material.identifier.value + "_" + (i != 2 ? 1 : 2) + ".png";
+                SignalumPowerSuit powerSuit = ((IPlayerPowerSuit)entityplayer).getPowerSuit();
+                if(powerSuit != null && powerSuit.hasAttachment((ItemAttachment) SIItems.awakenedAbilityModule)){
+                    ItemStack stack = powerSuit.getAttachment((ItemAttachment) SIItems.awakenedAbilityModule);
+                    if(stack != null){
+                        path = "assets/signalindustries/armor/signalumpowersuit_awakened" + "_" + (i != 2 ? 1 : 2) + ".png";
+                    }
+                }
+                if(powerSuit != null && powerSuit.hasAttachmentClass(ItemSuitColorizer.class)){
+                    ItemStack stack = powerSuit.getAttachmentClass(ItemSuitColorizer.class);
+                    if(stack != null){
+                        ItemSuitColorizer suitColorizer = (ItemSuitColorizer) stack.getItem();
+                        path = suitColorizer.path + "_" + (i != 2 ? 1 : 2) + ".png";
+                    }
+                }
+                this.loadTexture(path);
                 ModelBiped modelbiped = i != 2 ? this.modelArmorChestplate : this.modelArmor;
                 modelbiped.bipedHead.showModel = i == 0;
                 modelbiped.bipedHeadOverlay.showModel = i == 0;

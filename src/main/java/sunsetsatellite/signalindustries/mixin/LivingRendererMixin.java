@@ -4,6 +4,7 @@ import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.LivingRenderer;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,6 +16,7 @@ import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemSignalumPrototypeHarness;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemCrownAttachment;
+import sunsetsatellite.signalindustries.items.attachments.ItemSuitColorizer;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
 @Mixin(value = LivingRenderer.class,remap = false)
@@ -48,6 +50,16 @@ public abstract class LivingRendererMixin<T extends EntityLiving> extends Entity
             EntityPlayer player = (EntityPlayer)entity;
             if (player.inventory.armorItemInSlot(2) != null && player.inventory.armorItemInSlot(2).getItem() instanceof ItemSignalumPrototypeHarness) {
                 if (player.inventory.armorItemInSlot(2).getData().getBoolean("active_shield")) {
+                    GL11.glEnable(GL11.GL_BLEND);
+                    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                    GL11.glDisable(GL11.GL_ALPHA_TEST);
+                    return;
+                }
+            }
+            SignalumPowerSuit powerSuit = ((IPlayerPowerSuit)player).getPowerSuit();
+            if(powerSuit != null && powerSuit.hasAttachmentClass(ItemSuitColorizer.class)) {
+                ItemStack stack = powerSuit.getAttachmentClass(ItemSuitColorizer.class);
+                if (stack != null) {
                     GL11.glEnable(GL11.GL_BLEND);
                     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
                     GL11.glDisable(GL11.GL_ALPHA_TEST);
