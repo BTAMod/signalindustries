@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.items.containers;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
@@ -142,6 +143,9 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
     @Override
     public float getStrVsBlock(ItemStack itemstack, Block block) {
         float superValue = super.getStrVsBlock(itemstack,block);
+        if(block.hasTag(BlockTags.MINEABLE_BY_SHOVEL)){
+            superValue = material.getEfficiency(false);
+        }
         if(superValue == 1.0f) return 1.0f;
         if(itemstack.getData().getInteger("energy") >= blockDestroyCost){
             return this.material.getEfficiency(false);
@@ -258,6 +262,15 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
     @Override
     public FluidStack drain(ItemStack stack, int amount) {
         return null;
+    }
+
+    @Override
+    public boolean canHarvestBlock(EntityLiving entityLiving, ItemStack itemStack, Block block)
+    {
+        Integer miningLevel = miningLevels.get(block);
+        if(miningLevel != null) return material.getMiningLevel() >= miningLevel;
+
+        return block.hasTag(BlockTags.MINEABLE_BY_PICKAXE) || block.hasTag(BlockTags.MINEABLE_BY_SHOVEL);
     }
 
 }
