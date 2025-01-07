@@ -987,6 +987,14 @@ public class VintageQuestingSIPlugin {
                 listOf(reinforcedEnergyCore),reinforcedDrill,
                 0,
                 -128-64);
+        QuestTemplate pulsarAttachment = simpleQuest("pulsarAttachment", SIItems.pulsarAttachment,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(SIItems.pulsarAttachment,1)
+                        )),
+                listOf(pulsar),pulsar,
+                64,
+                0);
         QuestTemplate reactor = simpleQuest("reactor", signalumReactorCore,
                 zip(listOf("retrieval"),
                         listOf(
@@ -1006,7 +1014,7 @@ public class VintageQuestingSIPlugin {
                 builder,blueprint,dimensionalOre,warpOrb,reinforcedEnergyConnector,reinforcedCasing,
                 reinforcedFluidOutput,reinforcedFluidInput,reinforcedItemOutput,reinforcedItemInput,
                 reinforcedGrating,reinforcedCasing2,booster,stabilizer,reinforcedWrathBeacon,eclipse,
-                dilithiumChip,dimensionalChip,anchor,pulsar,eternity,saturatedKey,reactor
+                dilithiumChip,dimensionalChip,anchor,pulsar,pulsarAttachment,eternity,saturatedKey,reactor
         );
     }
 
