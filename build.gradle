@@ -164,6 +164,7 @@ dependencies {
 
 	implementation project(path: ":btwaila",configuration: "namedElements")
 	implementation project(path: ":vintage-questing",configuration: "namedElements")
+	implementation project(path: ":tmb",configuration: "namedElements")
 	//implementation project(path: ":guilib",configuration: "namedElements")
 	//implementation project(path: ":dragonfly",configuration: "namedElements")
 

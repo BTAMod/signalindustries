@@ -43,7 +43,7 @@ public class AlloySmelterRecipes implements MachineRecipesBase<RecipeGroup<Recip
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.emptySignalumCrystalDust))
                         },
                         new ItemStack(SIItems.crystalAlloyIngot,2),
-                        new RecipeProperties(200,40,Tier.BASIC,true)
+                        new RecipeProperties(200,40,Tier.BASIC,false)
                 )
         );
         group.register(
