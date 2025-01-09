@@ -39,6 +39,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
     @Unique
     public SignalumPowerSuit powerSuit = null;
 
+    @Unique
+    public CompoundTag powerSuitData = null;
+
     @Shadow public abstract void sendTranslatedChatMessage(String message);
 
     @Shadow public InventoryPlayer inventory;
@@ -74,6 +77,11 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
     @Override
     public SignalumPowerSuit getPowerSuit() {
         return powerSuit;
+    }
+
+    @Override
+    public CompoundTag getPowerSuitData() {
+        return powerSuitData;
     }
 
     @Inject(
@@ -168,9 +176,18 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
             method = "addAdditionalSaveData",
             at = @At("HEAD")
     )
-    public void saveSuitData(CompoundTag nbttagcompound, CallbackInfo ci) {
+    public void saveSuitData(CompoundTag tag, CallbackInfo ci) {
         if(powerSuit != null){
             powerSuit.saveToStacks();
+            powerSuit.saveData(tag);
+        }
+    }
+
+    @Inject(method = "readAdditionalSaveData", at = @At("HEAD"))
+    public void readAdditionalSaveData(CompoundTag tag, CallbackInfo ci)
+    {
+        if (tag.containsKey("PowerSuit")) {
+            powerSuitData = tag.getCompound("PowerSuit");
         }
     }
 

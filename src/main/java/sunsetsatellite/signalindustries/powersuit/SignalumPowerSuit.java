@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.powersuit;
 
+import com.mojang.nbt.CompoundTag;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.option.KeyBinding;
@@ -26,6 +27,7 @@ import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseEffectAbilit
 import sunsetsatellite.signalindustries.interfaces.IApplicationItem;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
+import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.inventories.item.InventoryAbilityModule;
 import sunsetsatellite.signalindustries.items.applications.base.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.applications.base.ItemWithUtility;
@@ -82,6 +84,18 @@ public class SignalumPowerSuit {
     public float temperature;
 
     private boolean cooling;
+
+    public void saveData(CompoundTag tag) {
+        CompoundTag suitTag = new CompoundTag();
+        suitTag.putFloat("Temperature", temperature);
+        suitTag.putBoolean("Active", active);
+        tag.putCompound("PowerSuit",suitTag);
+    }
+
+    public void loadData(CompoundTag suitTag) {
+        active = suitTag.getBoolean("Active");
+        temperature = suitTag.getFloat("Temperature");
+    }
 
     private static class AttachmentLocation {
         final int slot;
@@ -140,6 +154,9 @@ public class SignalumPowerSuit {
         attachmentLocations.put("bootBackL", new AttachmentLocation(0, boots, AttachmentPoint.BOOT_BACK));
         attachmentLocations.put("bootBackR", new AttachmentLocation(1, boots, AttachmentPoint.BOOT_BACK));
         temperature = 20.0f;
+        if(((IPlayerPowerSuit) player).getPowerSuitData() != null){
+            loadData(((IPlayerPowerSuit) player).getPowerSuitData());
+        }
     }
 
     public void openCoreUi() {
