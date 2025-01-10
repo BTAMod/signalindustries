@@ -8,7 +8,7 @@ import org.useless.dragonfly.model.blockstates.processed.MetaStateInterpreter;
 import sunsetsatellite.catalyst.CatalystEnergy;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
-import sunsetsatellite.catalyst.energy.api.IEnergy;
+import sunsetsatellite.catalyst.energy.simple.api.IEnergyContainer;
 import sunsetsatellite.signalindustries.blocks.BlockCatalystConduit;
 
 import java.util.HashMap;
@@ -27,7 +27,7 @@ public class CatalystConduitStateInterpreter extends MetaStateInterpreter {
                 } else if (!(neighbouringBlock instanceof BlockCatalystConduit)) {
                     if (neighbouringBlock instanceof BlockTileEntity) {
                         TileEntity neighbouringTile = worldSource.getBlockTileEntity(offset.x, offset.y, offset.z);
-                        if (neighbouringTile instanceof IEnergy) {
+                        if (neighbouringTile instanceof IEnergyContainer) {
                             show = true;
                         } else if (neighbouringBlock.hasTag(CatalystEnergy.ENERGY_CONDUITS_CONNECT)) {
                             show = true;

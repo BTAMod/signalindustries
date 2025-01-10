@@ -1,30 +1,24 @@
 package sunsetsatellite.signalindustries.inventories.machines;
 
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.catalyst.core.util.Connection;
-import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.energy.api.IEnergyItem;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredEnergyConductor;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredEnergyGenerator;
 
-public class TileEntitySignalumDynamo extends TileEntityTieredEnergyConductor {
+public class TileEntitySignalumDynamo extends TileEntityTieredEnergyGenerator {
 
     public int cost;
 
     public TileEntitySignalumDynamo(){
-        cost = 20;
+        cost = 5;
         itemContents = new ItemStack[2];
         fluidContents = new FluidStack[1];
         fluidCapacity[0] = 4000;
         acceptedFluids.get(0).add(SIBlocks.energyFlowing);
-        setCapacity(10000);
-        setEnergy(0);
-        setTransfer(250);
-        for (Direction dir : Direction.values()) {
-            setConnection(dir, Connection.OUTPUT);
-        }
+        capacity = 10000;
+        maxReceive = 250;
+        maxProvide = 250;
     }
 
     @Override
@@ -32,14 +26,13 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyConductor {
         super.tick();
         worldObj.markBlocksDirty(x,y,z,x,y,z);
         extractFluids();
-        boolean update = false;
         if(fuelBurnTicks > 0){
             fuelBurnTicks--;
         }
 
         if(!worldObj.isClientSide){
             if(isBurning() && canProcess()){
-                modifyEnergy(20);
+                generateEnergy(25);
             } else if(canProcess()){
                 fuel();
                 if(fuelBurnTicks > 0){
@@ -48,7 +41,7 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyConductor {
             }
         }
 
-        if(getStackInSlot(1) != null && getStackInSlot(1).getItem() instanceof IEnergyItem){
+        /*if(getStackInSlot(1) != null && getStackInSlot(1).getItem() instanceof IEnergyItem){
             ItemStack stack = getStackInSlot(1);
             provide(stack,getMaxProvide(),false);
             onInventoryChanged();
@@ -57,7 +50,7 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyConductor {
             ItemStack stack = getStackInSlot(0);
             receive(stack,getMaxReceive(),false);
             onInventoryChanged();
-        }
+        }*/
 
     }
 

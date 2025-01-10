@@ -3,9 +3,8 @@ package sunsetsatellite.signalindustries.inventories;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.Tag;
 import sunsetsatellite.catalyst.Catalyst;
-import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.energy.impl.TileEntityEnergyConductor;
+import sunsetsatellite.catalyst.energy.simple.impl.TileEntityEnergyConductor;
 import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
 import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
@@ -19,17 +18,13 @@ public class TileEntityCatalystConduit extends TileEntityEnergyConductor impleme
     public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(),new Multipart[Direction.values().length]);
 
     public TileEntityCatalystConduit() {
-        for (Direction dir : Direction.values()){
-            setConnection(dir, Connection.BOTH);
-        }
     }
 
     @Override
     public void tick() {
         if(getBlockType() != null){
             Tier tier = ((ITiered) getBlockType()).getTier();
-            setCapacity((int) Math.pow(2,tier.ordinal()) * 1024);
-            setTransfer(128 * (tier.ordinal()+1));
+            throughput = 128 * (tier.ordinal()+1);
         }
         super.tick();
     }

@@ -9,6 +9,7 @@ import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.sound.BlockSounds;
 import org.useless.dragonfly.model.block.DFBlockModelBuilder;
 import sunsetsatellite.catalyst.Catalyst;
+import sunsetsatellite.catalyst.CatalystEnergy;
 import sunsetsatellite.catalyst.CatalystMultipart;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.catalyst.multipart.block.model.BlockModelMultipart;
@@ -1446,6 +1447,7 @@ public class SIBlocks extends DataInitializer {
                                 .setBlockState("dynamo.json")
                                 .setMetaStateInterpreter(new RotatableStateInterpreter())
                                 .build(block))
+                .addTags(CatalystEnergy.ENERGY_CONDUITS_CONNECT)
                 .build(new BlockSignalumDynamo("basic.dynamo", config.getInt("BlockIDs.basicSignalumDynamo"), Tier.BASIC, Material.metal));
         basicProgrammer = new BlockBuilder(MOD_ID)
                 .setBlockSound(BlockSounds.METAL)

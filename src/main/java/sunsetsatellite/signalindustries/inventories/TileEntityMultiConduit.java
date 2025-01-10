@@ -7,14 +7,9 @@ import com.mojang.nbt.ListTag;
 import com.mojang.nbt.Tag;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
-import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.*;
-import sunsetsatellite.catalyst.energy.api.IEnergy;
-import sunsetsatellite.catalyst.energy.api.IEnergyItem;
-import sunsetsatellite.catalyst.energy.api.IEnergySink;
-import sunsetsatellite.catalyst.energy.api.IEnergySource;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
@@ -23,12 +18,12 @@ import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.interfaces.INamedTileEntity;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
-import sunsetsatellite.signalindustries.util.Tier;
 
 import java.lang.reflect.Field;
 import java.util.*;
 
-public class TileEntityMultiConduit extends TileEntityFluidContainer implements INamedTileEntity, IMultiConduit, IEnergy, IEnergySource, IEnergySink, ISupportsMultiparts {
+//TODO: reimplement catalyst energy support
+public class TileEntityMultiConduit extends TileEntityFluidContainer implements INamedTileEntity, IMultiConduit, /*IEnergy, IEnergySource, IEnergySink,*/ ISupportsMultiparts {
     public IConduitBlock[] conduits = new IConduitBlock[4];
     public HashMap<Direction, Integer> conduitConnections = (HashMap<Direction, Integer>) Catalyst.mapOf(Direction.values(),Catalyst.arrayFill(new Integer[Direction.values().length],-1));
 
@@ -37,14 +32,14 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
     public int rememberTicks = 0;
     public TileEntityFluidContainer[] lastPipes = new TileEntityFluidContainer[4];
 
-    //catalyst energy
+   /* //catalyst energy
     public int energy = 0;
     public int capacity = 0;
     public IEnergy lastProvided;
     public IEnergy lastReceived;
     public TickTimer lastTransferMemory;
     public int maxReceive = 0;
-    public int maxProvide = 0;
+    public int maxProvide = 0;*/
 
     //multipart
     public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(),new Multipart[Direction.values().length]);
@@ -55,13 +50,13 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
         transferSpeed = 0;
         acceptedFluids.clear();
         fluidConnections.replaceAll((D,C)->Connection.BOTH);
-        this.lastTransferMemory = new TickTimer(this,this::clearLastTransfers,10,true);
+        //this.lastTransferMemory = new TickTimer(this,this::clearLastTransfers,10,true);
     }
 
     @Override
     public void tick() {
         worldObj.markBlockDirty(x,y,z);
-        lastTransferMemory.tick();
+        //lastTransferMemory.tick();
         if(Arrays.stream(conduits).allMatch(Objects::isNull) && !acceptedFluids.isEmpty()){
             acceptedFluids.clear();
         }
@@ -131,7 +126,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
             }
         }
 
-        for (Direction dir : Direction.values()) {
+        /*for (Direction dir : Direction.values()) {
             TileEntity facingTile = dir.getTileEntity(worldObj,this);
             if(facingTile instanceof IEnergySink && !facingTile.equals(lastReceived)){
                 int provided = provide(dir,getMaxProvide(),true);
@@ -146,7 +141,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
                     ((IEnergy) facingTile).notifyOfReceive(this);
                 }
             }
-        }
+        }*/
     }
 
     public boolean addConduit(IConduitBlock newConduit){
@@ -176,7 +171,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
                         acceptedFluids.get(acceptedFluids.size()-1).add(SIBlocks.energyFlowing);
                     }
                 } else {
-                    if(newConduit.getConduitCapability() == ConduitCapability.CATALYST_ENERGY){
+                   /* if(newConduit.getConduitCapability() == ConduitCapability.CATALYST_ENERGY){
                         if(newConduit instanceof ITiered){
                             Tier tier = ((ITiered) newConduit).getTier();
                             capacity += (int) Math.pow(2,tier.ordinal()) * 1024;
@@ -186,7 +181,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
                                 maxProvide = transfer;
                             }
                         }
-                    }
+                    }*/
                     fluidContents = Arrays.copyOf(fluidContents,fluidContents.length + 1);
                     fluidCapacity = Arrays.copyOf(fluidCapacity, fluidCapacity.length + 1);
                     acceptedFluids.add(new ArrayList<>());
@@ -235,11 +230,11 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
         tag.putList("conduits", conduitList);
         tag.putCompound("conduitConnections",conduitConnectionsTag);
 
-        tag.putInt("energy",energy);
+        /*tag.putInt("energy",energy);
         tag.putInt("capacity",capacity);
 
         tag.putInt("maxReceive",maxReceive);
-        tag.putInt("maxProvide",maxProvide);
+        tag.putInt("maxProvide",maxProvide);*/
 
         CompoundTag coversNbt = new CompoundTag();
 
@@ -260,11 +255,11 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
         ListTag conduitList = tag.getList("conduits");
         conduitList.forEach((C)->addConduit((IConduitBlock) Block.getBlock((int) C.getValue())));
 
-        maxReceive = tag.getInteger("maxReceive");
+        /*maxReceive = tag.getInteger("maxReceive");
         maxProvide = tag.getInteger("maxProvide");
 
         energy = tag.getInteger("energy");
-        capacity = tag.getInteger("capacity");
+        capacity = tag.getInteger("capacity");*/
 
         CompoundTag connectionsTag = tag.getCompound("conduitConnections");
         for (Object con : connectionsTag.getValues()) {
@@ -299,7 +294,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
         return false;
     }
 
-    public void clearLastTransfers(){
+    /*public void clearLastTransfers(){
         lastProvided = null;
         lastReceived = null;
     }
@@ -373,13 +368,13 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
     @Override
     public boolean canConnect(Direction dir, Connection connection) {
         return true;
-    }
+    }*/
 
     public BlockInstance toInstance(){
         return new BlockInstance(Block.blocksList[worldObj.getBlockId(x,y,z)],new Vec3i(x,y,z),this);
     }
 
-    @Override
+    /*@Override
     public int receive(Direction dir, int amount, boolean test) {
         if(canConnect(dir, Connection.INPUT)){
             int received = Math.min(this.capacity - this.energy, Math.min(this.maxReceive, amount));
@@ -472,7 +467,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
     public void setTransfer(int amount){
         maxProvide = amount;
         maxReceive = amount;
-    }
+    }*/
 
     @Override
     public HashMap<Direction, Multipart> getParts() {

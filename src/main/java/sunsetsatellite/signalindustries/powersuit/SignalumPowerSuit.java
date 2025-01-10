@@ -54,7 +54,7 @@ public class SignalumPowerSuit {
     public Status status = Status.OK;
     public boolean active = false;
     private final Minecraft mc = Minecraft.getMinecraft(Minecraft.class);
-    public Tier mode;
+    public Tier mode = Tier.BASIC;
     public EntityPlayer player;
     public int selectedApplicationSlot = 0;
     public TickTimer saveTimer = new TickTimer(this, this::saveToStacks,60,true);
@@ -248,6 +248,9 @@ public class SignalumPowerSuit {
         if(getModule() != null){
             module = new InventoryAbilityModule(getModule());
             mode = getModuleMode();
+            if(mode == null){
+                mode = Tier.BASIC;
+            }
         } else {
             module = null;
             mode = Tier.BASIC;
@@ -640,6 +643,9 @@ public class SignalumPowerSuit {
     }
 
     public void renderOverlay(GuiIngame guiIngame, FontRenderer fontRenderer, ItemEntityRenderer itemRenderer, EntityPlayer player, int height, int width, int mouseX, int mouseY) {
+        if (!Minecraft.getMinecraft(Minecraft.class).gameSettings.immersiveMode.drawOverlays()) {
+            return;
+        }
         DrawUtil drawUtil = new DrawUtil();
         if(!active){
             KeyBinding openSuitKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyOpenSuit();

@@ -12,6 +12,8 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.CatalystMultipart;
 import sunsetsatellite.catalyst.core.util.ConduitCapability;
+import sunsetsatellite.catalyst.core.util.network.NetworkComponent;
+import sunsetsatellite.catalyst.core.util.network.NetworkType;
 import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
 import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.signalindustries.blocks.base.BlockConduitBase;
@@ -21,7 +23,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlockCatalystConduit extends BlockConduitBase {
+public class BlockCatalystConduit extends BlockConduitBase implements NetworkComponent {
 
     public BlockCatalystConduit(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
@@ -39,8 +41,7 @@ public class BlockCatalystConduit extends BlockConduitBase {
     public boolean onBlockRightClicked(World world, int i, int j, int k, EntityPlayer entityplayer, Side side, double xHit, double yHit) {
         if (entityplayer.isSneaking() && !world.isClientSide) {
             TileEntityCatalystConduit tile = (TileEntityCatalystConduit) world.getBlockTileEntity(i, j, k);
-            entityplayer.sendMessage(TextFormatting.WHITE + "Max Transfer: " + TextFormatting.LIGHT_GRAY + "IN: " + tile.maxReceive + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + "OUT: " + tile.maxProvide + " | "
-                    + TextFormatting.WHITE + "Energy: " + TextFormatting.LIGHT_GRAY + tile.energy + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + tile.capacity);
+            entityplayer.sendMessage(TextFormatting.WHITE + "Max Throughput: " + TextFormatting.LIGHT_GRAY + tile.getMaxThroughput() + TextFormatting.WHITE);
             return false;
         }
         return false;
@@ -76,5 +77,10 @@ public class BlockCatalystConduit extends BlockConduitBase {
     @Override
     public ConduitCapability getConduitCapability() {
         return ConduitCapability.CATALYST_ENERGY;
+    }
+
+    @Override
+    public NetworkType getType() {
+        return NetworkType.CATALYST_ENERGY;
     }
 }
